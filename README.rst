@@ -22,7 +22,8 @@ Installation
 Requirements
 ~~~~~~~~~~~~
 
-Python 2.6+ or Python 3+
+* Python 2.6+ or Python 3+
+* Pandas >= 0.14.0
 
 From PyPI
 ~~~~~~~~~
