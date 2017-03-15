@@ -11,6 +11,8 @@ worksheet's contents using a DataFrame.
     import pandas as pd
     from gspread_dataframe import get_as_dataframe, set_with_dataframe
 
+    worksheet = some_worksheet_obtained_from_gspread_client
+
     df = pd.DataFrame.from_records([{'a': i, 'b': i * 2} for i in range(100)])
     set_with_dataframe(worksheet, df)
 

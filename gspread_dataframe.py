@@ -146,7 +146,7 @@ def set_with_dataframe(worksheet,
                        dataframe,
                        row=1,
                        col=1,
-                       include_index=True,
+                       include_index=False,
                        include_column_header=True,
                        resize=False,
                        allow_formulas=True):
@@ -157,10 +157,10 @@ def set_with_dataframe(worksheet,
     :param worksheet: the gspread worksheet to set with content of DataFrame.
     :param dataframe: the DataFrame.
     :param include_index: if True, include the DataFrame's index as an
-            additional column. Defaults to True.
+            additional column. Defaults to False.
     :param include_column_header: if True, add a header row before data with
-            column names. If include_index is True, the index's name will be
-            used as its column's header. Defaults to True.
+            column names. (If include_index is True, the index's name will be
+            used as its column's header.) Defaults to True.
     :param resize: if True, changes the worksheet's size to match the shape
             of the provided DataFrame. If False, worksheet will only be
             resized as necessary to contain the DataFrame contents.

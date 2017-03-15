@@ -10,6 +10,11 @@ Welcome to gspread-dataframe's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. include:: ../README.rst
+
+Module Documentation
+--------------------
+
 .. automodule:: gspread_dataframe
    :members: get_as_dataframe, set_with_dataframe
 
