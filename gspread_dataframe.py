@@ -13,6 +13,7 @@ from gspread.ns import _ns, _ns1, ATOM_NS, BATCH_NS, SPREADSHEET_NS
 from gspread.utils import finditem, numericise as num
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
+from collections import defaultdict
 import itertools
 import logging
 
@@ -84,31 +85,39 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
     if cols is not None or rows is not None:
         worksheet.resize(rows, cols)
 
+def _get_all_values(worksheet, evaluate_formulas):
+    cells = worksheet._fetch_cells()
+
+    # defaultdicts fill in gaps for empty rows/cells not returned by gdocs
+    rows = defaultdict(lambda: defaultdict(str))
+    for cell in cells:
+        row = rows.setdefault(int(cell.row), defaultdict(str))
+        row[cell.col] = cell.value if evaluate_formulas else cell.input_value
+
+    if not rows:
+        return []
+
+    all_row_keys = itertools.chain.from_iterable(row.keys() for row in rows.values())
+    rect_cols = range(1, max(all_row_keys) + 1)
+    rect_rows = range(1, max(rows.keys()) + 1)
+
+    return [[rows[i][j] for j in rect_cols] for i in rect_rows]
+
 def get_as_dataframe(worksheet,
-                     index_column_number=None,
-                     has_column_header=True,
                      evaluate_formulas=False,
                      **options):
     """
     Returns the worksheet contents as a DataFrame.
 
     :param worksheet: the worksheet.
-    :param index_column_number: if >0, the worksheet column number to use
-            as the DataFrame index. (First column in worksheet is column 1.)
-            If absent or false, the DataFrame index will be used.
-            Defaults to None.
-    :param has_column_header: if True, interpret the first row of
-            the worksheet as containing the names of columns for the
-            DataFrame. Defaults to True.
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
     :param **options: all the options for pandas.read_csv
     :returns: pandas.DataFrame
     """
-    # TODO evaluate_formulas, has_column_header, index_column_number
-    df = pd.io.parsers.TextParser(wksht.get_all_values(), **options).read()
-    return df
+    all_values = _get_all_values(worksheet, evaluate_formulas)
+    return pd.io.parsers.TextParser(all_values, **options).read()
 
 def set_with_dataframe(worksheet,
                        dataframe,
