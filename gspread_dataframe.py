@@ -38,6 +38,7 @@ except ImportError:
             raise ImportError("Missing module named 'pandas'; using "
             "gspread_dataframe functions requires pandas >= 0.14.0")
     pd = _MissingPandasModule()
+    TextParser = None
 
 __all__ = ('set_with_dataframe', 'get_as_dataframe')
 
@@ -87,7 +88,7 @@ def get_as_dataframe(worksheet,
                      index_column_number=None,
                      has_column_header=True,
                      evaluate_formulas=False,
-                     numericise=True):
+                     **options):
     """
     Returns the worksheet contents as a DataFrame.
 
@@ -102,44 +103,11 @@ def get_as_dataframe(worksheet,
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
-    :param numericise: if True, when cells can be interpreted as numeric
-            values, use true numeric objects in the DataFrame. Defaults
-            to True.
-    :returns: pandas.DataFame
+    :param **options: all the options for pandas.read_csv
+    :returns: pandas.DataFrame
     """
-    cell_feed = worksheet.client.get_cells_feed(worksheet)
-
-    df = pd.DataFrame()
-    value_func = num if numericise else lambda x: x
-    for cell in cell_feed.findall(_ns('entry')):
-        gs = cell.find(_ns1('cell'))
-        if evaluate_formulas:
-            cell_value = value_func(list(gs.itertext())[0])
-        else:
-            cell_value = value_func(gs.get('inputValue'))
-        column = num(gs.get('col'))
-        row = num(gs.get('row'))
-
-        df.loc[row, column] = cell_value
-
-    if not df.empty:
-        df = df.reindex(columns=list(range(1, max(df.columns)+1)))
-
-        if has_column_header:
-            df.columns = df.iloc[0]
-            df.columns.name = None
-            df = df.drop(1)
-
-        df.index = list(range(1, len(df)+1))
-
-        if index_column_number and len(df):
-            if index_column_number < 1 or \
-               index_column_number > len(df.columns):
-                raise ValueError("index_column must reference number of "
-                    "an existing column, not %s" % index_column_number)
-            df.index = df[df.columns[index_column_number-1]]
-            del df[df.columns[index_column_number-1]]
-
+    # TODO evaluate_formulas, has_column_header, index_column_number
+    df = pd.io.parsers.TextParser(wksht.get_all_values(), **options).read()
     return df
 
 def set_with_dataframe(worksheet,
