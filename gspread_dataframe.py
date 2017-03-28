@@ -34,12 +34,14 @@ try:
         "Imported satisfactory (>=0.14.0) Pandas module: %s",
         pd.__version__)
 except ImportError:
+    _import_error_msg = "Missing module named 'pandas'; using " \
+    "gspread_dataframe functions requires pandas >= 0.14.0"
     class _MissingPandasModule():
         def __getattr__(self, name):
-            raise ImportError("Missing module named 'pandas'; using "
-            "gspread_dataframe functions requires pandas >= 0.14.0")
+            raise ImportError(_import_error_msg)
     pd = _MissingPandasModule()
-    TextParser = None
+    def TextParser(*args, **kwargs):
+        raise ImportError(_import_error_msg)
 
 __all__ = ('set_with_dataframe', 'get_as_dataframe')
 

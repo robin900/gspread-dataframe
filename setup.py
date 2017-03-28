@@ -3,13 +3,26 @@ try:
 except ImportError:
     from distutils.core import setup
 
-VERSION = '1.1.0'
+import os.path
+import sys
+
+PY3 = sys.version_info >= (3, 0)
+
+with open(os.path.join(os.path.dirname(__file__), 'VERSION'), 'rb') as f:
+    VERSION = f.read()
+    if PY3:
+        VERSION = VERSION.decode('utf8')
+    VERSION = VERSION.strip()
 
 setup(
     name='gspread-dataframe',
     version=VERSION,
     py_modules=['gspread_dataframe'],
-    install_requires=['gspread'],
+    test_suite='tests',
+    install_requires=[
+        'gspread', 
+        'pandas>=0.14.0'
+        ],
     description='Read/write gspread worksheets using pandas DataFrames',
     author='Robin Thomas',
     author_email='rthomas900@gmail.com',
