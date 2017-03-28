@@ -18,6 +18,21 @@ worksheet's contents using a DataFrame.
 
     df2 = get_as_dataframe(worksheet)
 
+The ``get_as_dataframe`` function supports the keyword arguments
+that are supported by your Pandas version's text parsing readers,
+such as ``pandas.read_csv``. Consult your Pandas documentation for a full
+list of options; since the ``'python'`` engine in Pandas is used for parsing,
+only options supported by that engine are acceptable:
+
+.. code:: python
+
+    import pandas as pd
+    from gspread_dataframe import get_as_dataframe
+
+    worksheet = some_worksheet_obtained_from_gspread_client
+
+    df = get_as_dataframe(worksheet, parse_dates=True, usecols=[0,2], skiprows=1, header=None)
+
 Installation
 ------------
 
