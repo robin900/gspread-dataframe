@@ -16,33 +16,22 @@ from xml.etree.ElementTree import Element, SubElement
 from collections import defaultdict
 import itertools
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
-# If pandas is absent, this module will load without raising an error.
-# Only if the set_with_dataframe or get_as_dataframe functions are called will
-# an ImportError be raised mentioning the missing module.
-try:
-    import pandas as pd
-    import re
-    major, minor = tuple([int(i) for i in
-        re.search(r'^(\d+)\.(\d+)\..+$', pd.__version__).groups()
-        ])
-    if (major, minor) < (0, 14):
-        raise ImportError("pandas version too old to support DF operations")
-    logger.debug(
-        "Imported satisfactory (>=0.14.0) Pandas module: %s",
-        pd.__version__)
-    from pandas.io.parsers import TextParser
-except ImportError:
-    _import_error_msg = "Missing module named 'pandas'; using " \
-    "gspread_dataframe functions requires pandas >= 0.14.0"
-    class _MissingPandasModule():
-        def __getattr__(self, name):
-            raise ImportError(_import_error_msg)
-    pd = _MissingPandasModule()
-    def TextParser(*args, **kwargs):
-        raise ImportError(_import_error_msg)
+# pandas import and version check
+
+import pandas as pd
+major, minor = tuple([int(i) for i in
+    re.search(r'^(\d+)\.(\d+)\..+$', pd.__version__).groups()
+    ])
+if (major, minor) < (0, 14):
+    raise ImportError("pandas version too old (<0.14.0) to support gspread_dataframe")
+logger.debug(
+    "Imported satisfactory (>=0.14.0) Pandas module: %s",
+    pd.__version__)
+from pandas.io.parsers import TextParser
 
 __all__ = ('set_with_dataframe', 'get_as_dataframe')
 
