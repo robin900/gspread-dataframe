@@ -4,6 +4,9 @@ Changelog
 
 (unreleased)
 ------------
+- Completed test suite. [Robin Thomas]
+- Externalized VERSION file; nearly complete test suite. [Robin Thomas]
+- Added latest generated CHANGELOG. [Robin Thomas]
 - Gitchangelog config file in proper location. [Robin Thomas]
 - Gitchangelog.rc. [Robin Thomas]
 - Fixed docs; added dev requirements in prep to use gitchangelog. [Robin
