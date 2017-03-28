@@ -33,6 +33,7 @@ try:
     logger.debug(
         "Imported satisfactory (>=0.14.0) Pandas module: %s",
         pd.__version__)
+    from pandas.io.parsers import TextParser
 except ImportError:
     _import_error_msg = "Missing module named 'pandas'; using " \
     "gspread_dataframe functions requires pandas >= 0.14.0"
@@ -117,10 +118,11 @@ def get_as_dataframe(worksheet,
             Defaults to False.
     :param **options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
+            (Note: TextParser supports only the 'python' parser engine.)
     :returns: pandas.DataFrame
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
-    return pd.io.parsers.TextParser(all_values, **options).read()
+    return TextParser(all_values, **options).read()
 
 def set_with_dataframe(worksheet,
                        dataframe,

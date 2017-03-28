@@ -1,8 +1,8 @@
 from .mock_worksheet import MockWorksheet
 
 from gspread_dataframe import *
-from pandas import Series
 import numpy as np
+import pandas as pd
 
 import unittest
 from functools import partial
@@ -93,15 +93,34 @@ class TestWorksheetReads(unittest.TestCase):
 
     def test_squeeze(self):
         df = get_as_dataframe(self.sheet, usecols=[0], squeeze=True)
-        self.assertTrue(isinstance(df, Series))
+        self.assertTrue(isinstance(df, pd.Series))
         self.assertEqual(9, len(df))
 
     def test_converters_datetime(self):
         df = get_as_dataframe(self.sheet, converters={'Date Column': lambda x: datetime.strptime(x, '%Y-%m-%d')})
-        self.assertTrue(datetime(2017,3,1), df['Date Column'][0])
+        self.assertEqual(datetime(2017,3,4), df['Date Column'][0])
 
-    def test_dtype(self):
-        df = get_as_dataframe(self.sheet, engine='c', dtype={'Numeric Column': np.float64})
-        self.assertTrue(np.float64(1.113), df['Numeric Column'][0])
+    def test_dtype_raises(self):
+        self.assertRaises(ValueError, get_as_dataframe, self.sheet, dtype={'Numeric Column': np.float64})
+
+    def test_no_nafilter(self):
+        df = get_as_dataframe(self.sheet, na_filter=False)
+        self.assertEqual('', df['Dialect-specific implementations'][7])
+
+    def test_nafilter(self):
+        df = get_as_dataframe(self.sheet, na_filter=True)
+        self.assertTrue(np.isnan(df['Dialect-specific implementations'][7]))
+
+    def test_parse_dates_true(self):
+        df = get_as_dataframe(self.sheet, index_col=4, parse_dates=True)
+        self.assertEqual(pd.Timestamp('2017-03-04 00:00:00'), df.index[0])
+
+    def test_parse_dates_true_infer(self):
+        df = get_as_dataframe(self.sheet, index_col=4, parse_dates=True, infer_datetime_format=True)
+        self.assertEqual(pd.Timestamp('2017-03-04 00:00:00'), df.index[0])
+
+    def test_parse_dates_custom_parser(self):
+        df = get_as_dataframe(self.sheet, parse_dates=[4], date_parser=lambda x: datetime.strptime(x, '%Y-%m-%d'))
+        self.assertEqual(datetime(2017,3,4), df['Date Column'][0])
 
 
