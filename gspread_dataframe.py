@@ -105,7 +105,7 @@ def get_as_dataframe(worksheet,
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
-    :param **options: all the options for pandas.io.parsers.TextParser,
+    :param \*\*options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
             (Note: TextParser supports only the 'python' parser engine.)
     :returns: pandas.DataFrame
