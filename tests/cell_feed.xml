@@ -1,0 +1,990 @@
+<?xml version="1.0"?>
+<ns0:feed xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:ns2="http://schemas.google.com/spreadsheets/2006">
+  <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full</ns0:id>
+  <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+  <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+  <ns0:title type="text">Sheet1</ns0:title>
+  <ns0:link href="https://docs.google.com/spreadsheets/d/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/edit" rel="alternate" type="application/atom+xml"/>
+  <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full" rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"/>
+  <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full" rel="http://schemas.google.com/g/2005#post" type="application/atom+xml"/>
+  <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/batch" rel="http://schemas.google.com/g/2005#batch" type="application/atom+xml"/>
+  <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full" rel="self" type="application/atom+xml"/>
+  <ns0:author>
+    <ns0:name>robin.thomas</ns0:name>
+    <ns0:email>robin.thomas@livestream.com</ns0:email>
+  </ns0:author>
+  <ns1:totalResults>97</ns1:totalResults>
+  <ns1:startIndex>1</ns1:startIndex>
+  <ns2:rowCount>998</ns2:rowCount>
+  <ns2:colCount>30</ns2:colCount>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A1</ns0:title>
+    <ns0:content type="text">Thingy</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C1/5wc7l7" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="Thingy" row="1">Thingy</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B1</ns0:title>
+    <ns0:content type="text">Syntax</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C2/5ypzwj" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="Syntax" row="1">Syntax</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C1</ns0:title>
+    <ns0:content type="text">Numeric Column</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C3/dhf2mh" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="Numeric Column" row="1">Numeric Column</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D1</ns0:title>
+    <ns0:content type="text">Formula Column</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C4/aupg28" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="Formula Column" row="1">Formula Column</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E1</ns0:title>
+    <ns0:content type="text">Date Column</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C5/onez2g" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="Date Column" row="1">Date Column</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F1</ns0:title>
+    <ns0:content type="text">Values are...</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C6/x3ivqw" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="Values are..." row="1">Values are...</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G1</ns0:title>
+    <ns0:content type="text">Selection</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C7/6fegdo" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="Selection" row="1">Selection</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H1</ns0:title>
+    <ns0:content type="text">Label(s) referencible in chart title</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C8/a0ctsp" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="Label(s) referencible in chart title" row="1">Label(s) referencible in chart title</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I1</ns0:title>
+    <ns0:content type="text">Dialect-specific implementations</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C9/qw2zui" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="Dialect-specific implementations" row="1">Dialect-specific implementations</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C10</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">J1</ns0:title>
+    <ns0:content type="text">Notes</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C10" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R1C10/3qtmsh" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="10" inputValue="Notes" row="1">Notes</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A2</ns0:title>
+    <ns0:content type="text">filter</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C1/efsn7c" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="filter" row="2">filter</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B2</ns0:title>
+    <ns0:content type="text">[expr=foo]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C2/v7ds90" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[expr=foo]" row="2">[expr=foo]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C2</ns0:title>
+    <ns0:content type="text">1.113</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C3/7ujti" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="1.113" numericValue="1.113" row="2">1.113</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D2</ns0:title>
+    <ns0:content type="text">2.226</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C4/qh8cc6" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="2.226" row="2">2.226</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E2</ns0:title>
+    <ns0:content type="text">2017-03-04</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C5/66cl45" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-04" numericValue="42798.0" row="2">2017-03-04</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F2</ns0:title>
+    <ns0:content type="text">literals</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C6/ncezz8" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="literals" row="2">literals</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G2</ns0:title>
+    <ns0:content type="text">multiple</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C7/95dogg" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="multiple" row="2">multiple</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H2</ns0:title>
+    <ns0:content type="text">no</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C8/1xymyp" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="no" row="2">no</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I2</ns0:title>
+    <ns0:content type="text">???</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R2C9/27zhwf" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="???" row="2">???</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A3</ns0:title>
+    <ns0:content type="text">daterange</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C1/vokztb" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="daterange" row="3">daterange</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B3</ns0:title>
+    <ns0:content type="text">[expr=daterange]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C2/6mga3f" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[expr=daterange]" row="3">[expr=daterange]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C3</ns0:title>
+    <ns0:content type="text">2.01</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C3/kta9p" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="2.01" numericValue="2.01" row="3">2.01</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D3</ns0:title>
+    <ns0:content type="text">4.02</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C4/qh6xrq" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="4.02" row="3">4.02</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E3</ns0:title>
+    <ns0:content type="text">2017-03-05</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C5/66b6jq" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-05" numericValue="42799.0" row="3">2017-03-05</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F3</ns0:title>
+    <ns0:content type="text">sometimes-parameterized SQL expressions</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C6/w16vk7" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="sometimes-parameterized SQL expressions" row="3">sometimes-parameterized SQL expressions</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G3</ns0:title>
+    <ns0:content type="text">single, REQUIRED</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C7/ku3k9n" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="single, REQUIRED" row="3">single, REQUIRED</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H3</ns0:title>
+    <ns0:content type="text">yes as [daterange]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C8/gm6o6s" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="yes as [daterange]" row="3">yes as [daterange]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I3</ns0:title>
+    <ns0:content type="text">yes probably</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C9/regkt8" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="yes probably" row="3">yes probably</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C10</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">J3</ns0:title>
+    <ns0:content type="text">static SQL but uses account's timezone setting to determine what SQL intervals to emit; Custom Date Range selection exposes two date pickers and provides the values. This is the only case I can see where more than one parameter is needed. Also, start date or end date can be empty, which should remove its clauses entirely. If not selected or reset, defaults to "All Dates" which appears as "all time" in chart titles. (UI bug fails to show All Dates as selected when filters are reset.)</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C10" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R3C10/tiq04f" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="10" inputValue="static SQL but uses account's timezone setting to determine what SQL intervals to emit; Custom Date Range selection exposes two date pickers and provides the values. This is the only case I can see where more than one parameter is needed. Also, start date or end date can be empty, which should remove its clauses entirely. If not selected or reset, defaults to &quot;All Dates&quot; which appears as &quot;all time&quot; in chart titles. (UI bug fails to show All Dates as selected when filters are reset.)" row="3">static SQL but uses account's timezone setting to determine what SQL intervals to emit; Custom Date Range selection exposes two date pickers and provides the values. This is the only case I can see where more than one parameter is needed. Also, start date or end date can be empty, which should remove its clauses entirely. If not selected or reset, defaults to "All Dates" which appears as "all time" in chart titles. (UI bug fails to show All Dates as selected when filters are reset.)</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A4</ns0:title>
+    <ns0:content type="text">aggregation</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C1/dx50iq" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="aggregation" row="4">aggregation</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B4</ns0:title>
+    <ns0:content type="text">[expr:aggregation]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C2/vixcmd" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[expr:aggregation]" row="4">[expr:aggregation]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C4</ns0:title>
+    <ns0:content type="text">2.907</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C3/8bp6s" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="2.907" numericValue="2.907" row="4">2.907</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D4</ns0:title>
+    <ns0:content type="text">5.814</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C4/qh5j7a" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="5.814" row="4">5.814</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E4</ns0:title>
+    <ns0:content type="text">2017-03-06</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C5/669rzb" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-06" numericValue="42800.0" row="4">2017-03-06</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F4</ns0:title>
+    <ns0:content type="text">parameterized SQL expressions</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C6/fqjsaq" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="parameterized SQL expressions" row="4">parameterized SQL expressions</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G4</ns0:title>
+    <ns0:content type="text">single, REQUIRED</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C7/ku4yu3" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="single, REQUIRED" row="4">single, REQUIRED</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H4</ns0:title>
+    <ns0:content type="text">yes as [aggregation]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C8/t08nr5" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="yes as [aggregation]" row="4">yes as [aggregation]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I4</ns0:title>
+    <ns0:content type="text">yes probably</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C9/ref68s" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="yes probably" row="4">yes probably</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C10</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">J4</ns0:title>
+    <ns0:content type="text">one could argue this is a map of { label :  formatter } of which you can pick 1..1 entry to apply. If not selected or reset, defaults to Daily (though UI bug does not mark Daily in aggregation area).</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C10" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R4C10/acismf" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="10" inputValue="one could argue this is a map of { label :  formatter } of which you can pick 1..1 entry to apply. If not selected or reset, defaults to Daily (though UI bug does not mark Daily in aggregation area)." row="4">one could argue this is a map of { label :  formatter } of which you can pick 1..1 entry to apply. If not selected or reset, defaults to Daily (though UI bug does not mark Daily in aggregation area).</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A5</ns0:title>
+    <ns0:content type="text">snippet</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C1/1eyeql" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="snippet" row="5">snippet</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B5</ns0:title>
+    <ns0:content type="text">[foo]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C2/162sky" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[foo]" row="5">[foo]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C5</ns0:title>
+    <ns0:content type="text">3.804</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C3/8r9c1" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="3.804" numericValue="3.804" row="5">3.804</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D5</ns0:title>
+    <ns0:content type="text">7.608</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C4/qh44mu" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="7.608" row="5">7.608</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E5</ns0:title>
+    <ns0:content type="text">2017-03-07</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C5/66jlyg" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-07" numericValue="42801.0" row="5">2017-03-07</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F5</ns0:title>
+    <ns0:content type="text">static SQL expressions</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C6/5bs1j" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="static SQL expressions" row="5">static SQL expressions</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G5</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C7/1o5hc0" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="n/a" row="5">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H5</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C8/1y52ps" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="n/a" row="5">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I5</ns0:title>
+    <ns0:content type="text">no</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R5C9/282g1t" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="no" row="5">no</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A6</ns0:title>
+    <ns0:content type="text">formatter</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C1/tyrpoq" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="formatter" row="6">formatter</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B6</ns0:title>
+    <ns0:content type="text">[expr:foo]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C2/v5t7lt" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[expr:foo]" row="6">[expr:foo]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C6</ns0:title>
+    <ns0:content type="text">4.701</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C3/9noam" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="4.701" numericValue="4.701" row="6">4.701</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D6</ns0:title>
+    <ns0:content type="text">9.402</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C4/qh2q2e" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="9.402" row="6">9.402</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E6</ns0:title>
+    <ns0:content type="text">2017-03-08</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C5/66i7e1" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-08" numericValue="42802.0" row="6">2017-03-08</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F6</ns0:title>
+    <ns0:content type="text">parameterized SQL expressions</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C6/fqs7pe" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="parameterized SQL expressions" row="6">parameterized SQL expressions</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G6</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C7/1o42rk" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="n/a" row="6">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H6</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C8/1y3o5c" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="n/a" row="6">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I6</ns0:title>
+    <ns0:content type="text">yes</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R6C9/283izr" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="yes" row="6">yes</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A7</ns0:title>
+    <ns0:content type="text">automatic join</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C1/imnpbz" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="automatic join" row="7">automatic join</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B7</ns0:title>
+    <ns0:content type="text">[foo+bar]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C2/jnfuzu" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[foo+bar]" row="7">[foo+bar]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C7</ns0:title>
+    <ns0:content type="text">5.598</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C3/a8u6z" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="5.598" numericValue="5.598" row="7">5.598</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D7</ns0:title>
+    <ns0:content type="text">11.196</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C4/qh1bhy" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="11.196" row="7">11.196</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E7</ns0:title>
+    <ns0:content type="text">2017-03-09</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C5/66gstm" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-09" numericValue="42803.0" row="7">2017-03-09</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F7</ns0:title>
+    <ns0:content type="text">SQL expression with two parameters!</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C6/9e3n8f" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="SQL expression with two parameters!" row="7">SQL expression with two parameters!</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G7</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C7/1o8agw" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="n/a" row="7">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H7</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C8/1y7vuo" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="n/a" row="7">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I7</ns0:title>
+    <ns0:content type="text">???</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C9/286iqn" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="???" row="7">???</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C10</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">J7</ns0:title>
+    <ns0:content type="text">uses key name conventions as rules to determine join columns</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C10" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R7C10/5d6u74" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="10" inputValue="uses key name conventions as rules to determine join columns" row="7">uses key name conventions as rules to determine join columns</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A8</ns0:title>
+    <ns0:content type="text">Proposed Thingy</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C1/u4q4l" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="Proposed Thingy" row="8">Proposed Thingy</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B8</ns0:title>
+    <ns0:content type="text">Syntax</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C2/5yg5xf" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="Syntax" row="8">Syntax</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C8</ns0:title>
+    <ns0:content type="text">6.495</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C3/ad5so" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="6.495" numericValue="6.495" row="8">6.495</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D8</ns0:title>
+    <ns0:content type="text">12.99</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C4/qgzwxi" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="12.99" row="8">12.99</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E8</ns0:title>
+    <ns0:content type="text">2017-03-10</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C5/66fe9s" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-10" numericValue="42804.0" row="8">2017-03-10</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F8</ns0:title>
+    <ns0:content type="text">Values are...</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C6/x3pwl4" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="Values are..." row="8">Values are...</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G8</ns0:title>
+    <ns0:content type="text">Selection</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C7/6fio30" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="Selection" row="8">Selection</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H8</ns0:title>
+    <ns0:content type="text">Label(s) referencible in chart title</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C8/a0e8d5" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="Label(s) referencible in chart title" row="8">Label(s) referencible in chart title</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I8</ns0:title>
+    <ns0:content type="text">Dialect-specific implementations</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C9/qw77ju" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="Dialect-specific implementations" row="8">Dialect-specific implementations</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C10</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">J8</ns0:title>
+    <ns0:content type="text">Notes</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C10" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R8C10/3qjstd" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="10" inputValue="Notes" row="8">Notes</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A9</ns0:title>
+    <ns0:content type="text">parameterized snippet</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C1/9svuly" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="parameterized snippet" row="9">parameterized snippet</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B9</ns0:title>
+    <ns0:content type="text">[expr::foo]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C2/emi2qv" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[expr::foo]" row="9">[expr::foo]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C9</ns0:title>
+    <ns0:content type="text">7.392</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C3/aspxx" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="7.392" numericValue="7.392" row="9">7.392</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D9</ns0:title>
+    <ns0:content type="text">14.784</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C4/qgyid2" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="14.784" row="9">14.784</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E9</ns0:title>
+    <ns0:content type="text">2017-03-11</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C5/66p88x" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-11" numericValue="42805.0" row="9">2017-03-11</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F9</ns0:title>
+    <ns0:content type="text">parameterized SQL expressions</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C6/fqcrgi" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="parameterized SQL expressions" row="9">parameterized SQL expressions</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G9</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C7/1ob3ls" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="n/a" row="9">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H9</ns0:title>
+    <ns0:content type="text">n/a</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C8/1yaozk" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="n/a" row="9">n/a</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I9</ns0:title>
+    <ns0:content type="text">no</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C9/2882bl" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="no" row="9">no</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C10</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">J9</ns0:title>
+    <ns0:content type="text">Syntax not decided yet; unique among macro types in that it can evaluate all other macro types when rendering</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C10" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R9C10/8hbh0f" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="10" inputValue="Syntax not decided yet; unique among macro types in that it can evaluate all other macro types when rendering" row="9">Syntax not decided yet; unique among macro types in that it can evaluate all other macro types when rendering</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C1</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">A10</ns0:title>
+    <ns0:content type="text">filter as SQL expression</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C1" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C1/a692kw" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="1" inputValue="filter as SQL expression" row="10">filter as SQL expression</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C2</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">B10</ns0:title>
+    <ns0:content type="text">[expr=foo]</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C2" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C2/v7p0sk" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="2" inputValue="[expr=foo]" row="10">[expr=foo]</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C3</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">C10</ns0:title>
+    <ns0:content type="text">8.289</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C3" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C3/bdwcd" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="3" inputValue="8.289" numericValue="8.289" row="10">8.289</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C4</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">D10</ns0:title>
+    <ns0:content type="text">16.578</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C4" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C4/qgx3sm" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="4" inputValue="=R[0]C[-1]*2" numericValue="16.578" row="10">16.578</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C5</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">E10</ns0:title>
+    <ns0:content type="text">2017-03-12</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C5" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C5/66ntoi" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="5" inputValue="2017-03-12" numericValue="42806.0" row="10">2017-03-12</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C6</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">F10</ns0:title>
+    <ns0:content type="text">static SQL expression</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C6" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C6/na7ozg" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="6" inputValue="static SQL expression" row="10">static SQL expression</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C7</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">G10</ns0:title>
+    <ns0:content type="text">multiple</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C7" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C7/952fww" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="7" inputValue="multiple" row="10">multiple</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C8</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">H10</ns0:title>
+    <ns0:content type="text">no</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C8" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C8/1y9vi9" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="8" inputValue="no" row="10">no</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C9</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">I10</ns0:title>
+    <ns0:content type="text">no</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C9" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C9/289gw1" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="9" inputValue="no" row="10">no</ns2:cell>
+  </ns0:entry>
+  <ns0:entry>
+    <ns0:id>https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C10</ns0:id>
+    <ns0:updated>2017-03-28T13:38:41.662Z</ns0:updated>
+    <ns0:category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
+    <ns0:title type="text">J10</ns0:title>
+    <ns0:content type="text">map of { label : expression } of which you can pick 0..N-1. their expressions just get ORed together.</ns0:content>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C10" rel="self" type="application/atom+xml"/>
+    <ns0:link href="https://spreadsheets.google.com/feeds/cells/1VAW7_4obGA07LnHiwGYzo0R2M8aQJZuQK1WBv5sFl8w/od6/private/full/R10C10/9ef0is" rel="edit" type="application/atom+xml"/>
+    <ns2:cell col="10" inputValue="map of { label : expression } of which you can pick 0..N-1. their expressions just get ORed together." row="10">map of { label : expression } of which you can pick 0..N-1. their expressions just get ORed together.</ns2:cell>
+  </ns0:entry>
+</ns0:feed>
