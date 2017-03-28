@@ -63,7 +63,7 @@ def _cellrepr(value, allow_formulas):
         return ""
     value = str(value)
     if (not allow_formulas) and value.startswith('='):
-        value = "'{value}".format(value=value)
+        value = "'%s" % value
     return value
 
 def _resize_to_minimum(worksheet, rows=None, cols=None):
@@ -227,7 +227,7 @@ def set_with_dataframe(worksheet,
             ).get('href')
             )
         for rownum, colnum, input_value in update_batch:
-            code = 'R{}C{}'.format(rownum, colnum)
+            code = 'R%sC%s' % (rownum, colnum)
             entry = SubElement(feed, 'entry')
             SubElement(entry, 'batch:id').text = code
             SubElement(entry, 'batch:operation', {'type': 'update'})
