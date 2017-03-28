@@ -113,7 +113,8 @@ def get_as_dataframe(worksheet,
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
-    :param **options: all the options for pandas.read_csv
+    :param **options: all the options for pandas.io.parsers.TextParser,
+            according to the version of pandas that is installed.
     :returns: pandas.DataFrame
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
