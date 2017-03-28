@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .mock_worksheet import MockWorksheet
 
 from gspread_dataframe import *
