@@ -1,5 +1,4 @@
 gitchangelog
-sphinx
 Sphinx
 Sphinx-PyPI-upload
 twine
