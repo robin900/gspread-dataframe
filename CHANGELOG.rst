@@ -2,22 +2,13 @@ Changelog
 =========
 
 
-(unreleased)
-------------
-- Completed test suite. [Robin Thomas]
-- Externalized VERSION file; nearly complete test suite. [Robin Thomas]
-- Added latest generated CHANGELOG. [Robin Thomas]
-- Gitchangelog config file in proper location. [Robin Thomas]
-- Gitchangelog.rc. [Robin Thomas]
-- Fixed docs; added dev requirements in prep to use gitchangelog. [Robin
-  Thomas]
-- Strip google sheet ID just to make mock XML smaller. [Robin Thomas]
-- Added basics of unit test suite, with accurate mock worksheet cell
-  feed. [Robin Thomas]
-- Support evaluate_formulas. [Robin Thomas]
-- Pretty easy to hook up TextParser; let's see how all of the option
-  handling works in later commits. [Robin Thomas]
-
+v2.0.0 (2017-03-29)
+-------------------
+- Get_as_dataframe uses pandas TextParser (#3) [Robin Thomas]
+  * Old keyword arguments to get_as_dataframe removed, except for
+    evaluate_formulas. get_as_dataframe now accepts all pandas
+    text parsing keyword arguments.
+  * Unit test suite completed.
 
 v1.1.0 (2017-03-28)
 -------------------
