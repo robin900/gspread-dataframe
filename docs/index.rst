@@ -12,8 +12,8 @@ Welcome to gspread-dataframe's documentation!
 
 .. include:: ../README.rst
 
-Module Documentation
---------------------
+Module Documentation - Version |version|
+----------------------------------------
 
 .. automodule:: gspread_dataframe
    :members: get_as_dataframe, set_with_dataframe

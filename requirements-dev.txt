@@ -1,0 +1,4 @@
+gitchangelog
+Sphinx
+Sphinx-PyPI-upload
+twine

@@ -13,31 +13,25 @@ from gspread.ns import _ns, _ns1, ATOM_NS, BATCH_NS, SPREADSHEET_NS
 from gspread.utils import finditem, numericise as num
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
+from collections import defaultdict
 import itertools
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
-# If pandas is absent, this module will load without raising an error.
-# Only if the set_with_dataframe or get_as_dataframe functions are called will
-# an ImportError be raised mentioning the missing module.
-try:
-    import pandas as pd
-    import re
-    major, minor = tuple([int(i) for i in
-        re.search(r'^(\d+)\.(\d+)\..+$', pd.__version__).groups()
-        ])
-    if (major, minor) < (0, 14):
-        raise ImportError("pandas version too old to support DF operations")
-    logger.debug(
-        "Imported satisfactory (>=0.14.0) Pandas module: %s",
-        pd.__version__)
-except ImportError:
-    class _MissingPandasModule():
-        def __getattr__(self, name):
-            raise ImportError("Missing module named 'pandas'; using "
-            "gspread_dataframe functions requires pandas >= 0.14.0")
-    pd = _MissingPandasModule()
+# pandas import and version check
+
+import pandas as pd
+major, minor = tuple([int(i) for i in
+    re.search(r'^(\d+)\.(\d+)\..+$', pd.__version__).groups()
+    ])
+if (major, minor) < (0, 14):
+    raise ImportError("pandas version too old (<0.14.0) to support gspread_dataframe")
+logger.debug(
+    "Imported satisfactory (>=0.14.0) Pandas module: %s",
+    pd.__version__)
+from pandas.io.parsers import TextParser
 
 __all__ = ('set_with_dataframe', 'get_as_dataframe')
 
@@ -58,7 +52,7 @@ def _cellrepr(value, allow_formulas):
         return ""
     value = str(value)
     if (not allow_formulas) and value.startswith('='):
-        value = "'{value}".format(value=value)
+        value = "'%s" % value
     return value
 
 def _resize_to_minimum(worksheet, rows=None, cols=None):
@@ -83,64 +77,41 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
     if cols is not None or rows is not None:
         worksheet.resize(rows, cols)
 
+def _get_all_values(worksheet, evaluate_formulas):
+    cells = worksheet._fetch_cells()
+
+    # defaultdicts fill in gaps for empty rows/cells not returned by gdocs
+    rows = defaultdict(lambda: defaultdict(str))
+    for cell in cells:
+        row = rows.setdefault(int(cell.row), defaultdict(str))
+        row[cell.col] = cell.value if evaluate_formulas else cell.input_value
+
+    if not rows:
+        return []
+
+    all_row_keys = itertools.chain.from_iterable(row.keys() for row in rows.values())
+    rect_cols = range(1, max(all_row_keys) + 1)
+    rect_rows = range(1, max(rows.keys()) + 1)
+
+    return [[rows[i][j] for j in rect_cols] for i in rect_rows]
+
 def get_as_dataframe(worksheet,
-                     index_column_number=None,
-                     has_column_header=True,
                      evaluate_formulas=False,
-                     numericise=True):
+                     **options):
     """
     Returns the worksheet contents as a DataFrame.
 
     :param worksheet: the worksheet.
-    :param index_column_number: if >0, the worksheet column number to use
-            as the DataFrame index. (First column in worksheet is column 1.)
-            If absent or false, the DataFrame index will be used.
-            Defaults to None.
-    :param has_column_header: if True, interpret the first row of
-            the worksheet as containing the names of columns for the
-            DataFrame. Defaults to True.
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
-    :param numericise: if True, when cells can be interpreted as numeric
-            values, use true numeric objects in the DataFrame. Defaults
-            to True.
-    :returns: pandas.DataFame
+    :param \*\*options: all the options for pandas.io.parsers.TextParser,
+            according to the version of pandas that is installed.
+            (Note: TextParser supports only the 'python' parser engine.)
+    :returns: pandas.DataFrame
     """
-    cell_feed = worksheet.client.get_cells_feed(worksheet)
-
-    df = pd.DataFrame()
-    value_func = num if numericise else lambda x: x
-    for cell in cell_feed.findall(_ns('entry')):
-        gs = cell.find(_ns1('cell'))
-        if evaluate_formulas:
-            cell_value = value_func(list(gs.itertext())[0])
-        else:
-            cell_value = value_func(gs.get('inputValue'))
-        column = num(gs.get('col'))
-        row = num(gs.get('row'))
-
-        df.loc[row, column] = cell_value
-
-    if not df.empty:
-        df = df.reindex(columns=list(range(1, max(df.columns)+1)))
-
-        if has_column_header:
-            df.columns = df.iloc[0]
-            df.columns.name = None
-            df = df.drop(1)
-
-        df.index = list(range(1, len(df)+1))
-
-        if index_column_number and len(df):
-            if index_column_number < 1 or \
-               index_column_number > len(df.columns):
-                raise ValueError("index_column must reference number of "
-                    "an existing column, not %s" % index_column_number)
-            df.index = df[df.columns[index_column_number-1]]
-            del df[df.columns[index_column_number-1]]
-
-    return df
+    all_values = _get_all_values(worksheet, evaluate_formulas)
+    return TextParser(all_values, **options).read()
 
 def set_with_dataframe(worksheet,
                        dataframe,
@@ -245,7 +216,7 @@ def set_with_dataframe(worksheet,
             ).get('href')
             )
         for rownum, colnum, input_value in update_batch:
-            code = 'R{}C{}'.format(rownum, colnum)
+            code = 'R%sC%s' % (rownum, colnum)
             entry = SubElement(feed, 'entry')
             SubElement(entry, 'batch:id').text = code
             SubElement(entry, 'batch:operation', {'type': 'update'})
