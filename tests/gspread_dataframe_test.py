@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from .mock_worksheet import MockWorksheet
+from .mock_worksheet import MockWorksheet, FEED
 
 from gspread_dataframe import *
 import numpy as np
 import pandas as pd
 
 import unittest
-from functools import partial
-from datetime import datetime, date
+from unittest.mock import Mock, MagicMock
+from datetime import datetime
 
 # Expected results
 
@@ -124,4 +124,16 @@ class TestWorksheetReads(unittest.TestCase):
         df = get_as_dataframe(self.sheet, parse_dates=[4], date_parser=lambda x: datetime.strptime(x, '%Y-%m-%d'))
         self.assertEqual(datetime(2017,3,4), df['Date Column'][0])
 
+class TestWorksheetWrites(unittest.TestCase):
 
+    def setUp(self):
+        self.sheet = MockWorksheet()
+        self.sheet.resize = MagicMock()
+        self.sheet.client = Mock()
+        self.sheet.client.post_cells = MagicMock()
+
+    def test_write_basic(self):
+        df = get_as_dataframe(self.sheet)
+        set_with_dataframe(self.sheet, df, resize=True)
+        self.sheet.resize.assert_called_once_with(None, None)
+        self.sheet.client.post_cells.assert_called_once_with(FEED)

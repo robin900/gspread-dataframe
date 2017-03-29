@@ -13,6 +13,10 @@ class MockWorksheet(object):
     def _fetch_cells(self):
         return [Cell(self, elem) for elem in FEED.findall(_ns('entry'))]
 
+    @property
+    def _element(self):
+        return FEED
+
 if __name__ == '__main__':
     from gspread_dataframe import *
     ws = MockWorksheet()
