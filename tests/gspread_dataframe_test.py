@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .mock_worksheet import MockWorksheet, FEED
+from .mock_worksheet import MockWorksheet, CELL_FEED
 
 from gspread_dataframe import *
 import numpy as np
@@ -8,6 +8,7 @@ import pandas as pd
 import unittest
 from unittest.mock import Mock, MagicMock
 from datetime import datetime
+from xml.etree import ElementTree as ET
 
 # Expected results
 
@@ -135,5 +136,7 @@ class TestWorksheetWrites(unittest.TestCase):
     def test_write_basic(self):
         df = get_as_dataframe(self.sheet)
         set_with_dataframe(self.sheet, df, resize=True)
-        self.sheet.resize.assert_called_once_with(None, None)
-        self.sheet.client.post_cells.assert_called_once_with(FEED)
+        self.sheet.resize.assert_called_once_with(10, 10)
+        with open('post_cells_expected.xml', 'wb') as f:
+            f.write(self.sheet.client.post_cells.call_args[0][1])
+        #self.sheet.client.post_cells.assert_called_once_with(self.sheet, ET.tostring(CELL_FEED))
