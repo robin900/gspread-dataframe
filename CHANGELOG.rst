@@ -2,9 +2,16 @@ Changelog
 =========
 
 
+
+v2.0.1 (2017-03-31)
+-------------------
+- Bump version to 2.0.1. [Robin Thomas]
+- Fixing #4: Respecting the minimum number of cols (#5) [Thorbjørn Wolf]
+
 v2.0.0 (2017-03-29)
 -------------------
 - Get_as_dataframe uses pandas TextParser (#3) [Robin Thomas]
+
   * Old keyword arguments to get_as_dataframe removed, except for
     evaluate_formulas. get_as_dataframe now accepts all pandas
     text parsing keyword arguments.
