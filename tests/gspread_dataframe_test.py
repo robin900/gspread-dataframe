@@ -4,6 +4,7 @@ from .mock_worksheet import MockWorksheet, POST_CELLS_EXPECTED
 from gspread_dataframe import *
 import numpy as np
 import pandas as pd
+from difflib import SequenceMatcher
 
 import unittest
 from unittest.mock import Mock, MagicMock
@@ -13,15 +14,15 @@ from xml.etree import ElementTree as ET
 # Expected results
 
 COLUMN_NAMES = [
-    'Thingy', 
-    'Syntax', 
-    'Numeric Column', 
-    'Formula Column', 
-    'Date Column', 
-    'Values are...', 
-    'Selection', 
-    'Label(s) referencible in chart title', 
-    'Dialect-specific implementations', 
+    'Thingy',
+    'Syntax',
+    'Numeric Column',
+    'Formula Column',
+    'Date Column',
+    'Values are...',
+    'Selection',
+    'Label(s) referencible in chart title',
+    'Dialect-specific implementations',
     'Notes'
 ]
 
@@ -137,5 +138,5 @@ class TestWorksheetWrites(unittest.TestCase):
         df = get_as_dataframe(self.sheet)
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
-        from difflib import SequenceMatcher
-        #self.sheet.client.post_cells.assert_called_once_with(self.sheet, POST_CELLS_EXPECTED.encode('utf8'))
+        self.sheet.client.post_cells.assert_called_once()
+        self.sheet.client.post_cells.assert_called_once_with(self.sheet, POST_CELLS_EXPECTED)

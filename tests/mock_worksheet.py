@@ -13,9 +13,10 @@ def contents_of_file(filename, et_parse=True):
 
 CELL_FEED = contents_of_file('cell_feed.xml')
 WORKSHEET_FEED = contents_of_file('worksheet_feed.xml')
-POST_CELLS_EXPECTED = contents_of_file('post_cells_expected.xml', False)
+POST_CELLS_EXPECTED = contents_of_file('post_cells_expected.xml', False).encode('utf8')
 
 class MockWorksheet(object):
+
     def _fetch_cells(self):
         return [Cell(self, elem) for elem in CELL_FEED.findall(_ns('entry'))]
 
