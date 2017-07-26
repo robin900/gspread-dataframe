@@ -142,10 +142,10 @@
     <updated>2017-03-28T13:38:41.662Z</updated>
     <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#cell"/>
     <title type="text">C2</title>
-    <content type="text">1.113</content>
+    <content type="text">[1, 2, 3]</content>
     <link href="https://spreadsheets.google.com/feeds/cells/XXXXXXX/od6/private/full/R2C3" rel="self" type="application/atom+xml"/>
     <link href="https://spreadsheets.google.com/feeds/cells/XXXXXXX/od6/private/full/R2C3/7ujti" rel="edit" type="application/atom+xml"/>
-    <ns2:cell col="3" inputValue="1.113" numericValue="1.113" row="2">1.113</ns2:cell>
+    <ns2:cell col="3" inputValue="[1, 2, 3]" row="2">[1, 2, 3]</ns2:cell>
   </entry>
   <entry>
     <id>https://spreadsheets.google.com/feeds/cells/XXXXXXX/od6/private/full/R2C4</id>
