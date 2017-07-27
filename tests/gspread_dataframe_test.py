@@ -126,6 +126,26 @@ class TestWorksheetReads(unittest.TestCase):
         df = get_as_dataframe(self.sheet, parse_dates=[4], date_parser=lambda x: datetime.strptime(x, '%Y-%m-%d'))
         self.assertEqual(df['Date Column'][0], datetime(2017,3,4))
 
+
+_original_mock_failure_message = Mock._format_mock_failure_message
+
+def _format_mock_failure_message(self, args, kwargs):
+    message = 'Expected call: %s\nActual call: %s'
+    expected_string = self._format_mock_call_signature(args, kwargs)
+    call_args = self.call_args
+    if len(call_args) == 3:
+        call_args = call_args[1:]
+    actual_string = self._format_mock_call_signature(*call_args)
+    msg = (message % (expected_string, actual_string))
+    if len(call_args[0]) > 1 and isinstance(call_args[0][1], (str, bytes)) and len(args) > 1 and isinstance(args[1], (str, bytes)) and call_args[0][1] != args[1]:
+        import difflib
+        sm = difflib.SequenceMatcher(None, call_args[0][1], args[1])
+        m = sm.find_longest_match(0, len(call_args[0][1]), 0, len(args[1]))
+        msg += "; diff: at index %d, expected %s -- actual %s" % (m.a+m.size, call_args[0][1][m.a+m.size-40:m.a+m.size+40], args[1][m.b+m.size-40:m.b+m.size+40])
+    return msg
+
+Mock._format_mock_failure_message = _format_mock_failure_message
+
 class TestWorksheetWrites(unittest.TestCase):
 
     def setUp(self):
@@ -140,3 +160,12 @@ class TestWorksheetWrites(unittest.TestCase):
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.client.post_cells.assert_called_once()
         self.sheet.client.post_cells.assert_called_once_with(self.sheet, POST_CELLS_EXPECTED)
+
+    def test_write_list_value_to_cell(self):
+        df = get_as_dataframe(self.sheet)
+        df = df.set_value(0, 'Numeric Column', [1,2,3])
+        set_with_dataframe(self.sheet, df, resize=True)
+        self.sheet.resize.assert_called_once_with(10, 10)
+        self.sheet.client.post_cells.assert_called_once()
+        self.sheet.client.post_cells.assert_called_once_with(self.sheet, POST_CELLS_EXPECTED)
+

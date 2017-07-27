@@ -48,9 +48,12 @@ def _cellrepr(value, allow_formulas):
             to be interpreted as formulas; otherwise, escape
             them with an apostrophe to avoid formula interpretation.
     """
-    if pd.isnull(value):
+    if pd.isnull(value) is True:
         return ""
-    value = str(value)
+    if isinstance(value, float):
+        value = repr(value)
+    else:
+        value = str(value)
     if (not allow_formulas) and value.startswith('='):
         value = "'%s" % value
     return value

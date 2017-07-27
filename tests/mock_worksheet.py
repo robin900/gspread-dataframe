@@ -9,7 +9,7 @@ WORKSHEET_FEED = None
 
 def contents_of_file(filename, et_parse=True):
     with open(os.path.join(os.path.dirname(__file__), filename), 'r') as f:
-        return ET.fromstring(f.read()) if et_parse else f.read()
+        return ET.fromstring(f.read().strip()) if et_parse else f.read().strip()
 
 CELL_FEED = contents_of_file('cell_feed.xml')
 WORKSHEET_FEED = contents_of_file('worksheet_feed.xml')
