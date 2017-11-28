@@ -11,6 +11,7 @@ Pandas 0.14.0 or greater installed.
 """
 from gspread.ns import _ns, _ns1, ATOM_NS, BATCH_NS, SPREADSHEET_NS
 from gspread.utils import finditem, numericise as num
+from gspread.exceptions import SpreadsheetNotFound
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
 from collections import defaultdict
@@ -240,3 +241,38 @@ def set_with_dataframe(worksheet,
 
     logger.debug("%d total update batches sent", len(update_batches))
 
+def get_worksheet(spreadsheet, title, create=True):
+    '''
+    Gets a worksheet from a spreadsheet by title, and creates it if it doesn't exist.
+
+    :param spreadsheet: The gspread.models.Spreadsheet to get a worksheet from.
+    :param title: The title of the worksheet to get/create.
+    :param create: If true, and if the worksheet title does not exist, it will create.  Defaults to True.
+    :return: gspread.models.Worksheet object associated to the worksheet with the given title.
+    '''
+    sheets = spreadsheet.worksheets()
+    for sheet in sheets:
+        if sheet.title == title:
+            return sheet
+    if create:
+        return spreadsheet.add_worksheet(title, rows=1, cols=1)
+    else:
+        return None
+
+def gs_open(gclient, title, create=True):
+    '''
+    Opens/creates a google spreadsheet with the given title.
+
+    :param gclient: The gspread.client.Client object used for communicating with google spreadsheets
+    :param title: The title of the spreadsheet to get/open.  See gspread.client.Client.open(), which is what this
+        function calls.
+    :param create: If True, and there does not exist a spreadsheet of the given name, it will create.
+    :return: A gspread.models.Spreadsheet object for communicating with the given spreadsheet.
+    '''
+    if create:
+        try:
+            return gclient.open(title)
+        except SpreadsheetNotFound:
+            return gclient.create(title)
+    else:
+        return gclient.open(title)
