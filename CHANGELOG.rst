@@ -2,8 +2,16 @@ Changelog
 =========
 
 
+v2.1.1 (2018-04-19)
+-------------------
+- Bump to 2.1.1. [Robin Thomas]
+- Update README. [Robin Thomas]
+- Prepare for bugfix release by requiring gspread<3.0.0. [Robin Thomas]
+
+
 v2.1.0 (2017-07-27)
 -------------------
+- CHANGELOG for 2.1.0. [Robin Thomas]
 - Bump version to 2.1.0. [Robin Thomas]
 - Safely perform _cellrepr on list objects, since list objects can be
   cell values (#7) [Robin Thomas]
@@ -32,7 +40,7 @@ v2.0.0 (2017-03-29)
 - Get_as_dataframe uses pandas TextParser (#3) [Robin Thomas]
 
   * pretty easy to hook up TextParser; let's see how all of the option
-    handling works in later commits.
+  handling works in later commits.
 
   * support evaluate_formulas
 
@@ -69,7 +77,7 @@ v2.0.0 (2017-03-29)
   * remove duplicate sphnix req
 
   * unworking attempt; need ws entry from worksheets feed to make
-    a fully-functioning mock worksheet for writes.
+  a fully-functioning mock worksheet for writes.
 
   * write test works now
 
