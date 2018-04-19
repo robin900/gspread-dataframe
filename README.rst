@@ -40,6 +40,7 @@ Requirements
 ~~~~~~~~~~~~
 
 * Python 2.6+ and Python 3.2+
+* gspread (<3.0.0)
 * Pandas >= 0.14.0
 
 From PyPI
