@@ -20,7 +20,7 @@ setup(
     py_modules=['gspread_dataframe'],
     test_suite='tests',
     install_requires=[
-        'gspread<3.0.0', 
+        'gspread>=3.0.0', 
         'pandas>=0.14.0'
         ],
     description='Read/write gspread worksheets using pandas DataFrames',

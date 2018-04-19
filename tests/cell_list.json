@@ -1,0 +1,12 @@
+[
+  ["Thingy", "Syntax", "Numeric Column", "Formula Column", "Date Column", "Values are...", "Selection", "Label(s) referencible in chart title", "Dialect-specific implementations", "Notes"], 
+  ["filter", "[expr=foo]", "[1, 2, 3]", "=R[0]C[-1]*2", "2017-03-04", "literals", "multiple", "no", "???", ""], 
+  ["daterange", "[expr=daterange]", 2.01, "=R[0]C[-1]*2", "2017-03-05", "sometimes-parameterized SQL expressions", "single, REQUIRED", "yes as [daterange]", "yes probably", "static SQL but uses account's timezone setting to determine what SQL intervals to emit; Custom Date Range selection exposes two date pickers and provides the values. This is the only case I can see where more than one parameter is needed. Also, start date or end date can be empty, which should remove its clauses entirely. If not selected or reset, defaults to \"All Dates\" which appears as \"all time\" in chart titles. (UI bug fails to show All Dates as selected when filters are reset.)"], 
+  ["aggregation", "[expr:aggregation]", 2.907, "=R[0]C[-1]*2", "2017-03-06", "parameterized SQL expressions", "single, REQUIRED", "yes as [aggregation]", "yes probably", "one could argue this is a map of { label :  formatter } of which you can pick 1..1 entry to apply. If not selected or reset, defaults to Daily (though UI bug does not mark Daily in aggregation area)."], 
+  ["snippet", "[foo]", 3.804, "=R[0]C[-1]*2", "2017-03-07", "static SQL expressions", "n/a", "n/a", "no", ""], 
+  ["formatter", "[expr:foo]", 4.701, "=R[0]C[-1]*2", "2017-03-08", "parameterized SQL expressions", "n/a", "n/a", "yes", ""], 
+  ["automatic join", "[foo+bar]", 5.598, "=R[0]C[-1]*2", "2017-03-09", "SQL expression with two parameters!", "n/a", "n/a", "???", "uses key name conventions as rules to determine join columns"], 
+  ["Proposed Thingy", "Syntax", 6.495, "=R[0]C[-1]*2", "2017-03-10", "Values are...", "Selection", "Label(s) referencible in chart title", "Dialect-specific implementations", "Notes"], 
+  ["parameterized snippet", "[expr::foo]", 7.392, "=R[0]C[-1]*2", "2017-03-11", "parameterized SQL expressions", "n/a", "n/a", "", "Syntax not decided yet; unique among macro types in that it can evaluate all other macro types when rendering"], 
+  ["filter as SQL expression", "[expr=foo]", 8.289, "=R[0]C[-1]*2", "2017-03-12", "static SQL expression", "multiple", "no", "no", "map of { label : expression } of which you can pick 0..N-1. their expressions just get ORed together."]
+]
