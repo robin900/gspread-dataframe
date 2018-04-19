@@ -9,10 +9,8 @@ This module contains functions to retrieve a gspread worksheet as a
 using a `pandas.DataFrame`. To use these functions, have
 Pandas 0.14.0 or greater installed.
 """
-from gspread.ns import _ns, _ns1, ATOM_NS, BATCH_NS, SPREADSHEET_NS
-from gspread.utils import finditem, numericise as num
-from xml.etree import ElementTree
-from xml.etree.ElementTree import Element, SubElement
+from gspread.utils import fill_gaps
+from gspread.models import Cell
 from collections import defaultdict
 import itertools
 import logging
@@ -34,10 +32,6 @@ logger.debug(
 from pandas.io.parsers import TextParser
 
 __all__ = ('set_with_dataframe', 'get_as_dataframe')
-
-CELLS_FEED_REL = SPREADSHEET_NS + '#cellsfeed'
-
-GOOGLE_SHEET_CELL_UPDATES_LIMIT = 40000
 
 def _cellrepr(value, allow_formulas):
     """
@@ -66,11 +60,9 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
     Both rows and cols are optional.
     """
     # get the current size
-    feed = worksheet.client.get_cells_feed(worksheet)
-
     current_cols, current_rows = (
-        num(feed.find(_ns1('colCount')).text),
-        num(feed.find(_ns1('rowCount')).text),
+        worksheet.col_count,
+        worksheet.row_count
         )
     if rows is not None and rows <= current_rows:
         rows = None
@@ -81,13 +73,34 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
         worksheet.resize(rows, cols)
 
 def _get_all_values(worksheet, evaluate_formulas):
-    cells = worksheet._fetch_cells()
+    data = worksheet.spreadsheet.values_get(
+        worksheet.title, 
+        params={
+            'valueRenderOption': ('UNFORMATTED_VALUE' if evaluate_formulas else 'FORMULA'),
+            'dateTimeRenderOption': 'FORMATTED_STRING'
+        }
+    )
+    (row_offset, column_offset) = (1, 1)
+    (last_row, last_column) = (worksheet.row_count, worksheet.col_count)
+    values = data.get('values', [])
+
+    rect_values = fill_gaps(
+        values,
+        rows=last_row - row_offset + 1,
+        cols=last_column - column_offset + 1
+    )
+
+    cells = [
+        Cell(row=i + row_offset, col=j + column_offset, value=value)
+        for i, row in enumerate(rect_values)
+        for j, value in enumerate(row)
+    ]
 
     # defaultdicts fill in gaps for empty rows/cells not returned by gdocs
     rows = defaultdict(lambda: defaultdict(str))
     for cell in cells:
         row = rows.setdefault(int(cell.row), defaultdict(str))
-        row[cell.col] = cell.value if evaluate_formulas else cell.input_value
+        row[cell.col] = cell.value 
 
     if not rows:
         return []
@@ -192,51 +205,9 @@ def set_with_dataframe(worksheet,
         logger.debug("No updates to perform on worksheet.")
         return
 
-    # Google limits cell update requests such that the submitted
-    # set of updates cannot contain 40,000 cells or more.
-    # Make update batches with less than 40,000 elements.
-    update_batches = [
-        updates[x:x+GOOGLE_SHEET_CELL_UPDATES_LIMIT]
-        for x in range(0, len(updates), GOOGLE_SHEET_CELL_UPDATES_LIMIT)
-        ]
-    logger.debug("%d cell updates to send, will send %d batches of "
-        "%d cells maximum", len(updates), len(update_batches), GOOGLE_SHEET_CELL_UPDATES_LIMIT)
+    cells_to_update = [ Cell(row, col, value) for row, col, value in updates ]
+    logger.debug("%d cell updates to send", len(cells_to_update))
 
-    for batch_num, update_batch in enumerate(update_batches):
-        batch_num += 1
-        logger.debug("Sending batch %d of cell updates", batch_num)
-        feed = Element('feed', {
-            'xmlns': ATOM_NS,
-            'xmlns:batch': BATCH_NS,
-            'xmlns:gs': SPREADSHEET_NS
-            })
-
-        id_elem = SubElement(feed, 'id')
-        id_elem.text = (
-            finditem(
-                lambda i: i.get('rel') == CELLS_FEED_REL,
-                worksheet._element.findall(_ns('link'))
-            ).get('href')
-            )
-        for rownum, colnum, input_value in update_batch:
-            code = 'R%sC%s' % (rownum, colnum)
-            entry = SubElement(feed, 'entry')
-            SubElement(entry, 'batch:id').text = code
-            SubElement(entry, 'batch:operation', {'type': 'update'})
-            SubElement(entry, 'id').text = id_elem.text + '/' + code
-            SubElement(entry, 'link', {
-                'rel': 'edit',
-                'type': "application/atom+xml",
-                'href': id_elem.text + '/' + code})
-
-            SubElement(entry, 'gs:cell', {
-                'row': str(rownum),
-                'col': str(colnum),
-                'inputValue': input_value})
-
-        data = ElementTree.tostring(feed)
-
-        worksheet.client.post_cells(worksheet, data)
-
-    logger.debug("%d total update batches sent", len(update_batches))
+    resp = worksheet.update_cells(cells_to_update, value_input_option='USER_ENTERED')
+    logger.debug("Cell update response: %s", resp)
 

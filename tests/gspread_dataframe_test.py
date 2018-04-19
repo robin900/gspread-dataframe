@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from .mock_worksheet import MockWorksheet, POST_CELLS_EXPECTED
+from .mock_worksheet import MockWorksheet, CELL_LIST, CELL_LIST_STRINGIFIED
 
 from gspread_dataframe import *
+from gspread.models import Cell
 import numpy as np
 import pandas as pd
 from difflib import SequenceMatcher
@@ -9,7 +10,6 @@ from difflib import SequenceMatcher
 import unittest
 from unittest.mock import Mock, MagicMock
 from datetime import datetime
-from xml.etree import ElementTree as ET
 
 # Expected results
 
@@ -146,26 +146,32 @@ def _format_mock_failure_message(self, args, kwargs):
 
 Mock._format_mock_failure_message = _format_mock_failure_message
 
+# have to patch Cell to make cells comparable
+def __eq__(self, other):
+    if not isinstance(other, self.__class__):
+        return False
+    return self.row == other.row and self.col == other.col and self.value == other.value
+Cell.__eq__ = __eq__
+
 class TestWorksheetWrites(unittest.TestCase):
 
     def setUp(self):
         self.sheet = MockWorksheet()
         self.sheet.resize = MagicMock()
-        self.sheet.client = Mock()
-        self.sheet.client.post_cells = MagicMock()
+        self.sheet.update_cells = MagicMock()
+        self.sheet.spreadsheet.values_update = MagicMock()
 
     def test_write_basic(self):
         df = get_as_dataframe(self.sheet)
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
-        self.sheet.client.post_cells.assert_called_once()
-        self.sheet.client.post_cells.assert_called_once_with(self.sheet, POST_CELLS_EXPECTED)
+        self.sheet.update_cells.assert_called_once()
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_write_list_value_to_cell(self):
         df = get_as_dataframe(self.sheet)
         df = df.set_value(0, 'Numeric Column', [1,2,3])
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
-        self.sheet.client.post_cells.assert_called_once()
-        self.sheet.client.post_cells.assert_called_once_with(self.sheet, POST_CELLS_EXPECTED)
-
+        self.sheet.update_cells.assert_called_once()
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
