@@ -14,6 +14,11 @@ with open(os.path.join(os.path.dirname(__file__), 'VERSION'), 'rb') as f:
         VERSION = VERSION.decode('utf8')
     VERSION = VERSION.strip()
 
+with open(os.path.join(os.path.dirname(__file__), 'README.rst'), 'rb') as f:
+    long_description = f.read()
+    if PY3:
+        long_description = long_description.decode('utf8')
+
 setup(
     name='gspread-dataframe',
     version=VERSION,
@@ -24,6 +29,7 @@ setup(
         'pandas>=0.14.0'
         ],
     description='Read/write gspread worksheets using pandas DataFrames',
+    long_description=long_description,
     author='Robin Thomas',
     author_email='rthomas900@gmail.com',
     license='MIT',
@@ -34,7 +40,7 @@ setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
         "Topic :: Office/Business :: Financial :: Spreadsheet",
