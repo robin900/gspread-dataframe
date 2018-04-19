@@ -2,6 +2,17 @@ Changelog
 =========
 
 
+v3.0.0 (2018-04-19)
+-------------------
+- Support for gspread 3.0.0; entire suite of tests refactored to (#12)
+  [Robin Thomas]
+
+  use gspread 3.0.0 and its v4 sheets API.
+
+  Fixes #11.
+- Updated CHANGES. [Robin Thomas]
+
+
 v2.1.1 (2018-04-19)
 -------------------
 - Bump to 2.1.1. [Robin Thomas]
