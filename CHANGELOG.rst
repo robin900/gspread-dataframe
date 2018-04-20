@@ -2,8 +2,18 @@ Changelog
 =========
 
 
+v3.0.1 (2018-04-20)
+-------------------
+- Bump to 3.0.1. [Robin Thomas]
+- Use https for sphinx upload. [Robin Thomas]
+- Add long_description for package; indicate that code is
+  production/stable. [Robin Thomas]
+
+
 v3.0.0 (2018-04-19)
 -------------------
+- Bump VERSION to 3.0.0. [Robin Thomas]
+- Changelog for 3.0.0. [Robin Thomas]
 - Support for gspread 3.0.0; entire suite of tests refactored to (#12)
   [Robin Thomas]
 
