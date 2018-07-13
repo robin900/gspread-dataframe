@@ -1,10 +1,10 @@
 gspread-dataframe
 -----------------
 
-If you have pandas (>= 0.14.0) installed, the ``gspread_dataframe``
-module offers ``get_as_dataframe`` and ``set_with_dataframe`` functions
-to return a worksheet's contents as a DataFrame object, or set a
-worksheet's contents using a DataFrame.
+This package allows easy data flow between a worksheet in a Google spreadsheet
+and a Pandas DataFrame. Any worksheet you can obtain using the ``gspread`` package
+can be retrieved as a DataFrame with ``get_as_dataframe``; DataFrame objects can
+be written to a worksheet using ``set_with_dataframe``:
 
 .. code:: python
 
@@ -39,7 +39,7 @@ Installation
 Requirements
 ~~~~~~~~~~~~
 
-* Python 2.6+ and Python 3.2+
+* Python 2.6+ or Python 3.2+
 * gspread (>=3.0.0; to use older versions of gspread, use gspread-dataframe releases of 2.1.1 or earlier)
 * Pandas >= 0.14.0
 
