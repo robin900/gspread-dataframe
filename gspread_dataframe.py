@@ -162,38 +162,34 @@ def set_with_dataframe(worksheet,
     # to allow space for the headers.
     y, x = dataframe.shape
     if include_index:
-        col += 1
+        x += 1
     if include_column_header:
-        row += 1
+        y += 1
     if resize:
-        worksheet.resize(y + row - 1, x + col - 1)
+        worksheet.resize(y, x)
     else:
-        _resize_to_minimum(worksheet, y + row - 1, x + col - 1)
+        _resize_to_minimum(worksheet, y, x)
 
     updates = []
 
     if include_column_header:
-        for idx, val in enumerate(dataframe.columns):
+        elts = list(dataframe.columns)
+        if include_index:
+            elts = [ dataframe.index.name ] + elts
+        for idx, val in enumerate(elts):
             updates.append(
-                (row - 1,
+                (row,
                  col+idx,
                  _cellrepr(val, allow_formulas))
             )
-    if include_index:
-        for idx, val in enumerate(dataframe.index):
-            updates.append(
-                (idx+row,
-                 col-1,
-                 _cellrepr(val, allow_formulas))
-            )
-        if include_column_header:
-            updates.append(
-                (row-1,
-                 col-1,
-                 _cellrepr(dataframe.index.name, allow_formulas))
-            )
+        row += 1
 
-    for y_idx, value_row in enumerate(dataframe.values):
+    values = []
+    for value_row, index_value in itertools.zip_longest(dataframe.values, dataframe.index):
+        if include_index:
+            value_row = [index_value] + list(value_row)
+        values.append(value_row)
+    for y_idx, value_row in enumerate(values):
         for x_idx, cell_value in enumerate(value_row):
             updates.append(
                 (y_idx+row,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .mock_worksheet import MockWorksheet, CELL_LIST, CELL_LIST_STRINGIFIED
+from .mock_worksheet import MockWorksheet, CELL_LIST, CELL_LIST_STRINGIFIED, CELL_LIST_STRINGIFIED_NO_THINGY
 
 from gspread_dataframe import *
 from gspread.models import Cell
@@ -167,6 +167,22 @@ class TestWorksheetWrites(unittest.TestCase):
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once()
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
+
+    def test_include_index_false(self):
+        df = get_as_dataframe(self.sheet)
+        df_index = df.set_index('Thingy')
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=False)
+        self.sheet.update_cells.assert_called_once()
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option='USER_ENTERED')
+        self.sheet.resize.assert_called_once_with(10, 9)
+
+    def test_include_index_true(self):
+        df = get_as_dataframe(self.sheet)
+        df_index = df.set_index('Thingy')
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=True)
+        self.sheet.update_cells.assert_called_once()
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
+        self.sheet.resize.assert_called_once_with(10, 10)
 
     def test_write_list_value_to_cell(self):
         df = get_as_dataframe(self.sheet)
