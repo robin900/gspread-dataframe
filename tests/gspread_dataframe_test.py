@@ -8,7 +8,10 @@ import pandas as pd
 from difflib import SequenceMatcher
 
 import unittest
-from unittest.mock import Mock, MagicMock
+try:
+    from unittest.mock import Mock, MagicMock
+except ImportError:
+    from mock import Mock, MagicMock
 from datetime import datetime
 
 # Expected results
