@@ -9,5 +9,6 @@ python:
 - 3.7-dev
 - nightly
 install:
+- pip install -U pip
 - pip install --prefer-binary -e .
 script: python setup.py test 
