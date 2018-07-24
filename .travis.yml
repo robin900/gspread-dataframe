@@ -10,5 +10,5 @@ python:
 - nightly
 install:
 - pip install -U pip
-- pip install --prefer-binary -e .
+- if [[ $TRAVIS_PYTHON_VERSION == 2.6* ]]; then pip install -e .; else pip install --prefer-binary -e .; fi
 script: python setup.py test 
