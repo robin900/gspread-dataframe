@@ -165,29 +165,25 @@ class TestWorksheetWrites(unittest.TestCase):
         df = get_as_dataframe(self.sheet)
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
-        self.sheet.update_cells.assert_called_once()
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_include_index_false(self):
         df = get_as_dataframe(self.sheet)
         df_index = df.set_index('Thingy')
         set_with_dataframe(self.sheet, df_index, resize=True, include_index=False)
-        self.sheet.update_cells.assert_called_once()
-        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option='USER_ENTERED')
         self.sheet.resize.assert_called_once_with(10, 9)
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option='USER_ENTERED')
 
     def test_include_index_true(self):
         df = get_as_dataframe(self.sheet)
         df_index = df.set_index('Thingy')
         set_with_dataframe(self.sheet, df_index, resize=True, include_index=True)
-        self.sheet.update_cells.assert_called_once()
-        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
         self.sheet.resize.assert_called_once_with(10, 10)
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_write_list_value_to_cell(self):
         df = get_as_dataframe(self.sheet)
         df = df.set_value(0, 'Numeric Column', [1,2,3])
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
-        self.sheet.update_cells.assert_called_once()
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
