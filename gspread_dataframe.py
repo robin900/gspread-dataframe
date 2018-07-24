@@ -12,9 +12,13 @@ Pandas 0.14.0 or greater installed.
 from gspread.utils import fill_gaps
 from gspread.models import Cell
 from collections import defaultdict
-import itertools
 import logging
 import re
+
+try:
+    from itertools import chain, zip_longest
+except ImportError:
+    from itertools import chain, izip_longest as zip_longest
 
 logger = logging.getLogger(__name__)
 
@@ -105,7 +109,7 @@ def _get_all_values(worksheet, evaluate_formulas):
     if not rows:
         return []
 
-    all_row_keys = itertools.chain.from_iterable(row.keys() for row in rows.values())
+    all_row_keys = chain.from_iterable(row.keys() for row in rows.values())
     rect_cols = range(1, max(all_row_keys) + 1)
     rect_rows = range(1, max(rows.keys()) + 1)
 
@@ -185,7 +189,7 @@ def set_with_dataframe(worksheet,
         row += 1
 
     values = []
-    for value_row, index_value in itertools.zip_longest(dataframe.values, dataframe.index):
+    for value_row, index_value in zip_longest(dataframe.values, dataframe.index):
         if include_index:
             value_row = [index_value] + list(value_row)
         values.append(value_row)
