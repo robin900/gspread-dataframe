@@ -33,6 +33,15 @@ USECOLS_COLUMN_NAMES = [
     'Date Column'
 ]
 
+def append_pandas_read_opts(func):
+    def wrapper(*args, **kwargs):
+        kwargs['na_values'] = []
+        kwargs['default_na_values'] = False
+        return func(*args, **kwargs)
+    return wrapper
+
+#get_as_dataframe = append_pandas_read_opts(get_as_dataframe)
+
 # Tests
 
 class TestWorksheetReads(unittest.TestCase):
@@ -162,27 +171,27 @@ class TestWorksheetWrites(unittest.TestCase):
         self.sheet.spreadsheet.values_update = MagicMock()
 
     def test_write_basic(self):
-        df = get_as_dataframe(self.sheet)
+        df = get_as_dataframe(self.sheet, na_filter=False)
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_include_index_false(self):
-        df = get_as_dataframe(self.sheet)
+        df = get_as_dataframe(self.sheet, na_filter=False)
         df_index = df.set_index('Thingy')
         set_with_dataframe(self.sheet, df_index, resize=True, include_index=False)
         self.sheet.resize.assert_called_once_with(10, 9)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option='USER_ENTERED')
 
     def test_include_index_true(self):
-        df = get_as_dataframe(self.sheet)
+        df = get_as_dataframe(self.sheet, na_filter=False)
         df_index = df.set_index('Thingy')
         set_with_dataframe(self.sheet, df_index, resize=True, include_index=True)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_write_list_value_to_cell(self):
-        df = get_as_dataframe(self.sheet)
+        df = get_as_dataframe(self.sheet, na_filter=False)
         df = df.set_value(0, 'Numeric Column', [1,2,3])
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
