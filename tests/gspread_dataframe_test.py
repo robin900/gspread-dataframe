@@ -195,7 +195,7 @@ class TestWorksheetWrites(unittest.TestCase):
 
     def test_write_list_value_to_cell(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
-        df = df.set_value(0, 'Numeric Column', [1,2,3])
+        df = df.at[0, 'Numeric Column'] = [1,2,3]
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
