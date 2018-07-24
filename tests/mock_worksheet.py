@@ -19,6 +19,16 @@ CELL_LIST_STRINGIFIED = [
    for j, value in enumerate(row)
 ]
 
+_without_index = contents_of_file('cell_list.json')
+for _r in _without_index:
+    del _r[0]
+
+CELL_LIST_STRINGIFIED_NO_THINGY = [
+   Cell(row=i+1, col=j+1, value=str(value))
+   for i, row in enumerate(_without_index)
+   for j, value in enumerate(row)
+]
+
 class MockWorksheet(object):
     def __init__(self):
         self.row_count = 10

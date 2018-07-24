@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .mock_worksheet import MockWorksheet, CELL_LIST, CELL_LIST_STRINGIFIED
+from .mock_worksheet import MockWorksheet, CELL_LIST, CELL_LIST_STRINGIFIED, CELL_LIST_STRINGIFIED_NO_THINGY
 
 from gspread_dataframe import *
 from gspread.models import Cell
@@ -8,7 +8,10 @@ import pandas as pd
 from difflib import SequenceMatcher
 
 import unittest
-from unittest.mock import Mock, MagicMock
+try:
+    from unittest.mock import Mock, MagicMock
+except ImportError:
+    from mock import Mock, MagicMock
 from datetime import datetime
 
 # Expected results
@@ -32,6 +35,15 @@ USECOLS_COLUMN_NAMES = [
     'Formula Column',
     'Date Column'
 ]
+
+def append_pandas_read_opts(func):
+    def wrapper(*args, **kwargs):
+        kwargs['na_values'] = []
+        kwargs['default_na_values'] = False
+        return func(*args, **kwargs)
+    return wrapper
+
+#get_as_dataframe = append_pandas_read_opts(get_as_dataframe)
 
 # Tests
 
@@ -162,16 +174,28 @@ class TestWorksheetWrites(unittest.TestCase):
         self.sheet.spreadsheet.values_update = MagicMock()
 
     def test_write_basic(self):
-        df = get_as_dataframe(self.sheet)
+        df = get_as_dataframe(self.sheet, na_filter=False)
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
-        self.sheet.update_cells.assert_called_once()
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
+
+    def test_include_index_false(self):
+        df = get_as_dataframe(self.sheet, na_filter=False)
+        df_index = df.set_index('Thingy')
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=False)
+        self.sheet.resize.assert_called_once_with(10, 9)
+        self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option='USER_ENTERED')
+
+    def test_include_index_true(self):
+        df = get_as_dataframe(self.sheet, na_filter=False)
+        df_index = df.set_index('Thingy')
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=True)
+        self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_write_list_value_to_cell(self):
-        df = get_as_dataframe(self.sheet)
-        df = df.set_value(0, 'Numeric Column', [1,2,3])
+        df = get_as_dataframe(self.sheet, na_filter=False)
+        df.at[0, 'Numeric Column'] = [1,2,3]
         set_with_dataframe(self.sheet, df, resize=True)
         self.sheet.resize.assert_called_once_with(10, 10)
-        self.sheet.update_cells.assert_called_once()
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
