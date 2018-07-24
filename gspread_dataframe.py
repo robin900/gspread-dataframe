@@ -127,7 +127,8 @@ def get_as_dataframe(worksheet,
             Defaults to False.
     :param \*\*options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
-            (Note: TextParser supports only the 'python' parser engine.)
+            (Note: TextParser supports only the default 'python' parser engine,
+            not the C engine.)
     :returns: pandas.DataFrame
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
