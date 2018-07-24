@@ -2,6 +2,16 @@ Changelog
 =========
 
 
+v3.0.2 (2018-07-24)
+-------------------
+- Bump to 3.0.2. [Robin Thomas]
+- Rbt fix 13 (#14) [Robin Thomas]
+  Fix for include_index=True for non-implicit indexes.
+  Test coverage added to ensure that include_index=True and 
+  include_index=False result in the proper cell list sent to gspread.
+- Tightened up README intro. [Robin Thomas]
+
+
 v3.0.1 (2018-04-20)
 -------------------
 - Bump to 3.0.1. [Robin Thomas]
