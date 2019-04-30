@@ -1,6 +1,9 @@
 gspread-dataframe
 -----------------
 
+.. image:: https://badge.fury.io/py/gspread-dataframe.svg
+    :target: https://badge.fury.io/py/gspread-dataframe
+
 .. image:: https://travis-ci.org/robin900/gspread-dataframe.svg?branch=master
     :target: https://travis-ci.org/robin900/gspread-dataframe
 
