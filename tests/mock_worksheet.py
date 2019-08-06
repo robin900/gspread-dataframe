@@ -1,6 +1,7 @@
 import os.path
 import json
 from gspread.models import Cell
+from gspread_dataframe import _cellrepr
 
 def contents_of_file(filename, et_parse=True):
     with open(os.path.join(os.path.dirname(__file__), filename), 'r') as f:
@@ -14,7 +15,7 @@ CELL_LIST = [
    for j, value in enumerate(row)
 ]
 CELL_LIST_STRINGIFIED = [
-   Cell(row=i+1, col=j+1, value=str(value))
+   Cell(row=i+1, col=j+1, value=_cellrepr(value, allow_formulas=True))
    for i, row in enumerate(contents_of_file('cell_list.json'))
    for j, value in enumerate(row)
 ]
@@ -24,7 +25,7 @@ for _r in _without_index:
     del _r[0]
 
 CELL_LIST_STRINGIFIED_NO_THINGY = [
-   Cell(row=i+1, col=j+1, value=str(value))
+   Cell(row=i+1, col=j+1, value=_cellrepr(value, allow_formulas=True))
    for i, row in enumerate(_without_index)
    for j, value in enumerate(row)
 ]

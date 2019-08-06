@@ -28,7 +28,7 @@ setup(
         'gspread>=3.0.0', 
         'pandas>=0.14.0'
         ],
-    test_requires=([] if PY3 else ['mock']),
+    test_requires=['oauth2client'] + ([] if PY3 else ['mock']),
     description='Read/write gspread worksheets using pandas DataFrames',
     long_description=long_description,
     author='Robin Thomas',

@@ -52,7 +52,7 @@ def _cellrepr(value, allow_formulas):
         value = repr(value)
     else:
         value = str(value)
-    if (not allow_formulas) and value.startswith('='):
+    if value.startswith("'") or ((not allow_formulas) and value.startswith('=')):
         value = "'%s" % value
     return value
 
