@@ -2,13 +2,23 @@ Changelog
 =========
 
 
+v3.0.3 (2019-08-06)
+-------------------
+- Fixup setup.py for tests_require, bump to 3.0.3. [Robin Thomas]
+- Fixes robin900/gspread-dataframe#16. [Robin Thomas]
+
+  Adds integration test coverage (for #16 fix and for future testing).
+- Added fury badge. [Robin Thomas]
+- Tweak docstring. [Robin Thomas]
+
+
 v3.0.2 (2018-07-24)
 -------------------
 - Bump to 3.0.2. [Robin Thomas]
 - Rbt fix 13 (#14) [Robin Thomas]
-  Fix for include_index=True for non-implicit indexes.
-  Test coverage added to ensure that include_index=True and 
-  include_index=False result in the proper cell list sent to gspread.
+
+  * Fixes #13. Test coverage added to ensure that include_index=True
+  and include_index=False result in the proper cell list sent to gspread.
 - Tightened up README intro. [Robin Thomas]
 
 
