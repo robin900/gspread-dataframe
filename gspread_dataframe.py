@@ -78,7 +78,7 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
 
 def _get_all_values(worksheet, evaluate_formulas):
     data = worksheet.spreadsheet.values_get(
-        worksheet.title, 
+        worksheet.title,
         params={
             'valueRenderOption': ('UNFORMATTED_VALUE' if evaluate_formulas else 'FORMULA'),
             'dateTimeRenderOption': 'FORMATTED_STRING'
@@ -104,7 +104,7 @@ def _get_all_values(worksheet, evaluate_formulas):
     rows = defaultdict(lambda: defaultdict(str))
     for cell in cells:
         row = rows.setdefault(int(cell.row), defaultdict(str))
-        row[cell.col] = cell.value 
+        row[cell.col] = cell.value
 
     if not rows:
         return []
@@ -118,7 +118,7 @@ def _get_all_values(worksheet, evaluate_formulas):
 def get_as_dataframe(worksheet,
                      evaluate_formulas=False,
                      **options):
-    """
+    r"""
     Returns the worksheet contents as a DataFrame.
 
     :param worksheet: the worksheet.
@@ -211,4 +211,3 @@ def set_with_dataframe(worksheet,
 
     resp = worksheet.update_cells(cells_to_update, value_input_option='USER_ENTERED')
     logger.debug("Cell update response: %s", resp)
-
