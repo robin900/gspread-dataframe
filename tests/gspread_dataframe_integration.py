@@ -40,7 +40,11 @@ CELL_LIST_FILENAME = os.path.join(os.path.dirname(__file__), 'cell_list.json')
 def read_config(filename):
     config = ConfigParser.ConfigParser()
     with open(filename) as fp:
-        config.read_file(fp)
+        if hasattr(config, 'read_file'):
+            read_func = config.read_file
+        else:
+            read_func = config.readfp
+        read_func(fp)
     return config
 
 
