@@ -4,10 +4,15 @@ python:
 - '3.4'
 - '3.5'
 - '3.6'
-- 3.6-dev
-- 3.7-dev
+- '3.7'
+- '3.8'
 - nightly
 install:
 - pip install -U pip
-- if [[ $TRAVIS_PYTHON_VERSION == 2.6* ]]; then pip install --only-binary -e .; else pip install --prefer-binary -e .; fi
-script: python setup.py test 
+- if [[ $TRAVIS_PYTHON_VERSION == 2.6* ]]; then pip install --only-binary -e .; else
+  pip install --prefer-binary -e .; fi
+script: python setup.py test
+before_install:
+- openssl aes-256-cbc -K $encrypted_efe1688938da_key -iv $encrypted_efe1688938da_iv
+  -in travis.secrets.tar.gz.enc -out travis.secrets.tar.gz -d
+- tar xvzf travis.secrets.tar.gz
