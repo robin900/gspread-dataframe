@@ -2,8 +2,16 @@ Changelog
 =========
 
 
+v3.0.4 (2020-02-09)
+-------------------
+- Bump to 3.0.4. [Robin Thomas]
+- Fix deprecation warnings due to invalid escape sequences. [Karthikeyan
+  Singaravelan]
+
+
 v3.0.3 (2019-08-06)
 -------------------
+- Changelog updated for v3.0.3. [Robin Thomas]
 - Fixup setup.py for tests_require, bump to 3.0.3. [Robin Thomas]
 - Fixes robin900/gspread-dataframe#16. [Robin Thomas]
 
