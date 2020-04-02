@@ -141,7 +141,7 @@ def _determine_index_column_size(index):
 
 def _determine_column_header_size(columns):
     if hasattr(columns, 'levshape'):
-        return len(index.levshape)
+        return len(columns.levshape)
     return 1
 
 def set_with_dataframe(worksheet,
@@ -192,23 +192,39 @@ def set_with_dataframe(worksheet,
     updates = []
 
     if include_column_header:
-        # TODO if columns is hierarchical, it will span multiple rows
         elts = list(dataframe.columns)
-        if include_index:
-            if hasattr(dataframe.index, 'names'):
-                index_elts = dataframe.index.names
-            else:
-                index_elts = dataframe.index.name
-            if not isinstance(index_elts, (list, tuple)):
-                index_elts = [ index_elts ]
-            elts = list(index_elts) + elts
-        for idx, val in enumerate(elts):
-            updates.append(
-                (row,
-                 col+idx,
-                 _cellrepr(val, allow_formulas))
-            )
-        row += 1
+        # if columns object is hierarchical multi-index, it will span multiple rows
+        if column_header_size > 1:
+            elts = list(dataframe.columns)
+            if include_index:
+                if hasattr(dataframe.index, 'names'):
+                    index_elts = dataframe.index.names
+                else:
+                    index_elts = dataframe.index.name
+                if not isinstance(index_elts, (list, tuple)):
+                    index_elts = [ index_elts ]
+                elts = [ ((None,) * (column_header_size - 1)) + (e,) for e in index_elts ] + elts
+            for level in range(0, column_header_size):
+                for idx, tup in enumerate(elts):
+                    updates.append((row, col+idx, _cellrepr(tup[level], allow_formulas)))
+                row += 1
+        else:
+            elts = list(dataframe.columns)
+            if include_index:
+                if hasattr(dataframe.index, 'names'):
+                    index_elts = dataframe.index.names
+                else:
+                    index_elts = dataframe.index.name
+                if not isinstance(index_elts, (list, tuple)):
+                    index_elts = [ index_elts ]
+                elts = list(index_elts) + elts
+            for idx, val in enumerate(elts):
+                updates.append(
+                    (row,
+                     col+idx,
+                     _cellrepr(val, allow_formulas))
+                )
+            row += 1
 
     values = []
     for value_row, index_value in zip_longest(dataframe.values, dataframe.index):
