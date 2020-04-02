@@ -196,13 +196,18 @@ def set_with_dataframe(worksheet,
         # if columns object is hierarchical multi-index, it will span multiple rows
         if column_header_size > 1:
             elts = list(dataframe.columns)
+            if include_index:
+                if hasattr(dataframe.index, 'names'):
+                    index_elts = dataframe.index.names
+                else:
+                    index_elts = dataframe.index.name
+                if not isinstance(index_elts, (list, tuple)):
+                    index_elts = [ index_elts ]
+                elts = [ ((None,) * (column_header_size - 1)) + (e,) for e in index_elts ] + elts
             for level in range(0, column_header_size):
                 for idx, tup in enumerate(elts):
                     updates.append((row, col+idx, _cellrepr(tup[level], allow_formulas)))
                 row += 1
-            if include_index:
-                # TODO somehow incorporate index name(s) into last header row
-                raise NotImplementedError()
         else:
             elts = list(dataframe.columns)
             if include_index:

@@ -169,7 +169,7 @@ class WorksheetTest(GspreadDataframeTest):
             rows = json.load(f)
         mi = list(pd.MultiIndex.from_product([['A', 'B'], ['one', 'two', 'three', 'four', 'five']]))
         column_headers = [
-            'Classification', 'Classification', 
+            '', '', 
             'SQL', 'SQL', 'SQL', 'SQL', 'SQL', 
             'Misc', 'Misc', 'Misc', 'Misc', 'Misc'
         ]
@@ -182,6 +182,10 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet.resize(11, 12)
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df = get_as_dataframe(self.sheet, index_col=[0,1], header=[0,1])
+        # fixup because of pandas.read_csv limitations
+        df.columns.names = [None, None]
+        df.index.names = ['Category', 'Subcategory']
+        # set and get, round-trip
         set_with_dataframe(self.sheet, df, resize=True, include_index=True)
         df2 = get_as_dataframe(self.sheet, index_col=[0,1], header=[0,1])
         self.assertTrue(df.equals(df2))
