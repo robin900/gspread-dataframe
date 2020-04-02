@@ -145,6 +145,28 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+        column_headers = [
+            'SQL', 'SQL', 'SQL', 'SQL', 'SQL', 
+            'Misc', 'Misc', 'Misc', 'Misc', 'Misc'
+        ]
+        rows = [ column_headers ] + rows 
+        cell_list = self.sheet.range('A1:J11')
+        for cell, value in zip(cell_list, itertools.chain(*rows)):
+            cell.value = value
+        self.sheet.update_cells(cell_list)
+        self.sheet.resize(11, 10)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        df = get_as_dataframe(self.sheet, header=[0,1])
+        import pdb; pdb.set_trace()
+        set_with_dataframe(self.sheet, df, resize=True)
+        df2 = get_as_dataframe(self.sheet, header=[0,1])
+        self.assertTrue(df.equals(df2))
+
+    def test_multiindex_column_header_and_multiindex(self):
+        # populate sheet with cell list values
+        rows = None
+        with open(CELL_LIST_FILENAME) as f:
+            rows = json.load(f)
         mi = list(pd.MultiIndex.from_product([['A', 'B'], ['one', 'two', 'three', 'four', 'five']]))
         column_headers = [
             'Classification', 'Classification', 
