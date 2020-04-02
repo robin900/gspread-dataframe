@@ -134,6 +134,16 @@ def get_as_dataframe(worksheet,
     all_values = _get_all_values(worksheet, evaluate_formulas)
     return TextParser(all_values, **options).read()
 
+def _determine_index_column_size(index):
+    if hasattr(index, 'levshape'):
+        return len(index.levshape)
+    return 1
+
+def _determine_column_header_size(columns):
+    if hasattr(columns, 'levshape'):
+        return len(index.levshape)
+    return 1
+
 def set_with_dataframe(worksheet,
                        dataframe,
                        row=1,
@@ -150,9 +160,9 @@ def set_with_dataframe(worksheet,
     :param dataframe: the DataFrame.
     :param include_index: if True, include the DataFrame's index as an
             additional column. Defaults to False.
-    :param include_column_header: if True, add a header row before data with
-            column names. (If include_index is True, the index's name will be
-            used as its column's header.) Defaults to True.
+    :param include_column_header: if True, add a header row or rows before data with
+            column names. (If include_index is True, the index's name(s) will be
+            used as its columns' headers.) Defaults to True.
     :param resize: if True, changes the worksheet's size to match the shape
             of the provided DataFrame. If False, worksheet will only be
             resized as necessary to contain the DataFrame contents.
@@ -166,10 +176,14 @@ def set_with_dataframe(worksheet,
     # If header-related params are True, the values are adjusted
     # to allow space for the headers.
     y, x = dataframe.shape
+    index_col_size = 0
+    column_header_size = 0
     if include_index:
-        x += 1
+        index_col_size = _determine_index_column_size(dataframe.index)
+        x += index_col_size
     if include_column_header:
-        y += 1
+        column_header_size = _determine_column_header_size(dataframe.columns)
+        y += column_header_size
     if resize:
         worksheet.resize(y, x)
     else:
@@ -178,9 +192,16 @@ def set_with_dataframe(worksheet,
     updates = []
 
     if include_column_header:
+        # TODO if columns is hierarchical, it will span multiple rows
         elts = list(dataframe.columns)
         if include_index:
-            elts = [ dataframe.index.name ] + elts
+            if hasattr(dataframe.index, 'names'):
+                index_elts = dataframe.index.names
+            else:
+                index_elts = dataframe.index.name
+            if not isinstance(index_elts, (list, tuple)):
+                index_elts = [ index_elts ]
+            elts = list(index_elts) + elts
         for idx, val in enumerate(elts):
             updates.append(
                 (row,
@@ -192,7 +213,9 @@ def set_with_dataframe(worksheet,
     values = []
     for value_row, index_value in zip_longest(dataframe.values, dataframe.index):
         if include_index:
-            value_row = [index_value] + list(value_row)
+            if not isinstance(index_value, (list, tuple)):
+                index_value = [ index_value ]
+            value_row = list(index_value) + list(value_row)
         values.append(value_row)
     for y_idx, value_row in enumerate(values):
         for x_idx, cell_value in enumerate(value_row):

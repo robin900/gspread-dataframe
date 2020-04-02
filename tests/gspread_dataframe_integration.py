@@ -105,7 +105,6 @@ class WorksheetTest(GspreadDataframeTest):
         self.spreadsheet.del_worksheet(self.sheet)
 
     def test_roundtrip(self):
-
         # populate sheet with cell list values
         rows = None
         with open(CELL_LIST_FILENAME) as f:
@@ -120,5 +119,24 @@ class WorksheetTest(GspreadDataframeTest):
         df = get_as_dataframe(self.sheet)
         set_with_dataframe(self.sheet, df)
         df2 = get_as_dataframe(self.sheet)
+        self.assertTrue(df.equals(df2))
+
+    def test_multiindex(self):
+        # populate sheet with cell list values
+        rows = None
+        with open(CELL_LIST_FILENAME) as f:
+            rows = json.load(f)
+        mi = list(pd.MultiIndex.from_product([['A', 'B'], ['one', 'two', 'three', 'four', 'five']]))
+        column_names = ['Category', 'Subcategory'] + rows[0]
+        rows = [ column_names ] + [ list(index_tup) + row for row, index_tup in zip(rows[1:], mi) ]
+        cell_list = self.sheet.range('A1:L10')
+        for cell, value in zip(cell_list, itertools.chain(*rows)):
+            cell.value = value
+        self.sheet.update_cells(cell_list)
+        self.sheet.resize(10, 12)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        df = get_as_dataframe(self.sheet, index_col=[0,1])
+        set_with_dataframe(self.sheet, df, resize=True, include_index=True)
+        df2 = get_as_dataframe(self.sheet, index_col=[0,1])
         self.assertTrue(df.equals(df2))
 
