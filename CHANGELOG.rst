@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.0.5 (2020-04-02)
+-------------------
+- Bump to v3.0.5. [Robin Thomas]
+- Multiindex column headers (#21) [Robin Thomas]
+- Support for MultiIndex (hierarchical) indexes for set_with_dataframe.
+  [Robin Thomas]
+
+
 v3.0.4 (2020-02-09)
 -------------------
 - Bump to 3.0.4. [Robin Thomas]
