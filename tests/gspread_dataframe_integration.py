@@ -157,7 +157,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet.resize(11, 10)
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df = get_as_dataframe(self.sheet, header=[0,1])
-        import pdb; pdb.set_trace()
+        self.assertEqual((2, 10), getattr(df.columns, 'levshape', None)), 
         set_with_dataframe(self.sheet, df, resize=True)
         df2 = get_as_dataframe(self.sheet, header=[0,1])
         self.assertTrue(df.equals(df2))
