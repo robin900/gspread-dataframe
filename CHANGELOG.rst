@@ -2,12 +2,17 @@ Changelog
 =========
 
 
+v3.0.6 (2020-04-19)
+-------------------
+- Bump to 3.0.6. [Robin Thomas]
+- Add MANIFEST.in to include VERSION file in sdist. [Robin Thomas]
+- Add pandas doc link. [Robin Thomas]
+
+
 v3.0.5 (2020-04-02)
 -------------------
 - Bump to v3.0.5. [Robin Thomas]
 - Multiindex column headers (#21) [Robin Thomas]
-- Support for MultiIndex (hierarchical) indexes for set_with_dataframe.
-  [Robin Thomas]
 
 
 v3.0.4 (2020-02-09)
