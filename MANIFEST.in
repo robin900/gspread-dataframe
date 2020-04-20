@@ -1,1 +1,11 @@
 include VERSION
+include *.rc
+include *.rst
+include *.txt
+recursive-include docs *.bat
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile
+recursive-include tests *.example
+recursive-include tests *.json
+recursive-include tests *.py
