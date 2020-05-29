@@ -121,6 +121,21 @@ class WorksheetTest(GspreadDataframeTest):
         df2 = get_as_dataframe(self.sheet)
         self.assertTrue(df.equals(df2))
 
+    def test_nrows(self):
+        # populate sheet with cell list values
+        rows = None
+        with open(CELL_LIST_FILENAME) as f:
+            rows = json.load(f)
+
+        self.sheet.resize(10, 10)
+        cell_list = self.sheet.range('A1:J10')
+        for cell, value in zip(cell_list, itertools.chain(*rows)):
+            cell.value = value
+        self.sheet.update_cells(cell_list)
+
+        df = get_as_dataframe(self.sheet, nrows=6)
+        self.assertEqual(6, len(df))
+
     def test_multiindex(self):
         # populate sheet with cell list values
         rows = None
