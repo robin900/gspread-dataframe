@@ -2,10 +2,19 @@ Changelog
 =========
 
 
+v3.0.7 (2020-05-29)
+-------------------
+- Bump to 3.0.7. [Robin Thomas]
+- Support nrows (pandas) parameter properly in get_as_dataframe. [Robin
+  Thomas]
+- Added to MANIFEST.in using check-manifest tool. [Robin Thomas]
+
+
 v3.0.6 (2020-04-19)
 -------------------
 - Bump to 3.0.6. [Robin Thomas]
 - Add MANIFEST.in to include VERSION file in sdist. [Robin Thomas]
+- Try link again. [Robin Thomas]
 - Add pandas doc link. [Robin Thomas]
 
 
@@ -13,6 +22,14 @@ v3.0.5 (2020-04-02)
 -------------------
 - Bump to v3.0.5. [Robin Thomas]
 - Multiindex column headers (#21) [Robin Thomas]
+
+  * Fixes #20. support for MultiIndex object used as the columns for a DataFrame, and also MultiIndex object used as the index of a DataFrame.
+- Support for MultiIndex (hierarchical) indexes for set_with_dataframe.
+  [Robin Thomas]
+- Fewer py builds. [Robin Thomas]
+- 2.7 compatible config reading. [Robin Thomas]
+- Try pip cache for travis. [Robin Thomas]
+- Bundle up travis secrets for CI build. [Robin Thomas]
 
 
 v3.0.4 (2020-02-09)
