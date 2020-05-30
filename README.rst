@@ -7,6 +7,9 @@ gspread-dataframe
 .. image:: https://travis-ci.org/robin900/gspread-dataframe.svg?branch=master
     :target: https://travis-ci.org/robin900/gspread-dataframe
 
+.. image:: https://img.shields.io/pypi/dm/gspread-dataframe.svg
+    :target: https://pypi.org/project/gspread-dataframe
+
 This package allows easy data flow between a worksheet in a Google spreadsheet
 and a Pandas DataFrame. Any worksheet you can obtain using the ``gspread`` package
 can be retrieved as a DataFrame with ``get_as_dataframe``; DataFrame objects can
