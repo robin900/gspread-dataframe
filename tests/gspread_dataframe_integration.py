@@ -133,8 +133,9 @@ class WorksheetTest(GspreadDataframeTest):
             cell.value = value
         self.sheet.update_cells(cell_list)
 
-        df = get_as_dataframe(self.sheet, nrows=6)
-        self.assertEqual(6, len(df))
+        for nrows in (9,6,0):
+            df = get_as_dataframe(self.sheet, nrows=nrows)
+            self.assertEqual(nrows, len(df))
 
     def test_multiindex(self):
         # populate sheet with cell list values

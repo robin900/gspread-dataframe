@@ -117,7 +117,6 @@ def _get_all_values(worksheet, evaluate_formulas):
 
 def get_as_dataframe(worksheet,
                      evaluate_formulas=False,
-                     nrows=None,
                      **options):
     r"""
     Returns the worksheet contents as a DataFrame.
@@ -126,8 +125,6 @@ def get_as_dataframe(worksheet,
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
-    :param nrows: if present and not None, limits the number of rows read from the worksheet.
-                  Defaults to None. See pandas documentation for more info on this parameter.
     :param \*\*options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
             (Note: TextParser supports only the default 'python' parser engine,
@@ -135,7 +132,7 @@ def get_as_dataframe(worksheet,
     :returns: pandas.DataFrame
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
-    return TextParser(all_values, **options).read(nrows)
+    return TextParser(all_values, **options).read(options.get('nrows', None))
 
 def _determine_index_column_size(index):
     if hasattr(index, 'levshape'):
