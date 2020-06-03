@@ -11,10 +11,13 @@ Pandas 0.14.0 or greater installed.
 """
 from gspread.utils import fill_gaps
 from gspread.models import Cell
-from collections import defaultdict
 import logging
 import re
 
+try:
+    from collections.abc import defaultdict
+except ImportError:
+    from collections import defaultdict
 try:
     from itertools import chain, zip_longest
 except ImportError:
