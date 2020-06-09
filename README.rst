@@ -50,7 +50,7 @@ Formatting Google worksheets for DataFrames
 
 If you install the ``gspread-formatting`` package, you can additionally format a Google worksheet to suit the  
 DataFrame data you've just written. See the `package documentation for details <https://github.com/robin900/gspread-formatting#formatting-a-worksheet-using-a-pandas-dataframe>`__, but here's a short example
-using the default formatter::
+using the default formatter:
 
 .. code:: python
 
