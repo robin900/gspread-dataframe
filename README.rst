@@ -45,6 +45,26 @@ only options supported by that engine are acceptable:
 
     df = get_as_dataframe(worksheet, parse_dates=True, usecols=[0,2], skiprows=1, header=None)
 
+Formatting Google worksheets for DataFrames
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you install the ``gspread-formatting`` package, you can additionally format a Google worksheet to suit the  
+DataFrame data you've just written. See the `package documentation for details <https://github.com/robin900/gspread-formatting#formatting-a-worksheet-using-a-pandas-dataframe>`__, but here's a short example
+using the default formatter::
+
+.. code:: python
+
+    import pandas as pd
+    from gspread_dataframe import get_as_dataframe, set_with_dataframe
+    from gspread_formatting.dataframe import format_with_dataframe
+
+    worksheet = some_worksheet_obtained_from_gspread_client
+
+    df = pd.DataFrame.from_records([{'a': i, 'b': i * 2} for i in range(100)])
+    set_with_dataframe(worksheet, df)
+    format_with_dataframe(worksheet, df, include_column_header=True)
+
+    
 Installation
 ------------
 
