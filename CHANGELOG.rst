@@ -2,6 +2,16 @@ Changelog
 =========
 
 
+v3.0.8 (2020-08-20)
+-------------------
+- Bump to 3.0.8. [Robin Thomas]
+- Make collections.abc imports 3.9-compatible. [Robin Thomas]
+- Accept nrows only as keyword parameter just as for all other pandas
+  parser-related arguments; remove nrows parameter documentation since
+  pandas, not this package, owns the parameter and its meaning. [Robin
+  Thomas]
+
+
 v3.0.7 (2020-05-29)
 -------------------
 - Bump to 3.0.7. [Robin Thomas]
