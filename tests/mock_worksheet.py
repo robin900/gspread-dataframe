@@ -1,5 +1,6 @@
 import os.path
 import json
+import re
 from gspread.models import Cell
 from gspread_dataframe import _cellrepr
 
@@ -14,8 +15,9 @@ CELL_LIST = [
    for i, row in enumerate(contents_of_file('cell_list.json'))
    for j, value in enumerate(row)
 ]
+
 CELL_LIST_STRINGIFIED = [
-   Cell(row=i+1, col=j+1, value=_cellrepr(value, allow_formulas=True, string_escaping=False))
+   Cell(row=i+1, col=j+1, value=_cellrepr(value, allow_formulas=True, string_escaping=re.compile(r'3e50')))
    for i, row in enumerate(contents_of_file('cell_list.json'))
    for j, value in enumerate(row)
 ]
@@ -25,7 +27,7 @@ for _r in _without_index:
     del _r[0]
 
 CELL_LIST_STRINGIFIED_NO_THINGY = [
-   Cell(row=i+1, col=j+1, value=_cellrepr(value, allow_formulas=True, string_escaping=False))
+   Cell(row=i+1, col=j+1, value=_cellrepr(value, allow_formulas=True, string_escaping=re.compile(r'3e50')))
    for i, row in enumerate(_without_index)
    for j, value in enumerate(row)
 ]
