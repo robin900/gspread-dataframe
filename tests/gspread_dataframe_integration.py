@@ -156,8 +156,6 @@ class WorksheetTest(GspreadDataframeTest):
         df = get_as_dataframe(self.sheet, index_col=[0,1])
         set_with_dataframe(self.sheet, df, resize=True, include_index=True, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet, index_col=[0,1])
-        for c in df.columns:
-            print("%s: %s" % (c, df[c].equals(df2[c])))
         self.assertTrue(df.equals(df2))
 
     def test_multiindex_column_header(self):

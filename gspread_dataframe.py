@@ -48,7 +48,7 @@ def _escaped_string(value, string_escaping):
             value.startswith("'") or 
             string_escaping == True or 
             (isinstance(string_escaping, re.Pattern) and string_escaping.match(value)) or
-            (isinstance(string_escaping, Callable) and string_escaping(value))
+            (callable(string_escaping) and string_escaping(value))
         ):
         return "'%s" % value
     else:
