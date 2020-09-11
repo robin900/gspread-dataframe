@@ -197,7 +197,8 @@ def set_with_dataframe(worksheet,
             will be escaped as a string. If any callable object like a function,
             it is called with the unescaped string value and if the return value is true,
             the string will be escaped; otherwise the string is left intact.
-            The escaping done when allow_formulas=True is unaffected by this parameter. 
+            The escaping done when allow_formulas=True (to escape string values beginning with `=`)
+            is unaffected by this parameter. 
             Any string value starting with the `'` character will be escaped 
             regardless of this parameter's value.
             Default value is False.
