@@ -41,13 +41,15 @@ from pandas.io.parsers import TextParser
 __all__ = ('set_with_dataframe', 'get_as_dataframe')
 
 
-DEFAULT_STRING_ESCAPING_MATCHER = re.compile(r"""(?!\d+[/-]\d+[/-]\d+).*""")
-
-
 def _escaped_string(value, string_escaping):
     if value == None:
         return ""
-    if string_escaping == True or value.startswith("'") or (isinstance(string_escaping, re.Pattern) and string_escaping.match(value)):
+    if (
+            value.startswith("'") or 
+            string_escaping == True or 
+            (isinstance(string_escaping, re.Pattern) and string_escaping.match(value)) or
+            (isinstance(string_escaping, Callable) and string_escaping(value))
+        ):
         return "'%s" % value
     else:
         return value
@@ -192,11 +194,13 @@ def set_with_dataframe(worksheet,
             as text literals, which Google Sheets will store as text and not parse as numbers.
             If False, only string values beginning with `'` are escaped.
             If an `re.Pattern` object, any string value that `match()`es the Pattern
-            will be escaped as a string. The escaping done when allow_formulas=True
-            is unaffected by this parameter. Any string value starting with the `'`
-            character will be escaped regardless of this parameter's value.
+            will be escaped as a string. If any callable object like a function,
+            it is called with the unescaped string value and if the return value is true,
+            the string will be escaped; otherwise the string is left intact.
+            The escaping done when allow_formulas=True is unaffected by this parameter. 
+            Any string value starting with the `'` character will be escaped 
+            regardless of this parameter's value.
             Default value is False.
-            any string _except_ `date` or `datetime` strings in most common locales.
     """
     # x_pos, y_pos refers to the position of data rows only,
     # excluding any header rows in the google sheet.
