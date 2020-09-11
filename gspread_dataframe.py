@@ -42,13 +42,12 @@ __all__ = ('set_with_dataframe', 'get_as_dataframe')
 
 
 def _escaped_string(value, string_escaping):
-    if value == None:
+    if value in (None, ""):
         return ""
     if (
             value.startswith("'") or 
-            string_escaping == True or 
-            (isinstance(string_escaping, re.Pattern) and string_escaping.match(value)) or
-            (callable(string_escaping) and string_escaping(value))
+            string_escaping == True or
+            (callable(string_escaping) and string_escaping(value)) 
         ):
         return "'%s" % value
     else:
@@ -192,12 +191,13 @@ def set_with_dataframe(worksheet,
             to avoid its interpretation as a formula. Defaults to True.
     :param string_escaping: if True, escapes all string values in the DataFrame
             as text literals, which Google Sheets will store as text and not parse as numbers.
-            If False, only string values beginning with `'` are escaped.
-            If an `re.Pattern` object, any string value that `match()`es the Pattern
-            will be escaped as a string. If any callable object like a function,
+            If False or None, only string values beginning with `'` are escaped.
+            If any callable object like a function or method,
             it is called with the unescaped string value and if the return value is true,
             the string will be escaped; otherwise the string is left intact.
-            The escaping done when allow_formulas=True (to escape string values beginning with `=`)
+            (A useful technique is to pass a regular expression bound method, e.g. 
+            `re.compile(r'^my_regex_.*$').search`.)
+            The escaping done by allow_formulas=True (to escape string values beginning with `=`)
             is unaffected by this parameter. 
             Any string value starting with the `'` character will be escaped 
             regardless of this parameter's value.

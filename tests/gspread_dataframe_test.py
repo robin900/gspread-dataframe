@@ -2,6 +2,7 @@
 from .mock_worksheet import MockWorksheet, CELL_LIST, CELL_LIST_STRINGIFIED, CELL_LIST_STRINGIFIED_NO_THINGY
 
 from gspread_dataframe import *
+from gspread_dataframe import _escaped_string as escape
 from gspread.models import Cell
 import numpy as np
 import pandas as pd
@@ -37,17 +38,34 @@ USECOLS_COLUMN_NAMES = [
     'Date Column'
 ]
 
-def append_pandas_read_opts(func):
-    def wrapper(*args, **kwargs):
-        kwargs['na_values'] = []
-        kwargs['default_na_values'] = False
-        return func(*args, **kwargs)
-    return wrapper
-
-#get_as_dataframe = append_pandas_read_opts(get_as_dataframe)
 
 # Tests
 
+class TestStringEscaping(unittest.TestCase):
+    CORE_VALUES = ('foo', '"""""', '2015-06-14', '345.60', '+', "=sum(a:a)")
+    VALUES_ALWAYS_ESCAPED = ("'foo", "'")
+    VALUES_NEVER_ESCAPED = ('',)
+    
+    def _run_values_for_escape_args(self, escape_core_values, *escape_args):
+        for escape_arg in escape_args:
+            for value in self.CORE_VALUES:
+                self.assertEqual(escape(value, escape_arg), "'" + value if escape_core_values else value)
+            for value in self.VALUES_ALWAYS_ESCAPED:
+                self.assertEqual(escape(value, escape_arg), "'" + value)
+            for value in self.VALUES_NEVER_ESCAPED:
+                self.assertEqual(escape(value, escape_arg), value)
+
+    def test_false(self):
+        self._run_values_for_escape_args(False, False, None, 42)
+
+    def test_true(self):
+        self._run_values_for_escape_args(True, True)
+
+    def test_callable(self):
+        self._run_values_for_escape_args(False, lambda x: False, re.compile(r'@@@@@{200}').match)
+        self._run_values_for_escape_args(True, lambda x: True, re.compile(r'.*').match)
+        
+        
 class TestWorksheetReads(unittest.TestCase):
 
     def setUp(self):
@@ -176,27 +194,27 @@ class TestWorksheetWrites(unittest.TestCase):
 
     def test_write_basic(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
-        set_with_dataframe(self.sheet, df, resize=True, string_escaping=re.compile(r'3e50'))
+        set_with_dataframe(self.sheet, df, resize=True, string_escaping=re.compile(r'3e50').match)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_include_index_false(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
         df_index = df.set_index('Thingy')
-        set_with_dataframe(self.sheet, df_index, resize=True, include_index=False, string_escaping=re.compile(r'3e50'))
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=False, string_escaping=lambda x: x == '3e50')
         self.sheet.resize.assert_called_once_with(10, 9)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option='USER_ENTERED')
 
     def test_include_index_true(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
         df_index = df.set_index('Thingy')
-        set_with_dataframe(self.sheet, df_index, resize=True, include_index=True, string_escaping=re.compile(r'3e50'))
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=True, string_escaping=re.compile(r'3e50').match)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_write_list_value_to_cell(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
         df.at[0, 'Numeric Column'] = [1,2,3]
-        set_with_dataframe(self.sheet, df, resize=True, string_escaping=re.compile(r'3e50'))
+        set_with_dataframe(self.sheet, df, resize=True, string_escaping=re.compile(r'3e50').match)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
