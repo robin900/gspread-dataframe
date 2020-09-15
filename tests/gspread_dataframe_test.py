@@ -43,27 +43,31 @@ USECOLS_COLUMN_NAMES = [
 
 class TestStringEscaping(unittest.TestCase):
     CORE_VALUES = ('foo', '"""""', '2015-06-14', '345.60', '+', "=sum(a:a)")
-    VALUES_ALWAYS_ESCAPED = ("'foo", "'")
+    VALUES_WITH_LEADING_APOSTROPHE = ("'foo", "'")
     VALUES_NEVER_ESCAPED = ('',)
     
-    def _run_values_for_escape_args(self, escape_core_values, *escape_args):
-        for escape_arg in escape_args:
-            for value in self.CORE_VALUES:
-                self.assertEqual(escape(value, escape_arg), "'" + value if escape_core_values else value)
-            for value in self.VALUES_ALWAYS_ESCAPED:
-                self.assertEqual(escape(value, escape_arg), "'" + value)
-            for value in self.VALUES_NEVER_ESCAPED:
-                self.assertEqual(escape(value, escape_arg), value)
+    def _run_values_for_escape_args(self, escape_arg, escaped_values, unescaped_values):
+        for value in escaped_values:
+            self.assertEqual(escape(value, escape_arg), "'" + value)
+        for value in unescaped_values:
+            self.assertEqual(escape(value, escape_arg), value)
+        for value in self.VALUES_NEVER_ESCAPED:
+            self.assertEqual(escape(value, escape_arg), value)
 
-    def test_false(self):
-        self._run_values_for_escape_args(False, False, None, 42)
+    def test_default(self):
+        self._run_values_for_escape_args('default', self.VALUES_WITH_LEADING_APOSTROPHE, self.CORE_VALUES)
 
-    def test_true(self):
-        self._run_values_for_escape_args(True, True)
+    def test_off(self):
+        self._run_values_for_escape_args('off', (), self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE)
+
+    def test_full(self):
+        self._run_values_for_escape_args('full', self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE, ())
 
     def test_callable(self):
-        self._run_values_for_escape_args(False, lambda x: False, re.compile(r'@@@@@{200}').match)
-        self._run_values_for_escape_args(True, lambda x: True, re.compile(r'.*').match)
+        self._run_values_for_escape_args(lambda x: False, (), self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE)
+        self._run_values_for_escape_args(re.compile(r'@@@@@{200}').match, (), self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE)
+        self._run_values_for_escape_args(lambda x: True, self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE, ())
+        self._run_values_for_escape_args(re.compile(r'.*').match, self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE, ())
         
         
 class TestWorksheetReads(unittest.TestCase):

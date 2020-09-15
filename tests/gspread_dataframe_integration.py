@@ -37,7 +37,7 @@ I18N_STR = u'Iñtërnâtiônàlizætiøn'  # .encode('utf8')
 
 CELL_LIST_FILENAME = os.path.join(os.path.dirname(__file__), 'cell_list.json')
 
-STRING_ESCAPING_PATTERN = re.compile(r'3e50').match
+STRING_ESCAPING_PATTERN = re.compile(r"(?:'\+|3e50)").match
 
 def read_config(filename):
     config = ConfigParser.ConfigParser()
