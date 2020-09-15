@@ -2,6 +2,7 @@
 from .mock_worksheet import MockWorksheet, CELL_LIST, CELL_LIST_STRINGIFIED, CELL_LIST_STRINGIFIED_NO_THINGY
 
 from gspread_dataframe import *
+from gspread_dataframe import _escaped_string as escape
 from gspread.models import Cell
 import numpy as np
 import pandas as pd
@@ -13,6 +14,7 @@ try:
 except ImportError:
     from mock import Mock, MagicMock
 from datetime import datetime
+import re
 
 # Expected results
 
@@ -36,17 +38,38 @@ USECOLS_COLUMN_NAMES = [
     'Date Column'
 ]
 
-def append_pandas_read_opts(func):
-    def wrapper(*args, **kwargs):
-        kwargs['na_values'] = []
-        kwargs['default_na_values'] = False
-        return func(*args, **kwargs)
-    return wrapper
-
-#get_as_dataframe = append_pandas_read_opts(get_as_dataframe)
 
 # Tests
 
+class TestStringEscaping(unittest.TestCase):
+    CORE_VALUES = ('foo', '"""""', '2015-06-14', '345.60', '+', "=sum(a:a)")
+    VALUES_WITH_LEADING_APOSTROPHE = ("'foo", "'")
+    VALUES_NEVER_ESCAPED = ('',)
+    
+    def _run_values_for_escape_args(self, escape_arg, escaped_values, unescaped_values):
+        for value in escaped_values:
+            self.assertEqual(escape(value, escape_arg), "'" + value)
+        for value in unescaped_values:
+            self.assertEqual(escape(value, escape_arg), value)
+        for value in self.VALUES_NEVER_ESCAPED:
+            self.assertEqual(escape(value, escape_arg), value)
+
+    def test_default(self):
+        self._run_values_for_escape_args('default', self.VALUES_WITH_LEADING_APOSTROPHE, self.CORE_VALUES)
+
+    def test_off(self):
+        self._run_values_for_escape_args('off', (), self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE)
+
+    def test_full(self):
+        self._run_values_for_escape_args('full', self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE, ())
+
+    def test_callable(self):
+        self._run_values_for_escape_args(lambda x: False, (), self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE)
+        self._run_values_for_escape_args(re.compile(r'@@@@@{200}').match, (), self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE)
+        self._run_values_for_escape_args(lambda x: True, self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE, ())
+        self._run_values_for_escape_args(re.compile(r'.*').match, self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE, ())
+        
+        
 class TestWorksheetReads(unittest.TestCase):
 
     def setUp(self):
@@ -175,27 +198,27 @@ class TestWorksheetWrites(unittest.TestCase):
 
     def test_write_basic(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
-        set_with_dataframe(self.sheet, df, resize=True)
+        set_with_dataframe(self.sheet, df, resize=True, string_escaping=re.compile(r'3e50').match)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_include_index_false(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
         df_index = df.set_index('Thingy')
-        set_with_dataframe(self.sheet, df_index, resize=True, include_index=False)
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=False, string_escaping=lambda x: x == '3e50')
         self.sheet.resize.assert_called_once_with(10, 9)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option='USER_ENTERED')
 
     def test_include_index_true(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
         df_index = df.set_index('Thingy')
-        set_with_dataframe(self.sheet, df_index, resize=True, include_index=True)
+        set_with_dataframe(self.sheet, df_index, resize=True, include_index=True, string_escaping=re.compile(r'3e50').match)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')
 
     def test_write_list_value_to_cell(self):
         df = get_as_dataframe(self.sheet, na_filter=False)
         df.at[0, 'Numeric Column'] = [1,2,3]
-        set_with_dataframe(self.sheet, df, resize=True)
+        set_with_dataframe(self.sheet, df, resize=True, string_escaping=re.compile(r'3e50').match)
         self.sheet.resize.assert_called_once_with(10, 10)
         self.sheet.update_cells.assert_called_once_with(CELL_LIST_STRINGIFIED, value_input_option='USER_ENTERED')

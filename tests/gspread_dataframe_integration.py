@@ -37,6 +37,8 @@ I18N_STR = u'Iñtërnâtiônàlizætiøn'  # .encode('utf8')
 
 CELL_LIST_FILENAME = os.path.join(os.path.dirname(__file__), 'cell_list.json')
 
+STRING_ESCAPING_PATTERN = re.compile(r"(?:'\+|3e50)").match
+
 def read_config(filename):
     config = ConfigParser.ConfigParser()
     with open(filename) as fp:
@@ -117,7 +119,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet.update_cells(cell_list)
 
         df = get_as_dataframe(self.sheet)
-        set_with_dataframe(self.sheet, df)
+        set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet)
         self.assertTrue(df.equals(df2))
 
@@ -152,7 +154,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet.resize(10, 12)
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df = get_as_dataframe(self.sheet, index_col=[0,1])
-        set_with_dataframe(self.sheet, df, resize=True, include_index=True)
+        set_with_dataframe(self.sheet, df, resize=True, include_index=True, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet, index_col=[0,1])
         self.assertTrue(df.equals(df2))
 
@@ -174,7 +176,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df = get_as_dataframe(self.sheet, header=[0,1])
         self.assertEqual((2, 10), getattr(df.columns, 'levshape', None)), 
-        set_with_dataframe(self.sheet, df, resize=True)
+        set_with_dataframe(self.sheet, df, resize=True, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet, header=[0,1])
         self.assertTrue(df.equals(df2))
 
@@ -202,7 +204,7 @@ class WorksheetTest(GspreadDataframeTest):
         df.columns.names = [None, None]
         df.index.names = ['Category', 'Subcategory']
         # set and get, round-trip
-        set_with_dataframe(self.sheet, df, resize=True, include_index=True)
+        set_with_dataframe(self.sheet, df, resize=True, include_index=True, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet, index_col=[0,1], header=[0,1])
         self.assertTrue(df.equals(df2))
 

@@ -40,7 +40,35 @@ from pandas.io.parsers import TextParser
 
 __all__ = ('set_with_dataframe', 'get_as_dataframe')
 
-def _cellrepr(value, allow_formulas):
+
+#
+# 'default': escape strings starting with ' and nothing else
+# 'off': escape nothing, strings starting with ' will be interpreted by sheets 
+# 'full': escape _all_ strings using '
+# any callable: call it with value, if return value is True escape with leading '
+
+def _escaped_string(value, string_escaping):
+    if value in (None, ""):
+        return ""
+    if string_escaping == 'default':
+        if value.startswith("'"):
+            return "'%s" % value
+    elif string_escaping == 'off':
+        return value
+    elif string_escaping == 'full':
+        return "'%s" % value
+    elif callable(string_escaping):
+        if string_escaping(value):
+            return "'%s" % value
+    else:
+        raise ValueError(
+            "string_escaping parameter must be one of: "
+            "'default', 'off', 'full', any callable taking one parameter"
+        )
+    return value
+        
+
+def _cellrepr(value, allow_formulas, string_escaping):
     """
     Get a string representation of dataframe value.
 
@@ -55,9 +83,10 @@ def _cellrepr(value, allow_formulas):
         value = repr(value)
     else:
         value = str(value)
-    if value.startswith("'") or ((not allow_formulas) and value.startswith('=')):
+    if ((not allow_formulas) and value.startswith('=')):
         value = "'%s" % value
-    return value
+    else:
+        return _escaped_string(value, string_escaping)
 
 def _resize_to_minimum(worksheet, rows=None, cols=None):
     """
@@ -154,7 +183,8 @@ def set_with_dataframe(worksheet,
                        include_index=False,
                        include_column_header=True,
                        resize=False,
-                       allow_formulas=True):
+                       allow_formulas=True,
+                       string_escaping='default'):
     """
     Sets the values of a given DataFrame, anchoring its upper-left corner
     at (row, col). (Default is row 1, column 1.)
@@ -173,6 +203,20 @@ def set_with_dataframe(worksheet,
     :param allow_formulas: if True, interprets `=foo` as a formula in
             cell values; otherwise all text beginning with `=` is escaped
             to avoid its interpretation as a formula. Defaults to True.
+    :param string_escaping: determines when string values are escaped as text literals
+            (by adding an initial `'` character) in requests to Sheets API. 
+            Four parameter values are accepted:
+              - 'default': only escape strings starting with a literal `'` character
+              - 'off': escape nothing; cell values starting with a `'` will be interpreted by 
+                       sheets as an escape character followed by a text literal.
+              - 'full': escape all string values
+              - any callable object: will be called once for each cell's string value;
+                     if return value is true, string will be escaped with preceding `'`
+                     (A useful technique is to pass a regular expression bound method, e.g. 
+                    `re.compile(r'^my_regex_.*$').search`.)
+            The escaping done when allow_formulas=False (escaping string values beginning with `=`)
+            is unaffected by this parameter's value. 
+            Default value is `'default'`.
     """
     # x_pos, y_pos refers to the position of data rows only,
     # excluding any header rows in the google sheet.
@@ -209,7 +253,7 @@ def set_with_dataframe(worksheet,
                 elts = [ ((None,) * (column_header_size - 1)) + (e,) for e in index_elts ] + elts
             for level in range(0, column_header_size):
                 for idx, tup in enumerate(elts):
-                    updates.append((row, col+idx, _cellrepr(tup[level], allow_formulas)))
+                    updates.append((row, col+idx, _cellrepr(tup[level], allow_formulas, string_escaping)))
                 row += 1
         else:
             elts = list(dataframe.columns)
@@ -225,7 +269,7 @@ def set_with_dataframe(worksheet,
                 updates.append(
                     (row,
                      col+idx,
-                     _cellrepr(val, allow_formulas))
+                     _cellrepr(val, allow_formulas, string_escaping))
                 )
             row += 1
 
@@ -241,7 +285,7 @@ def set_with_dataframe(worksheet,
             updates.append(
                 (y_idx+row,
                  x_idx+col,
-                 _cellrepr(cell_value, allow_formulas))
+                 _cellrepr(cell_value, allow_formulas, string_escaping))
             )
 
     if not updates:
