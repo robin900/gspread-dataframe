@@ -2,10 +2,33 @@ Changelog
 =========
 
 
+v3.1.0 (2020-09-15)
+-------------------
+- Bump to 3.1.0. [Robin Thomas]
+- String_escaping now a parameter to set_with_dataframe (#27) [Robin
+  Thomas]
+
+  Fixes #26 .
+
+  A new parameter, string_escaping, is added to set_with_dataframe: values are 'default', 'off', 'full', or <any callable>.
+
+
 v3.0.8 (2020-08-20)
 -------------------
 - Bump to 3.0.8. [Robin Thomas]
+- Update README.rst. [Robin Thomas]
+
+  whitespace tweak
+- Rst fix. [Robin Thomas]
+- Add dataframe formatting doc section, with link to formatting package.
+  [Robin Thomas]
+- Argh no 3.9-dev yet. [Robin Thomas]
+- Corrected version reference in sphinx docs. [Robin Thomas]
+- Removed 3.6, added 3.9-dev to travis build. [Robin Thomas]
 - Make collections.abc imports 3.9-compatible. [Robin Thomas]
+- Use full version string in sphnix docs. [Robin Thomas]
+- Add docs badge to README. [Robin Thomas]
+- Add downloads badge. [Robin Thomas]
 - Accept nrows only as keyword parameter just as for all other pandas
   parser-related arguments; remove nrows parameter documentation since
   pandas, not this package, owns the parameter and its meaning. [Robin
