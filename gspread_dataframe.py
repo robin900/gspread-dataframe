@@ -184,7 +184,8 @@ def set_with_dataframe(worksheet,
                        include_column_header=True,
                        resize=False,
                        allow_formulas=True,
-                       string_escaping='default'):
+                       string_escaping='default',
+                       handle_MultiIndex='repeat'):
     """
     Sets the values of a given DataFrame, anchoring its upper-left corner
     at (row, col). (Default is row 1, column 1.)
@@ -217,6 +218,20 @@ def set_with_dataframe(worksheet,
             The escaping done when allow_formulas=False (escaping string values beginning with `=`)
             is unaffected by this parameter's value. 
             Default value is `'default'`.
+    :param handle_MultiIndex: determines how cells are populated with higher-level values
+                              from a MultiIndex, if the DataFrame uses a MultiIndex.
+                              Three parameter values are accepted:
+                                - 'repeat': the higher-level values appear in their own cells
+                                            for every row.
+                                - 'blank': higher-level values are left blank in rows where
+                                           the previous row has the same higher-level value.
+                                - 'merge': higher-level values are left blank in rows where
+                                           the previous row has the same higher-level value;
+                                           in addition, all of the cells in a column or columns
+                                           representing the same higher-level value or values
+                                           are merged into a single cell.
+                              Default value is 'repeat'.
+
     """
     # x_pos, y_pos refers to the position of data rows only,
     # excluding any header rows in the google sheet.
@@ -236,6 +251,8 @@ def set_with_dataframe(worksheet,
     else:
         _resize_to_minimum(worksheet, y, x)
 
+    using_multiindex = index_col_size > 1
+
     updates = []
 
     if include_column_header:
@@ -247,9 +264,7 @@ def set_with_dataframe(worksheet,
                 if hasattr(dataframe.index, 'names'):
                     index_elts = dataframe.index.names
                 else:
-                    index_elts = dataframe.index.name
-                if not isinstance(index_elts, (list, tuple)):
-                    index_elts = [ index_elts ]
+                    index_elts = [ dataframe.index.name ]
                 elts = [ ((None,) * (column_header_size - 1)) + (e,) for e in index_elts ] + elts
             for level in range(0, column_header_size):
                 for idx, tup in enumerate(elts):
@@ -261,9 +276,7 @@ def set_with_dataframe(worksheet,
                 if hasattr(dataframe.index, 'names'):
                     index_elts = dataframe.index.names
                 else:
-                    index_elts = dataframe.index.name
-                if not isinstance(index_elts, (list, tuple)):
-                    index_elts = [ index_elts ]
+                    index_elts = [ dataframe.index.name ]
                 elts = list(index_elts) + elts
             for idx, val in enumerate(elts):
                 updates.append(
@@ -276,10 +289,44 @@ def set_with_dataframe(worksheet,
     values = []
     for value_row, index_value in zip_longest(dataframe.values, dataframe.index):
         if include_index:
-            if not isinstance(index_value, (list, tuple)):
+            if not using_multiindex:
                 index_value = [ index_value ]
             value_row = list(index_value) + list(value_row)
         values.append(value_row)
+
+    # if using_multiindex:
+    # - 'repeat' or other value: do nothing
+    # = 'blank': blank out index values that match those of preceding row
+    # - 'merge': do same as blank, but remember which cell ranges to do mergeCells for.
+    if include_index and using_multiindex and handle_MultiIndex in ('blank', 'merge'):
+        start_values = [ (None, None) for i in range(index_col_size) ]
+        merge_tracking = {}
+        for row_idx, value_row in enumerate(values):
+            index_values = value_row[0:index_col_size]
+            for cat_idx in range(1, index_col_size):
+                index_cat = index_values[0:cat_idx]
+                if index_cat not in merge_tracking:
+                    merge_tracking[index_cat] = [row_idx, row_idx]
+                tracking_idxs = merge_tracking[index_cat]
+                tracking_idxs[1] = row_idx
+        for index_cat, tracking_idxs in merge_tracking.items():
+            if tracking_idxs[1] == tracking_idxs[0]:
+                continue
+            # blank the cells
+            for index_row_idx in range(tracking_idxs[0]+1, tracking_idxs[1]+1):
+                for index_col_idx in range(len(index_cat)):
+                    values[index_row_idx][index_col_idx] = ''
+            if handle_MultiIndex == 'merge':
+                # go column by column.
+                # merge_tracking used both to track when blanks are used and afterwards to build mergeCells requests
+            for index_idx, index_value in enumerate(index_values):
+                if start_values[index_idx][1] == None or start_values[index_idx][0] != index_value:
+                    if start_values[index_idx][1] != None:
+                        # TODO deepcopy this
+                        merge_stack.append(start_values)
+                        # TODO make new start_values.
+                        start_values = [ ]
+            
     for y_idx, value_row in enumerate(values):
         for x_idx, cell_value in enumerate(value_row):
             updates.append(
