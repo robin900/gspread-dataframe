@@ -208,3 +208,7 @@ class WorksheetTest(GspreadDataframeTest):
         df2 = get_as_dataframe(self.sheet, index_col=[0,1], header=[0,1])
         self.assertTrue(df.equals(df2))
 
+    def test_multiindex_merge_cells(self):
+        # TODO test merge (and maybe blank) handle_MultiIndex option
+        pass
+

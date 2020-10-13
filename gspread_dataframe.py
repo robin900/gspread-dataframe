@@ -294,39 +294,54 @@ def set_with_dataframe(worksheet,
             value_row = list(index_value) + list(value_row)
         values.append(value_row)
 
+    merge_cell_requests = []
+
     # if using_multiindex:
     # - 'repeat' or other value: do nothing
     # = 'blank': blank out index values that match those of preceding row
     # - 'merge': do same as blank, but remember which cell ranges to do mergeCells for.
     if include_index and using_multiindex and handle_MultiIndex in ('blank', 'merge'):
-        start_values = [ (None, None) for i in range(index_col_size) ]
-        merge_tracking = {}
+        index_runs = []
+        current_run_rows = []
+        current_run_index_values = ()
         for row_idx, value_row in enumerate(values):
-            index_values = value_row[0:index_col_size]
-            for cat_idx in range(1, index_col_size):
-                index_cat = index_values[0:cat_idx]
-                if index_cat not in merge_tracking:
-                    merge_tracking[index_cat] = [row_idx, row_idx]
-                tracking_idxs = merge_tracking[index_cat]
-                tracking_idxs[1] = row_idx
-        for index_cat, tracking_idxs in merge_tracking.items():
-            if tracking_idxs[1] == tracking_idxs[0]:
-                continue
-            # blank the cells
-            for index_row_idx in range(tracking_idxs[0]+1, tracking_idxs[1]+1):
-                for index_col_idx in range(len(index_cat)):
-                    values[index_row_idx][index_col_idx] = ''
+            index_values = tuple(value_row[0:index_col_size])
+            if current_run_index_values != index_values:
+                if current_run_index_values:
+                    index_runs.push( (current_run_index_values, (current_run_rows[0], current_run_rows[-1]) )
+                current_run_rows = [ row_idx ]
+                current_run_index_values = index_values
+            else:
+                current_run_rows.push(row_idx)
+        if current_run_rows:
+            index_runs.push( (current_run_index_values, (current_run_rows[0], current_run_rows[-1]) )
+        
+        # for each _column_ of the index, find the full consecutive run (or runs) of a single value in that column.
+        column_runs = []
+        for col_idx in range(index_col_size):
+            sliced_runs = [ (c[0][col_idx], c[1]) for c in index_runs ]
+            current_run = None
+            current_run_rows = ()
+            for run in sliced_runs:
+                if not current_run_rows or run[0] != current_run:
+                    if current_run_rows:
+                        column_runs.push( (col_idx, current_run, current_run_rows) )
+                    current_run = run[0]
+                    current_run_rows = run[1]
+                else:
+                    current_run_rows = (current_run_rows[0], run[1][1])
+            if current_run_rows:
+                column_runs.push( (col_idx, current_run, current_run_rows) )
+
+        # then for each "column run", blank out the values after the first row's value, and construct a mergeCells request.
+        for col_idx, col_value, row_idxs in column_runs:
+            start_idx, end_idx_inclusive = row_idxs
+            for i in range(start_idx+1, end_idx+1):
+                values[i][col_idx] = ''
             if handle_MultiIndex == 'merge':
-                # go column by column.
-                # merge_tracking used both to track when blanks are used and afterwards to build mergeCells requests
-            for index_idx, index_value in enumerate(index_values):
-                if start_values[index_idx][1] == None or start_values[index_idx][0] != index_value:
-                    if start_values[index_idx][1] != None:
-                        # TODO deepcopy this
-                        merge_stack.append(start_values)
-                        # TODO make new start_values.
-                        start_values = [ ]
-            
+                merge_cell_requests.append({ 'mergeCells': { 'range': GridRange(XXX), 'mergeType': 'MERGE_ALL' } })
+
+
     for y_idx, value_row in enumerate(values):
         for x_idx, cell_value in enumerate(value_row):
             updates.append(
@@ -344,3 +359,8 @@ def set_with_dataframe(worksheet,
 
     resp = worksheet.update_cells(cells_to_update, value_input_option='USER_ENTERED')
     logger.debug("Cell update response: %s", resp)
+
+    if merge_cell_requests:
+        logger.debug("Sending batch of %d mergeCells requests", len(merge_cell_requests))
+        resp = worksheet.batch_update(merge_cell_requests)
+        logger.debug("mergeCells batch update response: %s", resp)
