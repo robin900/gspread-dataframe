@@ -154,9 +154,9 @@ class WorksheetTest(GspreadDataframeTest):
         df = get_as_dataframe(self.sheet)
         set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet)
-        self.assertTrue(df.equals(df2))
         # check that some numeric values in numeric column are intact
         self.assertEqual(3.804, df2["Numeric Column"][3])
+        self.assertTrue(df.equals(df2))
 
     def test_nrows(self):
         # populate sheet with cell list values
