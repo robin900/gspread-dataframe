@@ -89,6 +89,11 @@ class WorksheetTest(GspreadDataframeTest):
         super(WorksheetTest, cls).setUpClass()
         ss_id = cls.config.get('Spreadsheet', 'id')
         cls.spreadsheet = cls.gc.open_by_key(ss_id)
+        cls.spreadsheet.batch_update(
+            {'requests': [
+                {'updateSpreadsheetProperties': { 'properties': { 'locale': 'en_US' }, 'fields': 'locale' }}
+            ]}
+        )
         try:
             test_sheet = cls.spreadsheet.worksheet('wksht_int_test')
             if test_sheet:
@@ -102,6 +107,11 @@ class WorksheetTest(GspreadDataframeTest):
         if self.__class__.spreadsheet is None:
             self.__class__.setUpClass()
         self.sheet = self.spreadsheet.add_worksheet('wksht_int_test', 20, 20)
+        self.__class__.spreadsheet.batch_update(
+            {'requests': [
+                {'updateSpreadsheetProperties': { 'properties': { 'locale': 'en_US' }, 'fields': 'locale' }}
+            ]}
+        )
 
     def tearDown(self):
         self.spreadsheet.del_worksheet(self.sheet)
@@ -122,6 +132,31 @@ class WorksheetTest(GspreadDataframeTest):
         set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet)
         self.assertTrue(df.equals(df2))
+
+    def test_numeric_values_with_spanish_locale(self):
+        # set locale!
+        self.__class__.spreadsheet.batch_update(
+            {'requests': [
+                {'updateSpreadsheetProperties': { 'properties': { 'locale': 'es_ES' }, 'fields': 'locale' }}
+            ]}
+        )
+        # populate sheet with cell list values
+        rows = None
+        with open(CELL_LIST_FILENAME) as f:
+            rows = json.load(f)
+
+        self.sheet.resize(10, 10)
+        cell_list = self.sheet.range('A1:J10')
+        for cell, value in zip(cell_list, itertools.chain(*rows)):
+            cell.value = value
+        self.sheet.update_cells(cell_list)
+
+        df = get_as_dataframe(self.sheet)
+        set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
+        df2 = get_as_dataframe(self.sheet)
+        self.assertTrue(df.equals(df2))
+        # check that some numeric values in numeric column are intact
+        self.assertEqual(3.804, df2["Numeric Column"][3])
 
     def test_nrows(self):
         # populate sheet with cell list values
