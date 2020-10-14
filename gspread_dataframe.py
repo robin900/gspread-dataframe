@@ -13,6 +13,7 @@ from gspread.utils import fill_gaps
 from gspread.models import Cell
 import logging
 import re
+from numbers import Real
 
 try:
     from collections.abc import defaultdict
@@ -79,10 +80,10 @@ def _cellrepr(value, allow_formulas, string_escaping):
     """
     if pd.isnull(value) is True:
         return ""
-    if isinstance(value, float):
-        value = repr(value)
-    else:
-        value = str(value)
+    if isinstance(value, Real):
+        return value
+
+    value = str(value)
     if ((not allow_formulas) and value.startswith('=')):
         value = "'%s" % value
     else:
