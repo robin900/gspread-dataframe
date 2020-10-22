@@ -53,9 +53,7 @@ class TestStringEscaping(unittest.TestCase):
     VALUES_WITH_LEADING_APOSTROPHE = ("'foo", "'")
     VALUES_NEVER_ESCAPED = ("",)
 
-    def _run_values_for_escape_args(
-        self, escape_arg, escaped_values, unescaped_values
-    ):
+    def _run_values_for_escape_args(self, escape_arg, escaped_values, unescaped_values):
         for value in escaped_values:
             self.assertEqual(escape(value, escape_arg), "'" + value)
         for value in unescaped_values:
@@ -155,13 +153,9 @@ class TestWorksheetReads(unittest.TestCase):
         self.assertEqual(len(df), 6)
 
     def test_prefix(self):
-        df = get_as_dataframe(
-            self.sheet, skiprows=[0], header=None, prefix="COL"
-        )
+        df = get_as_dataframe(self.sheet, skiprows=[0], header=None, prefix="COL")
         self.assertEqual(len(df), 9)
-        self.assertEqual(
-            df.columns.tolist(), ["COL" + str(i) for i in range(10)]
-        )
+        self.assertEqual(df.columns.tolist(), ["COL" + str(i) for i in range(10)])
 
     def test_squeeze(self):
         df = get_as_dataframe(self.sheet, usecols=[0], squeeze=True)
@@ -171,9 +165,7 @@ class TestWorksheetReads(unittest.TestCase):
     def test_converters_datetime(self):
         df = get_as_dataframe(
             self.sheet,
-            converters={
-                "Date Column": lambda x: datetime.strptime(x, "%Y-%m-%d")
-            },
+            converters={"Date Column": lambda x: datetime.strptime(x, "%Y-%m-%d")},
         )
         self.assertEqual(df["Date Column"][0], datetime(2017, 3, 4))
 
@@ -251,11 +243,7 @@ Mock._format_mock_failure_message = _format_mock_failure_message
 def __eq__(self, other):
     if not isinstance(other, self.__class__):
         return False
-    return (
-        self.row == other.row
-        and self.col == other.col
-        and self.value == other.value
-    )
+    return self.row == other.row and self.col == other.col and self.value == other.value
 
 
 Cell.__eq__ = __eq__

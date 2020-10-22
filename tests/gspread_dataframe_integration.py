@@ -148,9 +148,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet.update_cells(cell_list)
 
         df = get_as_dataframe(self.sheet)
-        set_with_dataframe(
-            self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN
-        )
+        set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet)
         self.assertTrue(df.equals(df2))
 
@@ -166,11 +164,19 @@ class WorksheetTest(GspreadDataframeTest):
             cell.value = value
         self.sheet.update_cells(cell_list)
 
-        df = get_as_dataframe(self.sheet, dtypes={'Numeric Column': np.int64})
-        set_with_dataframe(
-            self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN
+        def np_int64_converter(v):
+            try:
+                return np.int64(v)
+            except:
+                return np.nan
+
+        df = get_as_dataframe(
+            self.sheet, converters={"Numeric Column": np_int64_converter}
         )
-        df2 = get_as_dataframe(self.sheet, dtypes={'Numeric Column': np.int64})
+        set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
+        df2 = get_as_dataframe(
+            self.sheet, converters={"Numeric Column": np_int64_converter}
+        )
         self.assertTrue(df.equals(df2))
 
     def test_numeric_values_with_spanish_locale(self):
@@ -199,9 +205,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet.update_cells(cell_list)
 
         df = get_as_dataframe(self.sheet)
-        set_with_dataframe(
-            self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN
-        )
+        set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
         df2 = get_as_dataframe(self.sheet)
         # check that some numeric values in numeric column are intact
         self.assertEqual(3.804, df2["Numeric Column"][3])

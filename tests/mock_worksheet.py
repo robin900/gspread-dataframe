@@ -62,10 +62,7 @@ class MockWorksheet(object):
 
 class MockSpreadsheet(object):
     def values_get(self, *args, **kwargs):
-        if (
-            kwargs.get("params", {}).get("valueRenderOption")
-            == "UNFORMATTED_VALUE"
-        ):
+        if kwargs.get("params", {}).get("valueRenderOption") == "UNFORMATTED_VALUE":
             return SHEET_CONTENTS_EVALUATED
         if kwargs.get("params", {}).get("valueRenderOption") == "FORMULA":
             return SHEET_CONTENTS_FORMULAS

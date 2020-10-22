@@ -35,12 +35,8 @@ major, minor = tuple(
     [int(i) for i in re.search(r"^(\d+)\.(\d+)\..+$", pd.__version__).groups()]
 )
 if (major, minor) < (0, 14):
-    raise ImportError(
-        "pandas version too old (<0.14.0) to support gspread_dataframe"
-    )
-logger.debug(
-    "Imported satisfactory (>=0.14.0) Pandas module: %s", pd.__version__
-)
+    raise ImportError("pandas version too old (<0.14.0) to support gspread_dataframe")
+logger.debug("Imported satisfactory (>=0.14.0) Pandas module: %s", pd.__version__)
 
 __all__ = ("set_with_dataframe", "get_as_dataframe")
 
@@ -81,7 +77,7 @@ def _cellrepr(value, allow_formulas, string_escaping):
     # numpy scalars should yield their Python equivalents
     if isinstance(value, np.generic):
         value = value.item()
-        
+
     if isinstance(value, Real):
         return value
 
@@ -263,8 +259,7 @@ def set_with_dataframe(
                 if not isinstance(index_elts, (list, tuple)):
                     index_elts = [index_elts]
                 elts = [
-                    ((None,) * (column_header_size - 1)) + (e,)
-                    for e in index_elts
+                    ((None,) * (column_header_size - 1)) + (e,) for e in index_elts
                 ] + elts
             for level in range(0, column_header_size):
                 for idx, tup in enumerate(elts):
@@ -272,9 +267,7 @@ def set_with_dataframe(
                         (
                             row,
                             col + idx,
-                            _cellrepr(
-                                tup[level], allow_formulas, string_escaping
-                            ),
+                            _cellrepr(tup[level], allow_formulas, string_escaping),
                         )
                     )
                 row += 1
@@ -299,9 +292,7 @@ def set_with_dataframe(
             row += 1
 
     values = []
-    for value_row, index_value in zip_longest(
-        dataframe.values, dataframe.index
-    ):
+    for value_row, index_value in zip_longest(dataframe.values, dataframe.index):
         if include_index:
             if not isinstance(index_value, (list, tuple)):
                 index_value = [index_value]
@@ -324,7 +315,5 @@ def set_with_dataframe(
     cells_to_update = [Cell(row, col, value) for row, col, value in updates]
     logger.debug("%d cell updates to send", len(cells_to_update))
 
-    resp = worksheet.update_cells(
-        cells_to_update, value_input_option="USER_ENTERED"
-    )
+    resp = worksheet.update_cells(cells_to_update, value_input_option="USER_ENTERED")
     logger.debug("Cell update response: %s", resp)
