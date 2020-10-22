@@ -9,6 +9,7 @@ import uuid
 import json
 from datetime import datetime, date
 import pandas as pd
+import numpy as np
 from gspread_dataframe import get_as_dataframe, set_with_dataframe
 
 try:
@@ -151,6 +152,25 @@ class WorksheetTest(GspreadDataframeTest):
             self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN
         )
         df2 = get_as_dataframe(self.sheet)
+        self.assertTrue(df.equals(df2))
+
+    def test_roundtrip_numpy_values(self):
+        # populate sheet with cell list values
+        rows = None
+        with open(CELL_LIST_FILENAME) as f:
+            rows = json.load(f)
+
+        self.sheet.resize(10, 10)
+        cell_list = self.sheet.range("A1:J10")
+        for cell, value in zip(cell_list, itertools.chain(*rows)):
+            cell.value = value
+        self.sheet.update_cells(cell_list)
+
+        df = get_as_dataframe(self.sheet, dtypes={'Numeric Column': np.int64})
+        set_with_dataframe(
+            self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN
+        )
+        df2 = get_as_dataframe(self.sheet, dtypes={'Numeric Column': np.int64})
         self.assertTrue(df.equals(df2))
 
     def test_numeric_values_with_spanish_locale(self):

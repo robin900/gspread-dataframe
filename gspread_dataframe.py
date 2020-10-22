@@ -13,6 +13,7 @@ from gspread.utils import fill_gaps
 from gspread.models import Cell
 import pandas as pd
 from pandas.io.parsers import TextParser
+import numpy as np
 import logging
 import re
 from numbers import Real
@@ -76,6 +77,11 @@ def _cellrepr(value, allow_formulas, string_escaping):
     """
     if pd.isnull(value) is True:
         return ""
+
+    # numpy scalars should yield their Python equivalents
+    if isinstance(value, np.generic):
+        value = value.item()
+        
     if isinstance(value, Real):
         return value
 
