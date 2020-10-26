@@ -154,29 +154,25 @@ class WorksheetTest(GspreadDataframeTest):
 
     def test_roundtrip_numpy_values(self):
         # populate sheet with cell list values
-        rows = None
-        with open(CELL_LIST_FILENAME) as f:
-            rows = json.load(f)
+        rows = [ [ 'A', 'B', 'C' ] ] + [ 
+            [
+                i * 10000000 * random.randint(0, 10000000), 
+                i * 10000000 * random.randint(0, 10000000), 
+                i * 10000000 * random.randint(0, 10000000)
+            ] for i in range(1, 10)
+        ]
 
-        self.sheet.resize(10, 10)
-        cell_list = self.sheet.range("A1:J10")
+        self.sheet.resize(rows=10, cols=3)
+        # silly dance to refresh row_count and col_count
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        cell_list = self.sheet.range("A1:C10")
         for cell, value in zip(cell_list, itertools.chain(*rows)):
             cell.value = value
         self.sheet.update_cells(cell_list)
 
-        def np_int64_converter(v):
-            try:
-                return np.int64(v)
-            except:
-                return np.nan
-
-        df = get_as_dataframe(
-            self.sheet, converters={"Numeric Column": np_int64_converter}
-        )
-        set_with_dataframe(self.sheet, df, string_escaping=STRING_ESCAPING_PATTERN)
-        df2 = get_as_dataframe(
-            self.sheet, converters={"Numeric Column": np_int64_converter}
-        )
+        df = get_as_dataframe(self.sheet)
+        set_with_dataframe(self.sheet, df)
+        df2 = get_as_dataframe(self.sheet)
         self.assertTrue(df.equals(df2))
 
     def test_numeric_values_with_spanish_locale(self):
