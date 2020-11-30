@@ -7,6 +7,8 @@ python:
 - 'pypy'
 install:
 - pip install -U pip
+- pip uninstall -y six
+- pip install six>=1.12.0
 - if [[ $TRAVIS_PYTHON_VERSION == 2.6* ]]; then pip install --only-binary -e .; else
   pip install --prefer-binary -e .; fi
 script: python setup.py test
