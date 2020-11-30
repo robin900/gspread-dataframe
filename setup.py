@@ -27,7 +27,7 @@ setup(
     install_requires=[
         'gspread>=3.0.0', 
         'pandas>=0.14.0',
-        'six'
+        'six>=1.12.0'
         ],
     tests_require=['oauth2client'] + ([] if PY3 else ['mock']),
     description='Read/write gspread worksheets using pandas DataFrames',

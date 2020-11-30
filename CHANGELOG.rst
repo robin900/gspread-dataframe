@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v3.1.2 (2020-11-30)
+-------------------
+- Bump to version v3.1.2. [Robin Thomas]
+- Allow for DataFrame cell input values to be unicode objects in Python
+  2. [Robin Thomas]
+- Black/flake8 all the things. [Robin Thomas]
+
+
 v3.1.1 (2020-10-14)
 -------------------
 - Bump to v3.1.1. [Robin Thomas]
