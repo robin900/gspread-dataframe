@@ -4,8 +4,8 @@ gspread-dataframe
 .. image:: https://badge.fury.io/py/gspread-dataframe.svg
     :target: https://badge.fury.io/py/gspread-dataframe
 
-.. image:: https://travis-ci.org/robin900/gspread-dataframe.svg?branch=master
-    :target: https://travis-ci.org/robin900/gspread-dataframe
+.. image:: https://travis-ci.com/robin900/gspread-dataframe.svg?branch=master
+    :target: https://travis-ci.com/robin900/gspread-dataframe
 
 .. image:: https://img.shields.io/pypi/dm/gspread-dataframe.svg
     :target: https://pypi.org/project/gspread-dataframe
