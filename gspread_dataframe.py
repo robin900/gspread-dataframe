@@ -79,7 +79,7 @@ def _cellrepr(value, allow_formulas, string_escaping):
     if isinstance(value, Real):
         return value
 
-    value = str(value)
+    value = value.encode('utf-8')
     if (not allow_formulas) and value.startswith("="):
         value = "'%s" % value
     else:
