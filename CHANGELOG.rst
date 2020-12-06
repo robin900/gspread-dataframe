@@ -2,9 +2,19 @@ Changelog
 =========
 
 
+v3.1.3 (2020-12-06)
+-------------------
+- Fixes #34 by correctly escaping formula expressions =XXX when
+  allow_formulas=False. [Robin Thomas]
+- Add 3.9 to travis build. [Robin Thomas]
+- Pin six to >=1.12.0 to avoid weird environmental dependency problem.
+  [Robin Thomas]
+- Move to travis-ci.com. [Robin Thomas]
+
+
 v3.1.2 (2020-11-30)
 -------------------
-- Bump to version v3.1.2. [Robin Thomas]
+- Bump to v3.1.2. [Robin Thomas]
 - Allow for DataFrame cell input values to be unicode objects in Python
   2. [Robin Thomas]
 - Black/flake8 all the things. [Robin Thomas]
