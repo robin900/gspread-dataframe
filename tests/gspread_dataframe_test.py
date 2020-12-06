@@ -7,7 +7,7 @@ from .mock_worksheet import (
 )
 
 from gspread_dataframe import get_as_dataframe, set_with_dataframe
-from gspread_dataframe import _escaped_string as escape
+from gspread_dataframe import _escaped_string as escape, _cellrepr as cellrepr
 from gspread.models import Cell
 import numpy as np
 import pandas as pd
@@ -99,6 +99,9 @@ class TestStringEscaping(unittest.TestCase):
             self.CORE_VALUES + self.VALUES_WITH_LEADING_APOSTROPHE,
             (),
         )
+
+    def test_formula_cellrepr_when_no_formulas_allowed(self):
+        self.assertEqual(cellrepr("=A1", allow_formulas=False, string_escaping="default"), "'=A1")
 
 
 class TestWorksheetReads(unittest.TestCase):

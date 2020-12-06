@@ -85,7 +85,7 @@ def _cellrepr(value, allow_formulas, string_escaping):
     value = ensure_text(value, encoding='utf-8')
 
     if (not allow_formulas) and value.startswith("="):
-        value = "'%s" % value
+        return "'%s" % value
     else:
         return _escaped_string(value, string_escaping)
 
