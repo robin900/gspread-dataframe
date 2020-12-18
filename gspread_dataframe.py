@@ -34,12 +34,12 @@ logger = logging.getLogger(__name__)
 major, minor = tuple(
     [int(i) for i in re.search(r"^(\d+)\.(\d+)\..+$", pd.__version__).groups()]
 )
-if (major, minor) < (0, 14):
+if (major, minor) < (0, 24):
     raise ImportError(
-        "pandas version too old (<0.14.0) to support gspread_dataframe"
+        "pandas version too old (<0.24.0) to support gspread_dataframe"
     )
 logger.debug(
-    "Imported satisfactory (>=0.14.0) Pandas module: %s", pd.__version__
+    "Imported satisfactory (>=0.24.0) Pandas module: %s", pd.__version__
 )
 
 __all__ = ("set_with_dataframe", "get_as_dataframe")
@@ -298,7 +298,7 @@ def set_with_dataframe(
 
     values = []
     for value_row, index_value in zip_longest(
-        dataframe.values, dataframe.index
+        dataframe.to_numpy('object'), dataframe.index.to_numpy('object')
     ):
         if include_index:
             if not isinstance(index_value, (list, tuple)):
