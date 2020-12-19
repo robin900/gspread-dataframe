@@ -2,6 +2,38 @@ Changelog
 =========
 
 
+v3.1.3 (2020-12-06)
+-------------------
+- Fixes #34 by correctly escaping formula expressions =XXX when
+  allow_formulas=False. [Robin Thomas]
+- Add 3.9 to travis build. [Robin Thomas]
+- Pin six to >=1.12.0 to avoid weird environmental dependency problem.
+  [Robin Thomas]
+- Move to travis-ci.com. [Robin Thomas]
+
+
+v3.1.2 (2020-11-30)
+-------------------
+- Bump to v3.1.2. [Robin Thomas]
+- Allow for DataFrame cell input values to be unicode objects in Python
+  2. [Robin Thomas]
+- Black/flake8 all the things. [Robin Thomas]
+
+
+v3.1.1 (2020-10-14)
+-------------------
+- Bump to v3.1.1. [Robin Thomas]
+- Send numeric values in DataFrames as JSON numeric values to avoid
+  locale-specific misinterpretation  (#30) [Robin Thomas]
+
+  * Fixes #29. Ensures that numeric values in DataFrames are sent to Sheets API as JSON numeric
+  values, so that locale-specific parsing of decimal separators cannot misinterpret
+  the stringified decimal values. Test coverage included.
+- 3.9-dev pandas not ready for travis-ci use. [Robin Thomas]
+- And let's try 3.9-dev for travis too. [Robin Thomas]
+- Add pypy (not yet pypy3) to Travis build. [Robin Thomas]
+
+
 v3.1.0 (2020-09-15)
 -------------------
 - Bump to 3.1.0. [Robin Thomas]
