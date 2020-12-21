@@ -2,8 +2,18 @@ Changelog
 =========
 
 
+v3.2.0 (2020-12-21)
+-------------------
+- Bump to v3.2.0. [Robin Thomas]
+- Fixes #35. Use `to_numpy('object')` to perform needed type conversions
+  (#36) [Robin Thomas]
+
+  Fixes #35. Use `to_numpy('object')` to perform needed type conversions (#36) on frame and index values before attempting to update cell values in the worksheet. Now requires Pandas>=0.24.0 instead of >=0.14.0.
+
+
 v3.1.3 (2020-12-06)
 -------------------
+- Bump to v3.1.3. [Robin Thomas]
 - Fixes #34 by correctly escaping formula expressions =XXX when
   allow_formulas=False. [Robin Thomas]
 - Add 3.9 to travis build. [Robin Thomas]
