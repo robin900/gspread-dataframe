@@ -269,6 +269,24 @@ class WorksheetTest(GspreadDataframeTest):
         df2 = get_as_dataframe(self.sheet, header=[0, 1])
         self.assertTrue(df.equals(df2))
 
+    def test_int64_json_issue35(self):
+        df = pd.DataFrame(
+            {
+                'a':pd.Series([1, 2, 3],dtype='int64',index=pd.RangeIndex(start=0, stop=3, step=1)),
+                'b':pd.Series([4, 5, 6],dtype='int64',index=pd.RangeIndex(start=0, stop=3, step=1))
+            },
+            index=pd.RangeIndex(start=0, stop=3, step=1)
+        )
+        set_with_dataframe(
+            self.sheet,
+            df,
+            resize=True,
+            include_index=True
+        )
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        df2 = get_as_dataframe(self.sheet, dtype={'a': 'int64', 'b': 'int64'}, index_col=0)
+        self.assertTrue(df.equals(df2))
+
     def test_multiindex_column_header_and_multiindex(self):
         # populate sheet with cell list values
         rows = None

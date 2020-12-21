@@ -72,7 +72,7 @@ Requirements
 
 * Python 2.7, 3+
 * gspread (>=3.0.0; to use older versions of gspread, use gspread-dataframe releases of 2.1.1 or earlier)
-* Pandas >= 0.14.0
+* Pandas >= 0.24.0
 
 From PyPI
 ~~~~~~~~~
