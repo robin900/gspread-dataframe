@@ -8,8 +8,12 @@ import itertools
 import uuid
 import json
 from datetime import datetime, date
+from gspread.exceptions import APIError
 import pandas as pd
-from gspread_dataframe import get_as_dataframe, set_with_dataframe
+from gspread_dataframe import \
+    get_as_dataframe, \
+    set_with_dataframe, \
+    _resize_to_minimum
 
 try:
     import ConfigParser
@@ -203,6 +207,62 @@ class WorksheetTest(GspreadDataframeTest):
             df = get_as_dataframe(self.sheet, nrows=nrows)
             self.assertEqual(nrows, len(df))
 
+
+    def test_resize_to_minimum_large(self):
+        self.sheet.resize(100, 26)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        # Large increase that requires exact re-sizing to avoid exceeding 
+        # cell limit: this should result in 1000000 rows and 2 columns.
+        # The sheets API, however, applies new rowCount first, then
+        # checks against cell count limit before applying new colCount!
+        # So to avoid a 400 response, we must in these cases have
+        # _resize_to_minimum call resize twice, first with the value
+        # that will reduce cell count and second with the value that
+        # will increase cell count.
+        _resize_to_minimum(self.sheet, 1000000, 2)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        self.assertEqual(1000000, self.sheet.row_count)
+        self.assertEqual(2, self.sheet.col_count)
+        # let's test the other case, where if columnCount were applied
+        # first the limit would be exceeded.
+        _resize_to_minimum(self.sheet, 10000, 26)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        self.assertEqual(10000, self.sheet.row_count)
+        self.assertEqual(26, self.sheet.col_count)
+
+    def test_resize_to_minimum(self):
+        self.sheet.resize(100, 26)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        # min rows < current, no change
+        _resize_to_minimum(self.sheet, 20, None)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        self.assertEqual(100, self.sheet.row_count)
+        self.assertEqual(26, self.sheet.col_count)
+        # min cols < current, no change
+        _resize_to_minimum(self.sheet, None, 2)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        self.assertEqual(100, self.sheet.row_count)
+        self.assertEqual(26, self.sheet.col_count)
+        # increase rows
+        _resize_to_minimum(self.sheet, 200, None)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        self.assertEqual(200, self.sheet.row_count)
+        self.assertEqual(26, self.sheet.col_count)
+        # increase cols
+        _resize_to_minimum(self.sheet, None, 27)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        self.assertEqual(200, self.sheet.row_count)
+        self.assertEqual(27, self.sheet.col_count)
+        # increase both
+        _resize_to_minimum(self.sheet, 201, 28)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        self.assertEqual(201, self.sheet.row_count)
+        self.assertEqual(28, self.sheet.col_count)
+        # large increase that exact re-sizing cannot keep below cell limit
+        # this should result in a 400 ApiError
+        with self.assertRaises(APIError):
+            _resize_to_minimum(self.sheet, 1000000, None)
+        
     def test_multiindex(self):
         # populate sheet with cell list values
         rows = None
