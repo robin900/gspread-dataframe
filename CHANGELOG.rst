@@ -2,6 +2,15 @@ Changelog
 =========
 
 
+v3.2.1 (2021-02-03)
+-------------------
+- Bump to v3.2.1. [Robin Thomas]
+- Fixes #37. [Robin Thomas]
+
+  Fixes #37. Discovered that Sheets API applies rowCount first, and THEN (#38) checks cell limits, so that if new rowCount * existing colCount > 5000000, then worksheet exceeds limit of 5000000 cells and the whole resize operation is aborted. Solution is to determine if such a condition would occur and then issue the smaller columnCount first as a separate call to reduce
+  cell count. Full test coverage added.
+
+
 v3.2.0 (2020-12-21)
 -------------------
 - Bump to v3.2.0. [Robin Thomas]
