@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v3.2.2 (2021-11-27)
+-------------------
+- Bump to v3.2.2. [Robin Thomas]
+- Fixes #40. Import Cell from main gspread package to avoid breakages
+  with gspread>=5.0.0. [Robin Thomas]
+
+
 v3.2.1 (2021-02-03)
 -------------------
 - Bump to v3.2.1. [Robin Thomas]
