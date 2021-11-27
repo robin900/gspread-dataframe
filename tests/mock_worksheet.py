@@ -1,7 +1,7 @@
 import os.path
 import json
 import re
-from gspread.models import Cell
+from gspread import Cell
 from gspread_dataframe import _cellrepr
 
 

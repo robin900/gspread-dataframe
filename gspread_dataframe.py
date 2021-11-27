@@ -10,7 +10,7 @@ using a `pandas.DataFrame`. To use these functions, have
 Pandas 0.14.0 or greater installed.
 """
 from gspread.utils import fill_gaps
-from gspread.models import Cell
+from gspread import Cell
 import pandas as pd
 from pandas.io.parsers import TextParser
 import logging
