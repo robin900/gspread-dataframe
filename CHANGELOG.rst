@@ -2,8 +2,34 @@ Changelog
 =========
 
 
+v3.2.2 (2021-11-27)
+-------------------
+- Bump to v3.2.2. [Robin Thomas]
+- Fixes #40. Import Cell from main gspread package to avoid breakages
+  with gspread>=5.0.0. [Robin Thomas]
+
+
+v3.2.1 (2021-02-03)
+-------------------
+- Bump to v3.2.1. [Robin Thomas]
+- Fixes #37. [Robin Thomas]
+
+  Fixes #37. Discovered that Sheets API applies rowCount first, and THEN (#38) checks cell limits, so that if new rowCount * existing colCount > 5000000, then worksheet exceeds limit of 5000000 cells and the whole resize operation is aborted. Solution is to determine if such a condition would occur and then issue the smaller columnCount first as a separate call to reduce
+  cell count. Full test coverage added.
+
+
+v3.2.0 (2020-12-21)
+-------------------
+- Bump to v3.2.0. [Robin Thomas]
+- Fixes #35. Use `to_numpy('object')` to perform needed type conversions
+  (#36) [Robin Thomas]
+
+  Fixes #35. Use `to_numpy('object')` to perform needed type conversions (#36) on frame and index values before attempting to update cell values in the worksheet. Now requires Pandas>=0.24.0 instead of >=0.14.0.
+
+
 v3.1.3 (2020-12-06)
 -------------------
+- Bump to v3.1.3. [Robin Thomas]
 - Fixes #34 by correctly escaping formula expressions =XXX when
   allow_formulas=False. [Robin Thomas]
 - Add 3.9 to travis build. [Robin Thomas]

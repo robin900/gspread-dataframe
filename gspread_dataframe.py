@@ -10,7 +10,7 @@ using a `pandas.DataFrame`. To use these functions, have
 Pandas 0.14.0 or greater installed.
 """
 from gspread.utils import fill_gaps
-from gspread.models import Cell
+from gspread import Cell
 import pandas as pd
 from pandas.io.parsers import TextParser
 import logging
@@ -34,16 +34,17 @@ logger = logging.getLogger(__name__)
 major, minor = tuple(
     [int(i) for i in re.search(r"^(\d+)\.(\d+)\..+$", pd.__version__).groups()]
 )
-if (major, minor) < (0, 14):
+if (major, minor) < (0, 24):
     raise ImportError(
-        "pandas version too old (<0.14.0) to support gspread_dataframe"
+        "pandas version too old (<0.24.0) to support gspread_dataframe"
     )
 logger.debug(
-    "Imported satisfactory (>=0.14.0) Pandas module: %s", pd.__version__
+    "Imported satisfactory (>=0.24.0) Pandas module: %s", pd.__version__
 )
 
 __all__ = ("set_with_dataframe", "get_as_dataframe")
 
+WORKSHEET_MAX_CELL_COUNT = 5000000
 
 def _escaped_string(value, string_escaping):
     if value in (None, ""):
@@ -97,15 +98,49 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
 
     Both rows and cols are optional.
     """
-    # get the current size
-    current_cols, current_rows = (worksheet.col_count, worksheet.row_count)
-    if rows is not None and rows <= current_rows:
-        rows = None
-    if cols is not None and cols <= current_cols:
-        cols = None
+    current_rows, current_cols = (worksheet.row_count, worksheet.col_count)
+    desired_rows, desired_cols = (rows, cols)
+    if desired_rows is not None and desired_rows <= current_rows:
+        desired_rows = current_rows
+    if desired_cols is not None and desired_cols <= current_cols:
+        desired_cols = current_cols
+    resize_cols_first = False
+    if desired_rows is not None and desired_cols is not None:
+        # special case: if desired sheet size now > cell limit for sheet,
+        # resize to exactly rows x cols, which in certain cases will 
+        # allow worksheet to stay within cell limit.
+        if desired_rows * desired_cols > WORKSHEET_MAX_CELL_COUNT:
+            desired_rows, desired_cols = (rows, cols)
 
-    if cols is not None or rows is not None:
-        worksheet.resize(rows, cols)
+        # Large increase that requires exact re-sizing to avoid exceeding
+        # cell limit might be, for example, 1000000 rows and 2 columns,
+        # for a worksheet that currently has 100 rows and 26 columns..
+        # The sheets API, however, applies new rowCount first, then
+        # checks against cell count limit before applying new colCount!
+        # In the above case, applying new rowCount produces 26 million
+        # cells, the limit is exceeded, and API aborts the change and
+        # returns a 400 response.
+        # So to avoid a 400 response, we must in these cases have
+        # _resize_to_minimum call resize twice, first with the value
+        # that will reduce cell count and second with the value that
+        # will increase cell count.
+        # We don't seem to need to address the reversed case, where
+        # columnCount is applied first, since Sheets API seems to apply
+        # rowCount first in all cases. There is test coverage of this
+        # reversed case, to guard against Sheets API changes in future.
+        if (
+            cols is not None and 
+            cols < current_cols and 
+            desired_rows * current_cols > WORKSHEET_MAX_CELL_COUNT
+        ):
+            resize_cols_first = True
+
+    if desired_cols is not None or desired_rows is not None:
+        if resize_cols_first:
+            worksheet.resize(cols=desired_cols)
+            worksheet.resize(rows=desired_rows)
+        else:
+            worksheet.resize(desired_rows, desired_cols)
 
 
 def _get_all_values(worksheet, evaluate_formulas):
@@ -312,7 +347,7 @@ def set_with_dataframe(worksheet,
 
     values = []
     for value_row, index_value in zip_longest(
-        dataframe.values, dataframe.index
+        dataframe.to_numpy('object'), dataframe.index.to_numpy('object')
     ):
         if include_index:
             if not using_multiindex:

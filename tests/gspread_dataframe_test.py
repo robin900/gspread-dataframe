@@ -8,7 +8,7 @@ from .mock_worksheet import (
 
 from gspread_dataframe import get_as_dataframe, set_with_dataframe
 from gspread_dataframe import _escaped_string as escape, _cellrepr as cellrepr
-from gspread.models import Cell
+from gspread import Cell
 import numpy as np
 import pandas as pd
 from difflib import SequenceMatcher
