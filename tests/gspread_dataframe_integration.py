@@ -347,6 +347,57 @@ class WorksheetTest(GspreadDataframeTest):
         df2 = get_as_dataframe(self.sheet, dtype={'a': 'int64', 'b': 'int64'}, index_col=0)
         self.assertTrue(df.equals(df2))
 
+class WorksheetMultiIndexTest(GspreadDataframeTest):
+    """Tests of MultiIndex handling for gspread_dataframe using a gspread.Worksheet."""
+
+    spreadsheet = None
+
+    @classmethod
+    def setUpClass(cls):
+        super(WorksheetMultiIndexTest, cls).setUpClass()
+        ss_id = cls.config.get("Spreadsheet", "id")
+        cls.spreadsheet = cls.gc.open_by_key(ss_id)
+        cls.spreadsheet.batch_update(
+            {
+                "requests": [
+                    {
+                        "updateSpreadsheetProperties": {
+                            "properties": {"locale": "en_US"},
+                            "fields": "locale",
+                        }
+                    }
+                ]
+            }
+        )
+        try:
+            test_sheet = cls.spreadsheet.worksheet("wksht_int_test")
+            if test_sheet:
+                # somehow left over from interrupted test, remove.
+                cls.spreadsheet.del_worksheet(test_sheet)
+        except gspread.exceptions.WorksheetNotFound:
+            pass  # expected
+
+    def setUp(self):
+        super(WorksheetMultiIndexTest, self).setUp()
+        if self.__class__.spreadsheet is None:
+            self.__class__.setUpClass()
+        self.sheet = self.spreadsheet.add_worksheet("wksht_int_test", 20, 20)
+        self.__class__.spreadsheet.batch_update(
+            {
+                "requests": [
+                    {
+                        "updateSpreadsheetProperties": {
+                            "properties": {"locale": "en_US"},
+                            "fields": "locale",
+                        }
+                    }
+                ]
+            }
+        )
+
+    def tearDown(self):
+        self.spreadsheet.del_worksheet(self.sheet)
+
     def test_multiindex_column_header_and_multiindex(self):
         # populate sheet with cell list values
         rows = None
@@ -383,7 +434,8 @@ class WorksheetTest(GspreadDataframeTest):
         self.sheet.update_cells(cell_list)
         self.sheet.resize(11, 12)
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
-        df = get_as_dataframe(self.sheet, index_col=[0, 1], header=[0, 1])
+        import pdb; pdb.set_trace()
+        df = get_as_dataframe(self.sheet, handle_MultiIndex='repeat', index_col=[0, 1], header=[0, 1])
         # fixup because of pandas.read_csv limitations
         df.columns.names = [None, None]
         df.index.names = ["Category", "Subcategory"]
@@ -395,7 +447,7 @@ class WorksheetTest(GspreadDataframeTest):
             include_index=True,
             string_escaping=STRING_ESCAPING_PATTERN,
         )
-        df2 = get_as_dataframe(self.sheet, index_col=[0, 1], header=[0, 1])
+        df2 = get_as_dataframe(self.sheet, handle_MultiIndex='repeat', index_col=[0, 1], header=[0, 1])
         self.assertTrue(df.equals(df2))
 
     def test_multiindex_merge_cells(self):

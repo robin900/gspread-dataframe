@@ -35,9 +35,7 @@ major, minor = tuple(
     [int(i) for i in re.search(r"^(\d+)\.(\d+)\..+$", pd.__version__).groups()]
 )
 if (major, minor) < (0, 24):
-    raise ImportError(
-        "pandas version too old (<0.24.0) to support gspread_dataframe"
-    )
+    raise ImportError("pandas version too old (<0.24.0) to support gspread_dataframe")
 logger.debug(
     "Imported satisfactory (>=0.24.0) Pandas module: %s", pd.__version__
 )
@@ -185,7 +183,7 @@ def _get_all_values(worksheet, evaluate_formulas):
     return [[rows[i][j] for j in rect_cols] for i in rect_rows]
 
 
-def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
+def get_as_dataframe(worksheet, evaluate_formulas=False, handle_MultiIndex='repeat', **options):
     r"""
     Returns the worksheet contents as a DataFrame.
 
@@ -193,6 +191,7 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
+    :param handle_MultiIndex: XXX TODO.
     :param \*\*options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
             (Note: TextParser supports only the default 'python' parser engine,
@@ -200,7 +199,8 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
     :returns: pandas.DataFrame
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
-    return TextParser(all_values, **options).read(options.get("nrows", None))
+    df = TextParser(all_values, **options).read(options.get("nrows", None))
+    # TODO fix MultiIndexes after the fact?
 
 
 def _determine_index_column_size(index):
@@ -369,13 +369,13 @@ def set_with_dataframe(worksheet,
             index_values = tuple(value_row[0:index_col_size])
             if current_run_index_values != index_values:
                 if current_run_index_values:
-                    index_runs.push( (current_run_index_values, (current_run_rows[0], current_run_rows[-1]) )
+                    index_runs.push( (current_run_index_values, current_run_rows[0], current_run_rows[-1]) )
                 current_run_rows = [ row_idx ]
                 current_run_index_values = index_values
             else:
                 current_run_rows.push(row_idx)
         if current_run_rows:
-            index_runs.push( (current_run_index_values, (current_run_rows[0], current_run_rows[-1]) )
+            index_runs.push( (current_run_index_values, current_run_rows[0], current_run_rows[-1]) )
         
         # for each _column_ of the index, find the full consecutive run (or runs) of a single value in that column.
         column_runs = []
