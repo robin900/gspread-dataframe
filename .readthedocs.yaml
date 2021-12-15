@@ -2,4 +2,4 @@ version: 2
 
 sphinx:
   configuration: docs/conf.py
-  builder: singlehtml
+  builder: html
