@@ -33,6 +33,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 # ones.
 extensions = ['sphinx.ext.autodoc']
 
+# autodoc "mock imports" so that autodoc does not need heavy dependencies
+# installed in order to function. (Helpful for ReadTheDocs.org.)
+
+autodoc_mock_imports = ['gspread', 'pandas']
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
