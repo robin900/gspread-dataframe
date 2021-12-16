@@ -219,6 +219,8 @@ def set_with_dataframe(
 
     :param worksheet: the gspread worksheet to set with content of DataFrame.
     :param dataframe: the DataFrame.
+    :param row: Row at which to start writing the DataFrame. Default is 1.
+    :param col: Column  at which to start writing the DataFrame. Default is 1.
     :param include_index: if True, include the DataFrame's index as an
             additional column. Defaults to False.
     :param include_column_header: if True, add a header row or rows before data
