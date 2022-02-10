@@ -399,8 +399,6 @@ class WorksheetMultiIndexTest(GspreadDataframeTest):
         self.spreadsheet.del_worksheet(self.sheet)
 
     def test_multiindex_column_header_and_multiindex(self):
-        # populate sheet with cell list values
-        rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
         mi = list(
@@ -434,7 +432,6 @@ class WorksheetMultiIndexTest(GspreadDataframeTest):
         self.sheet.update_cells(cell_list)
         self.sheet.resize(11, 12)
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
-        import pdb; pdb.set_trace()
         df = get_as_dataframe(self.sheet, handle_MultiIndex='repeat', index_col=[0, 1], header=[0, 1])
         # fixup because of pandas.read_csv limitations
         df.columns.names = [None, None]
@@ -451,6 +448,54 @@ class WorksheetMultiIndexTest(GspreadDataframeTest):
         self.assertTrue(df.equals(df2))
 
     def test_multiindex_merge_cells(self):
-        # TODO test merge (and maybe blank) handle_MultiIndex option
-        pass
+        # populate sheet with cell list values
+        with open(CELL_LIST_FILENAME) as f:
+            rows = json.load(f)
+        mi = list(
+            pd.MultiIndex.from_product(
+                [["A", "B"], ["one", "two", "three", "four", "five"]]
+            )
+        )
+        column_headers = [
+            "",
+            "",
+            "SQL",
+            "SQL",
+            "SQL",
+            "SQL",
+            "SQL",
+            "Misc",
+            "Misc",
+            "Misc",
+            "Misc",
+            "Misc",
+        ]
+        column_names = ["Category", "Subcategory"] + rows[0]
+        rows = (
+            [column_headers]
+            + [column_names]
+            + [list(index_tup) + row for row, index_tup in zip(rows[1:], mi)]
+        )
+        cell_list = self.sheet.range("A1:L11")
+        for cell, value in zip(cell_list, itertools.chain(*rows)):
+            cell.value = value
+        self.sheet.update_cells(cell_list)
+        self.sheet.resize(11, 12)
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+        df = get_as_dataframe(self.sheet, handle_MultiIndex='repeat', index_col=[0, 1], header=[0, 1])
+        # fixup because of pandas.read_csv limitations
+        df.columns.names = [None, None]
+        df.index.names = ["Category", "Subcategory"]
+        # set and get, round-trip
+        set_with_dataframe(
+            self.sheet,
+            df,
+            resize=True,
+            include_index=True,
+            handle_MultiIndex='blank',
+            string_escaping=STRING_ESCAPING_PATTERN,
+        )
+        import pdb; pdb.set_trace()
+        df2 = get_as_dataframe(self.sheet, handle_MultiIndex='blank', index_col=[0, 1], header=[0, 1])
+        self.assertTrue(df.equals(df2))
 

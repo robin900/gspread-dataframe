@@ -200,7 +200,10 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, handle_MultiIndex='repe
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
     df = TextParser(all_values, **options).read(options.get("nrows", None))
-    # TODO fix MultiIndexes after the fact?
+    if handle_MultiIndex in ('blank', 'merge') and df.index.nlevels > 1:
+        # TODO fix MultiIndexes if blank/merge setting by replacing empty values
+        pass
+    return df
 
 
 def _determine_index_column_size(index):
@@ -369,13 +372,13 @@ def set_with_dataframe(worksheet,
             index_values = tuple(value_row[0:index_col_size])
             if current_run_index_values != index_values:
                 if current_run_index_values:
-                    index_runs.push( (current_run_index_values, current_run_rows[0], current_run_rows[-1]) )
+                    index_runs.append( (current_run_index_values, current_run_rows[0], current_run_rows[-1]) )
                 current_run_rows = [ row_idx ]
                 current_run_index_values = index_values
             else:
-                current_run_rows.push(row_idx)
+                current_run_rows.append(row_idx)
         if current_run_rows:
-            index_runs.push( (current_run_index_values, current_run_rows[0], current_run_rows[-1]) )
+            index_runs.append( (current_run_index_values, current_run_rows[0], current_run_rows[-1]) )
         
         # for each _column_ of the index, find the full consecutive run (or runs) of a single value in that column.
         column_runs = []
@@ -386,13 +389,13 @@ def set_with_dataframe(worksheet,
             for run in sliced_runs:
                 if not current_run_rows or run[0] != current_run:
                     if current_run_rows:
-                        column_runs.push( (col_idx, current_run, current_run_rows) )
+                        column_runs.append( (col_idx, current_run, current_run_rows) )
                     current_run = run[0]
                     current_run_rows = run[1]
                 else:
                     current_run_rows = (current_run_rows[0], run[1][1])
             if current_run_rows:
-                column_runs.push( (col_idx, current_run, current_run_rows) )
+                column_runs.append( (col_idx, current_run, current_run_rows) )
 
         # then for each "column run", blank out the values after the first row's value, and construct a mergeCells request.
         for col_idx, col_value, row_idxs in column_runs:
