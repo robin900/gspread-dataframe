@@ -17,9 +17,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 
 # -- General configuration ------------------------------------------------
@@ -32,6 +32,11 @@
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc']
+
+# autodoc "mock imports" so that autodoc does not need heavy dependencies
+# installed in order to function. (Helpful for ReadTheDocs.org.)
+
+autodoc_mock_imports = ['gspread', 'pandas']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

@@ -29,17 +29,6 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-# pandas version check
-
-major, minor = tuple(
-    [int(i) for i in re.search(r"^(\d+)\.(\d+)\..+$", pd.__version__).groups()]
-)
-if (major, minor) < (0, 24):
-    raise ImportError("pandas version too old (<0.24.0) to support gspread_dataframe")
-logger.debug(
-    "Imported satisfactory (>=0.24.0) Pandas module: %s", pd.__version__
-)
-
 __all__ = ("set_with_dataframe", "get_as_dataframe")
 
 WORKSHEET_MAX_CELL_COUNT = 5000000
@@ -233,6 +222,8 @@ def set_with_dataframe(worksheet,
 
     :param worksheet: the gspread worksheet to set with content of DataFrame.
     :param dataframe: the DataFrame.
+    :param row: Row at which to start writing the DataFrame. Default is 1.
+    :param col: Column  at which to start writing the DataFrame. Default is 1.
     :param include_index: if True, include the DataFrame's index as an
             additional column. Defaults to False.
     :param include_column_header: if True, add a header row or rows before data
