@@ -188,8 +188,9 @@ def _dataframe_with_corrected_multiIndex(df):
         else:
             prev_values = tuple(idx_row)
         new_index_values.append(idx_row)
+    # TODO preserve columns; and preserve index names somehow!
     new_index = pd.MultiIndex.from_tuples(new_index_values, names=tuple(df.index.names))
-    return pd.DataFrame(df.to_numpy(), index=new_index)
+    return pd.DataFrame(df.to_numpy(), columns=df.columns.to_numpy(), index=new_index)
 
 
 def get_as_dataframe(worksheet, evaluate_formulas=False, handle_MultiIndex='repeat', **options):
@@ -307,13 +308,14 @@ def set_with_dataframe(worksheet,
         _resize_to_minimum(worksheet, y, x)
 
     using_multiindex = index_col_size > 1
+    using_column_multiindex = column_header_size > 1
 
     updates = []
 
     if include_column_header:
         elts = list(dataframe.columns)
         # if columns object is multi-index, it will span multiple rows
-        if column_header_size > 1:
+        if using_column_multiindex:
             elts = list(dataframe.columns)
             if include_index:
                 if hasattr(dataframe.index, "names"):
@@ -328,6 +330,8 @@ def set_with_dataframe(worksheet,
                 ] + elts
             for level in range(0, column_header_size):
                 for idx, tup in enumerate(elts):
+                    # TODO use blank values when handle_MultiIndex in ('blank', 'merge')
+                    # TODO also issue some mergeCells requests when == 'merge'
                     updates.append(
                         (
                             row,
