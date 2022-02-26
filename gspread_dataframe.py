@@ -12,6 +12,7 @@ Pandas 0.14.0 or greater installed.
 from gspread.utils import fill_gaps
 from gspread import Cell
 import pandas as pd
+import numpy as np
 from pandas.io.parsers import TextParser
 import logging
 import re
@@ -172,8 +173,27 @@ def _get_all_values(worksheet, evaluate_formulas):
     return [[rows[i][j] for j in rect_cols] for i in rect_rows]
 
 
+def _safe_isnan(val):
+    return isinstance(val, float) and np.isnan(val)
+
+
+def _dataframe_with_corrected_multiIndex(df):
+    _nlev = df.index.nlevels
+    prev_values = (float('nan'),) * (_nlev - 1)
+    new_index_values = []
+    for idx_row in df.index.to_numpy():
+        if any([_safe_isnan(i) for i in idx_row[0:-1]]):
+            # replace each nan with elt from prev_values
+            idx_row = tuple( (prev_values[idx] if idx < _nlev and _safe_isnan(i) else i) for idx, i in enumerate(idx_row) )
+        else:
+            prev_values = tuple(idx_row)
+        new_index_values.append(idx_row)
+    new_index = pd.MultiIndex.from_tuples(new_index_values, names=tuple(df.index.names))
+    return pd.DataFrame(df.to_numpy(), index=new_index)
+
+
 def get_as_dataframe(worksheet, evaluate_formulas=False, handle_MultiIndex='repeat', **options):
-    r"""
+    """
     Returns the worksheet contents as a DataFrame.
 
     :param worksheet: the worksheet.
@@ -190,8 +210,7 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, handle_MultiIndex='repe
     all_values = _get_all_values(worksheet, evaluate_formulas)
     df = TextParser(all_values, **options).read(options.get("nrows", None))
     if handle_MultiIndex in ('blank', 'merge') and df.index.nlevels > 1:
-        # TODO fix MultiIndexes if blank/merge setting by replacing empty values
-        pass
+        df = _dataframe_with_corrected_multiIndex(df)
     return df
 
 
@@ -374,7 +393,7 @@ def set_with_dataframe(worksheet,
         # for each _column_ of the index, find the full consecutive run (or runs) of a single value in that column.
         column_runs = []
         for col_idx in range(index_col_size):
-            sliced_runs = [ (c[0][col_idx], c[1]) for c in index_runs ]
+            sliced_runs = [ (c[0][col_idx], (c[1], c[2])) for c in index_runs ]
             current_run = None
             current_run_rows = ()
             for run in sliced_runs:
@@ -391,7 +410,7 @@ def set_with_dataframe(worksheet,
         # then for each "column run", blank out the values after the first row's value, and construct a mergeCells request.
         for col_idx, col_value, row_idxs in column_runs:
             start_idx, end_idx_inclusive = row_idxs
-            for i in range(start_idx+1, end_idx+1):
+            for i in range(start_idx+1, end_idx_inclusive+1):
                 values[i][col_idx] = ''
             if handle_MultiIndex == 'merge':
                 merge_cell_requests.append({ 'mergeCells': { 'range': GridRange(XXX), 'mergeType': 'MERGE_ALL' } })

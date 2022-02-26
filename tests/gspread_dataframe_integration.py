@@ -495,7 +495,6 @@ class WorksheetMultiIndexTest(GspreadDataframeTest):
             handle_MultiIndex='blank',
             string_escaping=STRING_ESCAPING_PATTERN,
         )
-        import pdb; pdb.set_trace()
         df2 = get_as_dataframe(self.sheet, handle_MultiIndex='blank', index_col=[0, 1], header=[0, 1])
         self.assertTrue(df.equals(df2))
 
