@@ -2,6 +2,27 @@ Changelog
 =========
 
 
+v3.3.0 (2022-04-04)
+-------------------
+- Bump to v3.3.0. [Robin Thomas]
+- Handle all cases of header row writing/reading (#44) (#47) [Robin
+  Thomas]
+
+  Fixes #44. Writes header rows properly for all cases of include_index, MultiIndex columns or index itself, and names for columns object levels or index levels.
+- Added :param entries for row and col in docstring. [Robin Thomas]
+- Remove 3.10, still not released on travis. [Robin Thomas]
+- Remove pypy from build matrix, add 3.10. [Robin Thomas]
+- Try default html sphnix builder for RTD. [Robin Thomas]
+- Removed pandas version checker because pandas 0.24.0 was a LONG time
+  ago. [Robin Thomas]
+- Try autodoc mock imports. [Robin Thomas]
+- Push proper dir onto sys.path. [Robin Thomas]
+- Try pushing onto sys.path to get automodule to work for RTD. [Robin
+  Thomas]
+- Rename to yaml file. [Robin Thomas]
+- Add readthedocs yml file. [Robin Thomas]
+
+
 v3.2.2 (2021-11-27)
 -------------------
 - Bump to v3.2.2. [Robin Thomas]
