@@ -196,12 +196,14 @@ def _determine_level_count(index):
     return 1
 
 def _index_names(index):
+    names = []
     if hasattr(index, "names"):
-        return [ i if i != None else "" for i in index.names ]
+        names = [ i if i != None else "" for i in index.names ]
     elif index.name not in (None, ""):
-        return [index.name]
-    else:
-        return []
+        names = [index.name]
+    if not any([n not in (None, "") for n in names]):
+        names = []
+    return names
 
 def set_with_dataframe(
     worksheet,
@@ -288,10 +290,13 @@ def set_with_dataframe(
                 extra = tuple(column_names_not_labels) \
                         if column_names_not_labels \
                         else ("",) * column_header_size
-                elts = [ extra ] + elts
+                extra = [ extra ]
+                if index_col_size > 1:
+                    extra = extra + [ ("",) * column_header_size ] * (index_col_size - 1)
+                elts = extra + elts
                 # if index has names, they need their own header row
                 if index_names:
-                    extra_header_row = list(index_names)
+                    extra_header_row = list(index_names) + [ "" ] * len(dataframe.columns)
             for level in range(0, column_header_size):
                 for idx, tup in enumerate(elts):
                     updates.append(
@@ -315,15 +320,18 @@ def set_with_dataframe(
                             ),
                         )
                     )
+                row += 1
 
         else:
             # columns object is not multi-index, columns object's "names"
-            # can not be written anywhere in header
+            # can not be written anywhere in header and be parseable to pandas.
             elts = list(dataframe.columns)
             if include_index:
                 # if index has names, they do NOT need their own header row
                 if index_names:
                     elts = index_names + elts
+                else:
+                    elts = ([""] * index_col_size) + elts
             for idx, val in enumerate(elts):
                 updates.append(
                     (

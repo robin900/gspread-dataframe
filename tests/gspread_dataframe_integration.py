@@ -9,7 +9,7 @@ import uuid
 import json
 import logging
 import sys
-from random import randint
+from random import uniform
 from datetime import datetime, date
 from gspread.exceptions import APIError
 import pandas as pd
@@ -298,6 +298,8 @@ class WorksheetTest(GspreadDataframeTest):
             include_index=True,
             string_escaping=STRING_ESCAPING_PATTERN,
         )
+        # must do this to refresh the size attributes of worksheet
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df2 = get_as_dataframe(self.sheet, index_col=[0, 1])
         self.assertTrue(df.equals(df2))
 
@@ -351,17 +353,17 @@ class WorksheetTest(GspreadDataframeTest):
             include_index=True
         )
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
-        df2 = get_as_dataframe(self.sheet, dtype={'a': 'int64', 'b': 'int64'}, index_col=0)
+        df2 = get_as_dataframe(self.sheet, dtype={'a': 'int64', 'b': 'int64'}, index_col=0, header=0)
         self.assertTrue(df.equals(df2))
 
     def test_header_writing_and_parsing(self):
         truth_table = itertools.product(*([[False, True]] * 4))
-        for include_index, index_has_names, columns_multilevel, columns_has_names in truth_table:
+        for include_index, columns_multilevel, index_has_names, columns_has_names in truth_table:
             logger.info(
                 "Testing include_index %s, index_has_names %s, columns_multilevel %s, columns_has_names %s",
                 include_index, index_has_names, columns_multilevel, columns_has_names
             )
-            data = [[randint(0, 100000) for i in range(8)]] * 20
+            data = [[uniform(0, 100000) for i in range(8)] for j in range(20)]
             index_names = ["Category", "Subcategory"] if index_has_names else None
             index = list(
                 itertools.product(
@@ -380,7 +382,10 @@ class WorksheetTest(GspreadDataframeTest):
                 columns = columns.droplevel(0)
             df = pd.DataFrame.from_records(data, index=index, columns=columns)
             set_with_dataframe(self.sheet, df, resize=True, include_index=include_index)
+            self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
             header_arg = list(range(len(getattr(columns, "levshape", [1]))))
+            # if include_index and columns_multilevel and index_has_names, there
+            # will be an additional header row
             index_col_arg = list(range(len(getattr(index, "levshape", [1]))))
             logger.info("header=%s, index_col=%s", header_arg, index_col_arg)
             df_readback = get_as_dataframe(
@@ -388,8 +393,11 @@ class WorksheetTest(GspreadDataframeTest):
                 header=header_arg,
                 index_col=(index_col_arg if include_index else None)
             )
-            #self.assertTrue(df.equals(df_readback))
-            logger.info("%s", df)
-            logger.info("%s", df_readback)
-            input("")
+            logger.info("DataFrames equal: %s", df.equals(df_readback))
+            if not df.equals(df_readback):
+                logger.info("%s", df)
+                logger.info("%s", df.dtypes)
+                logger.info("%s", df_readback)
+                logger.info("%s", df_readback.dtypes)
+            self.assertTrue(df.equals(df_readback))
 
