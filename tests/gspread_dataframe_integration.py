@@ -400,4 +400,3 @@ class WorksheetTest(GspreadDataframeTest):
                 logger.info("%s", df_readback)
                 logger.info("%s", df_readback.dtypes)
             self.assertTrue(df.equals(df_readback))
-
