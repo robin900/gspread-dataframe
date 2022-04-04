@@ -190,17 +190,20 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
     return TextParser(all_values, **options).read(options.get("nrows", None))
 
 
-def _determine_index_column_size(index):
+def _determine_level_count(index):
     if hasattr(index, "levshape"):
         return len(index.levshape)
     return 1
 
-
-def _determine_column_header_size(columns):
-    if hasattr(columns, "levshape"):
-        return len(columns.levshape)
-    return 1
-
+def _index_names(index):
+    names = []
+    if hasattr(index, "names"):
+        names = [ i if i != None else "" for i in index.names ]
+    elif index.name not in (None, ""):
+        names = [index.name]
+    if not any([n not in (None, "") for n in names]):
+        names = []
+    return names
 
 def set_with_dataframe(
     worksheet,
@@ -259,12 +262,17 @@ def set_with_dataframe(
     y, x = dataframe.shape
     index_col_size = 0
     column_header_size = 0
+    index_names = _index_names(dataframe.index)
+    column_names_not_labels = _index_names(dataframe.columns)
     if include_index:
-        index_col_size = _determine_index_column_size(dataframe.index)
+        index_col_size = _determine_level_count(dataframe.index)
         x += index_col_size
     if include_column_header:
-        column_header_size = _determine_column_header_size(dataframe.columns)
+        column_header_size = _determine_level_count(dataframe.columns)
         y += column_header_size
+        # if included index has name(s) it needs its own header row to accommodate columns' index names
+        if column_header_size > 1 and include_index and index_names:
+            y += 1
     if resize:
         worksheet.resize(y, x)
     else:
@@ -275,19 +283,20 @@ def set_with_dataframe(
     if include_column_header:
         elts = list(dataframe.columns)
         # if columns object is multi-index, it will span multiple rows
+        extra_header_row = None
         if column_header_size > 1:
             elts = list(dataframe.columns)
             if include_index:
-                if hasattr(dataframe.index, "names"):
-                    index_elts = dataframe.index.names
-                else:
-                    index_elts = dataframe.index.name
-                if not isinstance(index_elts, (list, tuple)):
-                    index_elts = [index_elts]
-                elts = [
-                    ((None,) * (column_header_size - 1)) + (e,)
-                    for e in index_elts
-                ] + elts
+                extra = tuple(column_names_not_labels) \
+                        if column_names_not_labels \
+                        else ("",) * column_header_size
+                extra = [ extra ]
+                if index_col_size > 1:
+                    extra = extra + [ ("",) * column_header_size ] * (index_col_size - 1)
+                elts = extra + elts
+                # if index has names, they need their own header row
+                if index_names:
+                    extra_header_row = list(index_names) + [ "" ] * len(dataframe.columns)
             for level in range(0, column_header_size):
                 for idx, tup in enumerate(elts):
                     updates.append(
@@ -300,16 +309,29 @@ def set_with_dataframe(
                         )
                     )
                 row += 1
+            if extra_header_row:
+                for idx, val in enumerate(extra_header_row):
+                    updates.append(
+                        (
+                            row,
+                            col + idx,
+                            _cellrepr(
+                                val, allow_formulas, string_escaping
+                            ),
+                        )
+                    )
+                row += 1
+
         else:
+            # columns object is not multi-index, columns object's "names"
+            # can not be written anywhere in header and be parseable to pandas.
             elts = list(dataframe.columns)
             if include_index:
-                if hasattr(dataframe.index, "names"):
-                    index_elts = dataframe.index.names
+                # if index has names, they do NOT need their own header row
+                if index_names:
+                    elts = index_names + elts
                 else:
-                    index_elts = dataframe.index.name
-                if not isinstance(index_elts, (list, tuple)):
-                    index_elts = [index_elts]
-                elts = list(index_elts) + elts
+                    elts = ([""] * index_col_size) + elts
             for idx, val in enumerate(elts):
                 updates.append(
                     (

@@ -7,6 +7,9 @@ import unittest
 import itertools
 import uuid
 import json
+import logging
+import sys
+from random import uniform
 from datetime import datetime, date
 from gspread.exceptions import APIError
 import pandas as pd
@@ -30,6 +33,8 @@ try:
 except NameError:
     basestring = unicode = str
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 CONFIG_FILENAME = os.path.join(os.path.dirname(__file__), "tests.config")
 CREDS_FILENAME = os.path.join(os.path.dirname(__file__), "creds.json")
@@ -119,6 +124,7 @@ class WorksheetTest(GspreadDataframeTest):
 
     def setUp(self):
         super(WorksheetTest, self).setUp()
+        self.streamHandler = logger.addHandler(logging.StreamHandler(sys.stdout))
         if self.__class__.spreadsheet is None:
             self.__class__.setUpClass()
         self.sheet = self.spreadsheet.add_worksheet("wksht_int_test", 20, 20)
@@ -137,6 +143,7 @@ class WorksheetTest(GspreadDataframeTest):
 
     def tearDown(self):
         self.spreadsheet.del_worksheet(self.sheet)
+        logger.removeHandler(self.streamHandler)
 
     def test_roundtrip(self):
         # populate sheet with cell list values
@@ -291,6 +298,8 @@ class WorksheetTest(GspreadDataframeTest):
             include_index=True,
             string_escaping=STRING_ESCAPING_PATTERN,
         )
+        # must do this to refresh the size attributes of worksheet
+        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df2 = get_as_dataframe(self.sheet, index_col=[0, 1])
         self.assertTrue(df.equals(df2))
 
@@ -344,56 +353,51 @@ class WorksheetTest(GspreadDataframeTest):
             include_index=True
         )
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
-        df2 = get_as_dataframe(self.sheet, dtype={'a': 'int64', 'b': 'int64'}, index_col=0)
+        df2 = get_as_dataframe(self.sheet, dtype={'a': 'int64', 'b': 'int64'}, index_col=0, header=0)
         self.assertTrue(df.equals(df2))
 
-    def test_multiindex_column_header_and_multiindex(self):
-        # populate sheet with cell list values
-        rows = None
-        with open(CELL_LIST_FILENAME) as f:
-            rows = json.load(f)
-        mi = list(
-            pd.MultiIndex.from_product(
-                [["A", "B"], ["one", "two", "three", "four", "five"]]
+    def test_header_writing_and_parsing(self):
+        truth_table = itertools.product(*([[False, True]] * 4))
+        for include_index, columns_multilevel, index_has_names, columns_has_names in truth_table:
+            logger.info(
+                "Testing include_index %s, index_has_names %s, columns_multilevel %s, columns_has_names %s",
+                include_index, index_has_names, columns_multilevel, columns_has_names
             )
-        )
-        column_headers = [
-            "",
-            "",
-            "SQL",
-            "SQL",
-            "SQL",
-            "SQL",
-            "SQL",
-            "Misc",
-            "Misc",
-            "Misc",
-            "Misc",
-            "Misc",
-        ]
-        column_names = ["Category", "Subcategory"] + rows[0]
-        rows = (
-            [column_headers]
-            + [column_names]
-            + [list(index_tup) + row for row, index_tup in zip(rows[1:], mi)]
-        )
-        cell_list = self.sheet.range("A1:L11")
-        for cell, value in zip(cell_list, itertools.chain(*rows)):
-            cell.value = value
-        self.sheet.update_cells(cell_list)
-        self.sheet.resize(11, 12)
-        self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
-        df = get_as_dataframe(self.sheet, index_col=[0, 1], header=[0, 1])
-        # fixup because of pandas.read_csv limitations
-        df.columns.names = [None, None]
-        df.index.names = ["Category", "Subcategory"]
-        # set and get, round-trip
-        set_with_dataframe(
-            self.sheet,
-            df,
-            resize=True,
-            include_index=True,
-            string_escaping=STRING_ESCAPING_PATTERN,
-        )
-        df2 = get_as_dataframe(self.sheet, index_col=[0, 1], header=[0, 1])
-        self.assertTrue(df.equals(df2))
+            data = [[uniform(0, 100000) for i in range(8)] for j in range(20)]
+            index_names = ["Category", "Subcategory"] if index_has_names else None
+            index = list(
+                itertools.product(
+                    ["A", "B", "C", "D"],
+                    ["one", "two", "three", "four", "five"],
+                )
+            )
+            index = pd.MultiIndex.from_tuples(index, names=index_names)
+            if not include_index:
+                index = None
+            columns = ["Alice", "Bob", "Carol", "Dave", "Ellen", "Fulgencio", "Gina", "Hector"]
+            columns = [ ("Helpful" if i < 4 else "Unhelpful", v) for i, v in enumerate(columns) ]
+            names = ["Demeanor", "Name"] if columns_has_names else None
+            columns = pd.MultiIndex.from_tuples(columns, names=names)
+            if not columns_multilevel:
+                columns = columns.droplevel(0)
+            df = pd.DataFrame.from_records(data, index=index, columns=columns)
+            set_with_dataframe(self.sheet, df, resize=True, include_index=include_index)
+            self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
+            header_arg = list(range(len(getattr(columns, "levshape", [1]))))
+            # if include_index and columns_multilevel and index_has_names, there
+            # will be an additional header row
+            index_col_arg = list(range(len(getattr(index, "levshape", [1]))))
+            logger.info("header=%s, index_col=%s", header_arg, index_col_arg)
+            df_readback = get_as_dataframe(
+                self.sheet, 
+                header=header_arg,
+                index_col=(index_col_arg if include_index else None)
+            )
+            logger.info("DataFrames equal: %s", df.equals(df_readback))
+            if not df.equals(df_readback):
+                logger.info("%s", df)
+                logger.info("%s", df.dtypes)
+                logger.info("%s", df_readback)
+                logger.info("%s", df_readback.dtypes)
+            self.assertTrue(df.equals(df_readback))
+
