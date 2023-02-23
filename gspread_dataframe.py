@@ -273,6 +273,10 @@ def set_with_dataframe(
         # if included index has name(s) it needs its own header row to accommodate columns' index names
         if column_header_size > 1 and include_index and index_names:
             y += 1
+    if row > 1:
+        y += row - 1
+    if col > 1:
+        x += col - 1
     if resize:
         worksheet.resize(y, x)
     else:
