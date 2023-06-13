@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 __all__ = ("set_with_dataframe", "get_as_dataframe")
 
-WORKSHEET_MAX_CELL_COUNT = 5000000
+WORKSHEET_MAX_CELL_COUNT = 10000000
 
 def _escaped_string(value, string_escaping):
     if value in (None, ""):
