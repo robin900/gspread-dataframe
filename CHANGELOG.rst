@@ -2,6 +2,17 @@ Changelog
 =========
 
 
+v3.3.1 (2023-06-16)
+-------------------
+- Bump to v3.3.1. [Robin Thomas]
+- Update gspread_dataframe.py (#53) [Rulowizard]
+
+  Fixes #52. Update the variable WORKSHEET_MAX_CELL_COUNT from 5000000 to 10000000.
+- Fixes #50. Take the row and col arguments into consideration when
+  resizing the worksheet (#51) [Motin]
+- Removed stray endline. [Robin Thomas]
+
+
 v3.3.0 (2022-04-04)
 -------------------
 - Bump to v3.3.0. [Robin Thomas]
