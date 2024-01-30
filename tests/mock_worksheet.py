@@ -57,7 +57,10 @@ class MockWorksheet(object):
         self.col_count = 10
         self.id = "fooby"
         self.title = "gspread dataframe test"
-        self.spreadsheet = MockSpreadsheet()
+        self.__spreadsheet = MockSpreadsheet()
+
+    def exceptionally_accesss_underlying_spreadsheet():
+        return self.__spreadsheet
 
 
 class MockSpreadsheet(object):
