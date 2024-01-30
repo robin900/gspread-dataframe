@@ -10,7 +10,7 @@ using a `pandas.DataFrame`. To use these functions, have
 Pandas 0.14.0 or greater installed.
 """
 from gspread.utils import fill_gaps
-from gspread import Cell
+from gspread import Cell, Spreadsheet, Worksheet
 import pandas as pd
 from pandas.io.parsers import TextParser
 import logging
@@ -130,9 +130,9 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
             worksheet.resize(desired_rows, desired_cols)
 
 
-def _get_all_values(worksheet, evaluate_formulas):
-    data = worksheet.spreadsheet.values_get(
-        worksheet.title,
+def _get_all_values(spreadsheet: Spreadsheet, worksheet: Worksheet, evaluate_formulas: bool) -> list:
+    data = spreadsheet.values_get(
+        range=worksheet.title,
         params={
             "valueRenderOption": (
                 "UNFORMATTED_VALUE" if evaluate_formulas else "FORMULA"
@@ -172,7 +172,7 @@ def _get_all_values(worksheet, evaluate_formulas):
     return [[rows[i][j] for j in rect_cols] for i in rect_rows]
 
 
-def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
+def get_as_dataframe(spreadsheet: Spreadsheekt, worksheet: Worksheet, evaluate_formulas: bool=False, **options):
     r"""
     Returns the worksheet contents as a DataFrame.
 
@@ -186,7 +186,7 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
             not the C engine.)
     :returns: pandas.DataFrame
     """
-    all_values = _get_all_values(worksheet, evaluate_formulas)
+    all_values = _get_all_values(spreadsheet, worksheet, evaluate_formulas)
     return TextParser(all_values, **options).read(options.get("nrows", None))
 
 
