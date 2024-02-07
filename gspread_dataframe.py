@@ -130,9 +130,13 @@ def _resize_to_minimum(worksheet, rows=None, cols=None):
             worksheet.resize(desired_rows, desired_cols)
 
 
+def _quote_worksheet_title(title):
+    return "'" + title.replace("'", "''") + "'"
+
+
 def _get_all_values(worksheet, evaluate_formulas):
     data = worksheet.spreadsheet.values_get(
-        worksheet.title,
+        _quote_worksheet_title(worksheet.title),
         params={
             "valueRenderOption": (
                 "UNFORMATTED_VALUE" if evaluate_formulas else "FORMULA"
