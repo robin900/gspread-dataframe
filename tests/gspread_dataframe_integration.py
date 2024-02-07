@@ -49,6 +49,7 @@ CELL_LIST_FILENAME = os.path.join(os.path.dirname(__file__), "cell_list.json")
 
 STRING_ESCAPING_PATTERN = re.compile(r"(?:'\+|3e50)").match
 
+TEST_WORKSHEET_NAME = "ZZZ1"  # just happens to be a valid cell reference (column ZZZ, row 1)
 
 def read_config(filename):
     config = ConfigParser.ConfigParser()
@@ -115,7 +116,7 @@ class WorksheetTest(GspreadDataframeTest):
             }
         )
         try:
-            test_sheet = cls.spreadsheet.worksheet("wksht_int_test")
+            test_sheet = cls.spreadsheet.worksheet(TEST_WORKSHEET_NAME)
             if test_sheet:
                 # somehow left over from interrupted test, remove.
                 cls.spreadsheet.del_worksheet(test_sheet)
@@ -127,7 +128,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.streamHandler = logger.addHandler(logging.StreamHandler(sys.stdout))
         if self.__class__.spreadsheet is None:
             self.__class__.setUpClass()
-        self.sheet = self.spreadsheet.add_worksheet("wksht_int_test", 20, 20)
+        self.sheet = self.spreadsheet.add_worksheet(TEST_WORKSHEET_NAME, 20, 20)
         self.__class__.spreadsheet.batch_update(
             {
                 "requests": [
