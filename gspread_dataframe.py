@@ -176,7 +176,7 @@ def _get_all_values(worksheet, evaluate_formulas):
     return [[rows[i][j] for j in rect_cols] for i in rect_rows]
 
 
-def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
+def get_as_dataframe(worksheet, evaluate_formulas=False, drop_empty_rows=True, drop_empty_columns=True, **options):
     r"""
     Returns the worksheet contents as a DataFrame.
 
@@ -184,6 +184,12 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
+    :param drop_empty_rows: if True, drop any rows from the DataFrame that have
+            only empty (NaN) values. Defaults to True.
+    :param drop_empty_columns: if True, drop any columns from the DataFrame
+            that have only empty (NaN) values and have no column name 
+            (that is, no header value). Columns with a header value
+            but are otherwise empty are retained. Defaults to True.
     :param \*\*options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
             (Note: TextParser supports only the default 'python' parser engine,
@@ -191,8 +197,25 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
     :returns: pandas.DataFrame
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
-    return TextParser(all_values, **options).read(options.get("nrows", None))
-
+    df = TextParser(all_values, **options).read(options.get("nrows", None))
+    if drop_empty_rows:
+        df = df.dropna(how='all', axis=0)
+    if drop_empty_columns:
+        # only unnamed columns (with Unnamed: prefix given by pandas parser)
+        # are eligible for dropping if all values are empty.
+        # TODO multi-index columns must have _all_ levels unnamed.
+        labels_to_drop = [ 
+            label for label in df.columns.values
+            if (
+                label.startswith('Unnamed: ') 
+                if isinstance(label, str) 
+                else all([v.startswith('Unnamed: ') for v in label])
+            )
+            and df[label].isna().all()
+        ]
+        if labels_to_drop:
+            df = df.drop(labels=labels_to_drop, axis=1)
+    return df
 
 def _determine_level_count(index):
     if hasattr(index, "levshape"):
