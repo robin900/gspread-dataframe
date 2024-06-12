@@ -2,6 +2,20 @@ Changelog
 =========
 
 
+v4.0.0 (2024-06-12)
+-------------------
+- Bump to v4.0.0. [Robin Thomas]
+- Removed test of prefix= param removed in Pandas 2.x. [Robin Thomas]
+- Support drop_empty_rows and drop_empty_columns parameters, True by
+  default (#62) [Robin Thomas]
+
+  Fixes #61.
+- Fixes #54. Worksheet names that are valid cell references no longer
+  cause Sheets API errors. (#58) [Robin Thomas]
+- Corrected Travis CI badge url. [Robin Thomas]
+- Keep test credentials out of sdist. [Robin Thomas]
+
+
 v3.3.1 (2023-06-16)
 -------------------
 - Bump to v3.3.1. [Robin Thomas]
