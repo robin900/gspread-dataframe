@@ -45,11 +45,11 @@ only options supported by that engine are acceptable:
 
     df = get_as_dataframe(worksheet, parse_dates=True, usecols=[0,2], skiprows=1, header=None)
 
-New in version 4.0.0: `drop_empty_rows` and `drop_empty_columns` parameters, both `True`
-by default, are now accepted by `get_as_dataframe`. If you created a Google sheet with the default
+New in version 4.0.0: ``drop_empty_rows`` and ``drop_empty_columns`` parameters, both ``True``
+by default, are now accepted by ``get_as_dataframe``. If you created a Google sheet with the default
 number of columns and rows (20 columns, 1000 rows), but have meaningful values for the DataFrame
 only in the top left corner of the worksheet, these parameters will cause any empty rows
-or columns to be discarded automatically.
+or columns to be discarded automatically and absent from the returned DataFrame.
 
 Formatting Google worksheets for DataFrames
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
