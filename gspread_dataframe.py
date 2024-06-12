@@ -12,6 +12,7 @@ Pandas 0.14.0 or greater installed.
 from gspread.utils import fill_gaps
 from gspread import Cell
 import pandas as pd
+import numpy as np
 from pandas.io.parsers import TextParser
 import logging
 import re
@@ -188,8 +189,8 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, drop_empty_rows=True, d
             only empty (NaN) values. Defaults to True.
     :param drop_empty_columns: if True, drop any columns from the DataFrame
             that have only empty (NaN) values and have no column name 
-            (that is, no header value). Columns with a header value
-            but are otherwise empty are retained. Defaults to True.
+            (that is, no header value). Named columns (those with a header value)
+            that are otherwise empty are retained. Defaults to True.
     :param \*\*options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
             (Note: TextParser supports only the default 'python' parser engine,
@@ -198,24 +199,45 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, drop_empty_rows=True, d
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
     df = TextParser(all_values, **options).read(options.get("nrows", None))
-    if drop_empty_rows:
-        df = df.dropna(how='all', axis=0)
-    if drop_empty_columns:
-        # only unnamed columns (with Unnamed: prefix given by pandas parser)
-        # are eligible for dropping if all values are empty.
-        # TODO multi-index columns must have _all_ levels unnamed.
-        labels_to_drop = [ 
-            label for label in df.columns.values
-            if (
-                label.startswith('Unnamed: ') 
-                if isinstance(label, str) 
-                else all([v.startswith('Unnamed: ') for v in label])
-            )
-            and df[label].isna().all()
-        ]
-        if labels_to_drop:
-            df = df.drop(labels=labels_to_drop, axis=1)
+
+    # if squeeze=True option was used, df may be a Series.
+    # There is special Series logic for our two drop options.
+    if isinstance(df, pd.Series):
+        if drop_empty_rows:
+            df = df.dropna()
+        # if this Series is empty and unnamed, it's droppable,
+        # and we should return an empty DataFrame instead.
+        if drop_empty_columns and df.empty and (not df.name or df.name.startswith('Unnamed: ')):
+           df = pd.DataFrame() 
+
+    # Else df is a DataFrame.
+    else:
+        if drop_empty_rows:
+            df = df.dropna(how='all', axis=0)
+        if drop_empty_columns:
+            labels_to_drop = _find_labels_of_empty_unnamed_columns(df)
+            if labels_to_drop:
+                df = df.drop(labels=labels_to_drop, axis=1)
+
     return df
+
+def _label_represents_unnamed_column(label):
+    if isinstance(label, str) and label.startswith('Unnamed: '):
+        return True
+    # unnamed columns will have an int64 label if header=False was used.
+    elif isinstance(label, np.int64):
+        return True
+    elif isinstance(label, tuple):
+        return all([_label_represents_unnamed_column(item) for item in label])
+    else:
+        return False
+
+def _find_labels_of_empty_unnamed_columns(df):
+    return [ 
+        label for label 
+        in df.columns.to_numpy() 
+        if _label_represents_unnamed_column(label) and df[label].isna().all() 
+    ]
 
 def _determine_level_count(index):
     if hasattr(index, "levshape"):

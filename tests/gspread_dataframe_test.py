@@ -110,40 +110,54 @@ class TestWorksheetReads(unittest.TestCase):
 
     def test_noargs(self):
         df = get_as_dataframe(self.sheet)
-        self.assertEqual(list(df.columns.values), COLUMN_NAMES)
+        self.assertEqual(list(df.columns.array), COLUMN_NAMES)
         self.assertEqual(len(df.columns), 10)
         self.assertEqual(len(df), 9)
         self.assertEqual(df.index.name, None)
-        self.assertEqual(type(df.index).__name__, "RangeIndex")
-        self.assertEqual(list(df.index.values), list(range(9)))
+        self.assertEqual(list(df.index.array), list(range(9)))
+
+    def test_drop_empty_columns_false(self):
+        df = get_as_dataframe(self.sheet, drop_empty_columns=False)
+        self.assertEqual(list(df.columns.array), COLUMN_NAMES + ["Unnamed: 10"])
+        self.assertEqual(len(df.columns), 11)
+        self.assertEqual(len(df), 9)
+        self.assertEqual(df.index.name, None)
+        self.assertEqual(list(df.index.array), list(range(9)))
+
+    def test_drop_empty_rows_false(self):
+        df = get_as_dataframe(self.sheet, drop_empty_rows=False)
+        self.assertEqual(list(df.columns.array), COLUMN_NAMES)
+        self.assertEqual(len(df.columns), 10)
+        self.assertEqual(len(df), 10)
+        self.assertEqual(df.index.name, None)
+        self.assertEqual(list(df.index.array), list(range(10)))
 
     def test_evaluate_formulas_true(self):
         df = get_as_dataframe(self.sheet, evaluate_formulas=True)
-        self.assertEqual(list(df.columns.values), COLUMN_NAMES)
+        self.assertEqual(list(df.columns.array), COLUMN_NAMES)
         self.assertEqual(df["Formula Column"][0], 2.226)
 
     def test_evaluate_formulas_false(self):
         df = get_as_dataframe(self.sheet)
-        self.assertEqual(list(df.columns.values), COLUMN_NAMES)
+        self.assertEqual(list(df.columns.array), COLUMN_NAMES)
         self.assertEqual(df["Formula Column"][0], "=R[0]C[-1]*2")
 
     def test_usecols(self):
         df = get_as_dataframe(self.sheet, usecols=USECOLS_COLUMN_NAMES)
-        self.assertEqual(list(df.columns.values), USECOLS_COLUMN_NAMES)
+        self.assertEqual(list(df.columns.array), USECOLS_COLUMN_NAMES)
 
     def test_indexcol(self):
         df = get_as_dataframe(self.sheet, index_col=4)
         self.assertEqual(len(df.columns), 9)
         self.assertEqual(df.index.name, "Date Column")
         self.assertEqual(type(df.index).__name__, "Index")
-        self.assertEqual(df.index.values[0], "2017-03-04")
+        self.assertEqual(df.index.array[0], "2017-03-04")
 
     def test_indexcol_none(self):
         df = get_as_dataframe(self.sheet, index_col=False)
         self.assertEqual(len(df.columns), 10)
         self.assertEqual(df.index.name, None)
-        self.assertEqual(type(df.index).__name__, "RangeIndex")
-        self.assertEqual(list(df.index.values), list(range(9)))
+        self.assertEqual(list(df.index.array), list(range(9)))
 
     def test_header_false(self):
         df = get_as_dataframe(self.sheet, header=None)
@@ -163,7 +177,7 @@ class TestWorksheetReads(unittest.TestCase):
         )
         self.assertEqual(len(df), 9)
         self.assertEqual(
-            df.columns.tolist(), ["COL" + str(i) for i in range(10)]
+            df.columns.tolist(), ["COL" + str(i) for i in range(11)]
         )
 
     def test_squeeze(self):
@@ -213,7 +227,7 @@ class TestWorksheetReads(unittest.TestCase):
         df = get_as_dataframe(
             self.sheet,
             parse_dates=[4],
-            date_parser=lambda x: datetime.strptime(x, "%Y-%m-%d"),
+            date_parser=lambda x: datetime.strptime(x, "%Y-%m-%d") if x is not np.nan else None
         )
         self.assertEqual(df["Date Column"][0], datetime(2017, 3, 4))
 
@@ -279,7 +293,7 @@ class TestWorksheetWrites(unittest.TestCase):
             resize=True,
             string_escaping=re.compile(r"3e50").match,
         )
-        self.sheet.resize.assert_called_once_with(10, 10)
+        self.sheet.resize.assert_called_once_with(11, 11)
         self.sheet.update_cells.assert_called_once_with(
             CELL_LIST_STRINGIFIED, value_input_option="USER_ENTERED"
         )
@@ -294,7 +308,7 @@ class TestWorksheetWrites(unittest.TestCase):
             include_index=False,
             string_escaping=lambda x: x == "3e50",
         )
-        self.sheet.resize.assert_called_once_with(10, 9)
+        self.sheet.resize.assert_called_once_with(11, 10)
         self.sheet.update_cells.assert_called_once_with(
             CELL_LIST_STRINGIFIED_NO_THINGY, value_input_option="USER_ENTERED"
         )
@@ -309,7 +323,7 @@ class TestWorksheetWrites(unittest.TestCase):
             include_index=True,
             string_escaping=re.compile(r"3e50").match,
         )
-        self.sheet.resize.assert_called_once_with(10, 10)
+        self.sheet.resize.assert_called_once_with(11, 11)
         self.sheet.update_cells.assert_called_once_with(
             CELL_LIST_STRINGIFIED, value_input_option="USER_ENTERED"
         )
@@ -323,7 +337,7 @@ class TestWorksheetWrites(unittest.TestCase):
             resize=True,
             string_escaping=re.compile(r"3e50").match,
         )
-        self.sheet.resize.assert_called_once_with(10, 10)
+        self.sheet.resize.assert_called_once_with(11, 11)
         self.sheet.update_cells.assert_called_once_with(
             CELL_LIST_STRINGIFIED, value_input_option="USER_ENTERED"
         )

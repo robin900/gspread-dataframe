@@ -151,6 +151,8 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column, drop empty row
+            rows = [ r[:-1] for r in rows ][:-1]
 
         self.sheet.resize(10, 10)
         cell_list = self.sheet.range("A1:J10")
@@ -183,6 +185,8 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column and empty row
+            rows = [ r[:-1] for r in rows ][:-1]
 
         self.sheet.resize(10, 10)
         cell_list = self.sheet.range("A1:J10")
@@ -204,6 +208,8 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column and empty row
+            rows = [ r[:-1] for r in rows ][:-1]
 
         self.sheet.resize(10, 10)
         cell_list = self.sheet.range("A1:J10")
@@ -276,6 +282,8 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column and empty row
+            rows = [ r[:-1] for r in rows ][:-1]
         mi = list(
             pd.MultiIndex.from_product(
                 [["A", "B"], ["one", "two", "three", "four", "five"]]
