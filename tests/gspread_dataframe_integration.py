@@ -128,7 +128,7 @@ class WorksheetTest(GspreadDataframeTest):
         self.streamHandler = logger.addHandler(logging.StreamHandler(sys.stdout))
         if self.__class__.spreadsheet is None:
             self.__class__.setUpClass()
-        self.sheet = self.spreadsheet.add_worksheet(TEST_WORKSHEET_NAME, 20, 20)
+        self.sheet = self.spreadsheet.add_worksheet(TEST_WORKSHEET_NAME, 200, 20)
         self.__class__.spreadsheet.batch_update(
             {
                 "requests": [
@@ -151,8 +151,9 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column, drop empty row
+            rows = [ r[:-1] for r in rows ][:-1]
 
-        self.sheet.resize(10, 10)
         cell_list = self.sheet.range("A1:J10")
         for cell, value in zip(cell_list, itertools.chain(*rows)):
             cell.value = value
@@ -183,8 +184,9 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column and empty row
+            rows = [ r[:-1] for r in rows ][:-1]
 
-        self.sheet.resize(10, 10)
         cell_list = self.sheet.range("A1:J10")
         for cell, value in zip(cell_list, itertools.chain(*rows)):
             cell.value = value
@@ -204,8 +206,9 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column and empty row
+            rows = [ r[:-1] for r in rows ][:-1]
 
-        self.sheet.resize(10, 10)
         cell_list = self.sheet.range("A1:J10")
         for cell, value in zip(cell_list, itertools.chain(*rows)):
             cell.value = value
@@ -214,7 +217,6 @@ class WorksheetTest(GspreadDataframeTest):
         for nrows in (9, 6, 0):
             df = get_as_dataframe(self.sheet, nrows=nrows)
             self.assertEqual(nrows, len(df))
-
 
     def test_resize_to_minimum_large(self):
         self.sheet.resize(100, 26)
@@ -276,6 +278,8 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column and empty row
+            rows = [ r[:-1] for r in rows ][:-1]
         mi = list(
             pd.MultiIndex.from_product(
                 [["A", "B"], ["one", "two", "three", "four", "five"]]
@@ -289,7 +293,6 @@ class WorksheetTest(GspreadDataframeTest):
         for cell, value in zip(cell_list, itertools.chain(*rows)):
             cell.value = value
         self.sheet.update_cells(cell_list)
-        self.sheet.resize(10, 12)
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df = get_as_dataframe(self.sheet, index_col=[0, 1])
         set_with_dataframe(
@@ -309,6 +312,8 @@ class WorksheetTest(GspreadDataframeTest):
         rows = None
         with open(CELL_LIST_FILENAME) as f:
             rows = json.load(f)
+            # drop empty column, drop empty row
+            rows = [ r[:-1] for r in rows ][:-1]
         column_headers = [
             "SQL",
             "SQL",
@@ -326,14 +331,12 @@ class WorksheetTest(GspreadDataframeTest):
         for cell, value in zip(cell_list, itertools.chain(*rows)):
             cell.value = value
         self.sheet.update_cells(cell_list)
-        self.sheet.resize(11, 10)
         self.sheet = self.sheet.spreadsheet.worksheet(self.sheet.title)
         df = get_as_dataframe(self.sheet, header=[0, 1])
         self.assertEqual((2, 10), getattr(df.columns, "levshape", None)),
         set_with_dataframe(
             self.sheet,
             df,
-            resize=True,
             string_escaping=STRING_ESCAPING_PATTERN,
         )
         df2 = get_as_dataframe(self.sheet, header=[0, 1])
@@ -360,10 +363,6 @@ class WorksheetTest(GspreadDataframeTest):
     def test_header_writing_and_parsing(self):
         truth_table = itertools.product(*([[False, True]] * 4))
         for include_index, columns_multilevel, index_has_names, columns_has_names in truth_table:
-            logger.info(
-                "Testing include_index %s, index_has_names %s, columns_multilevel %s, columns_has_names %s",
-                include_index, index_has_names, columns_multilevel, columns_has_names
-            )
             data = [[uniform(0, 100000) for i in range(8)] for j in range(20)]
             index_names = ["Category", "Subcategory"] if index_has_names else None
             index = list(
@@ -388,14 +387,17 @@ class WorksheetTest(GspreadDataframeTest):
             # if include_index and columns_multilevel and index_has_names, there
             # will be an additional header row
             index_col_arg = list(range(len(getattr(index, "levshape", [1]))))
-            logger.info("header=%s, index_col=%s", header_arg, index_col_arg)
             df_readback = get_as_dataframe(
                 self.sheet, 
                 header=header_arg,
                 index_col=(index_col_arg if include_index else None)
             )
-            logger.info("DataFrames equal: %s", df.equals(df_readback))
             if not df.equals(df_readback):
+                logger.info(
+                    "Testing include_index %s, index_has_names %s, columns_multilevel %s, columns_has_names %s",
+                    include_index, index_has_names, columns_multilevel, columns_has_names
+                )
+                logger.info("header=%s, index_col=%s", header_arg, index_col_arg)
                 logger.info("%s", df)
                 logger.info("%s", df.dtypes)
                 logger.info("%s", df_readback)

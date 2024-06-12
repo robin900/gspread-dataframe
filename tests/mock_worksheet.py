@@ -54,7 +54,7 @@ CELL_LIST_STRINGIFIED_NO_THINGY = [
 class MockWorksheet(object):
     def __init__(self):
         self.row_count = 10
-        self.col_count = 10
+        self.col_count = 11
         self.id = "fooby"
         self.title = "gspread dataframe test"
         self.spreadsheet = MockSpreadsheet()

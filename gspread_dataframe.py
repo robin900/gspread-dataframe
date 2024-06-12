@@ -12,6 +12,7 @@ Pandas 0.14.0 or greater installed.
 from gspread.utils import fill_gaps
 from gspread import Cell
 import pandas as pd
+import numpy as np
 from pandas.io.parsers import TextParser
 import logging
 import re
@@ -32,6 +33,8 @@ logger = logging.getLogger(__name__)
 __all__ = ("set_with_dataframe", "get_as_dataframe")
 
 WORKSHEET_MAX_CELL_COUNT = 10000000
+
+UNNAMED_COLUMN_NAME_PATTERN = re.compile(r'^Unnamed:\s\d+(?:_level_\d+)?$')
 
 def _escaped_string(value, string_escaping):
     if value in (None, ""):
@@ -176,7 +179,7 @@ def _get_all_values(worksheet, evaluate_formulas):
     return [[rows[i][j] for j in rect_cols] for i in rect_rows]
 
 
-def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
+def get_as_dataframe(worksheet, evaluate_formulas=False, drop_empty_rows=True, drop_empty_columns=True, **options):
     r"""
     Returns the worksheet contents as a DataFrame.
 
@@ -184,6 +187,12 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
     :param evaluate_formulas: if True, get the value of a cell after
             formula evaluation; otherwise get the formula itself if present.
             Defaults to False.
+    :param drop_empty_rows: if True, drop any rows from the DataFrame that have
+            only empty (NaN) values. Defaults to True.
+    :param drop_empty_columns: if True, drop any columns from the DataFrame
+            that have only empty (NaN) values and have no column name 
+            (that is, no header value). Named columns (those with a header value)
+            that are otherwise empty are retained. Defaults to True.
     :param \*\*options: all the options for pandas.io.parsers.TextParser,
             according to the version of pandas that is installed.
             (Note: TextParser supports only the default 'python' parser engine,
@@ -191,8 +200,62 @@ def get_as_dataframe(worksheet, evaluate_formulas=False, **options):
     :returns: pandas.DataFrame
     """
     all_values = _get_all_values(worksheet, evaluate_formulas)
-    return TextParser(all_values, **options).read(options.get("nrows", None))
+    df = TextParser(all_values, **options).read(options.get("nrows", None))
 
+    # if squeeze=True option was used, df may be a Series.
+    # There is special Series logic for our two drop options.
+    if isinstance(df, pd.Series):
+        if drop_empty_rows:
+            df = df.dropna()
+        # if this Series is empty and unnamed, it's droppable,
+        # and we should return an empty DataFrame instead.
+        if drop_empty_columns and df.empty and (not df.name or UNNAMED_COLUMN_NAME_PATTERN.search(df.name)):
+           df = pd.DataFrame() 
+
+    # Else df is a DataFrame.
+    else:
+        if drop_empty_rows:
+            df = df.dropna(how='all', axis=0)
+            _reconstruct_if_multi_index(df, 'index')
+        if drop_empty_columns:
+            labels_to_drop = _find_labels_of_empty_unnamed_columns(df)
+            if labels_to_drop:
+                df = df.drop(labels=labels_to_drop, axis=1)
+                _reconstruct_if_multi_index(df, 'columns')
+
+    return df
+
+def _reconstruct_if_multi_index(df, attrname):
+    # pandas, even as of 2.2.2, has a bug where a MultiIndex
+    # will simply preserve the dropped labels in each level
+    # when asked by .levels and .levshape, although the dropped
+    # labels won't appear in to_numpy(). We must therefore reconstruct
+    # the MultiIndex via to_numpy() -> .from_tuples, and then
+    # assign it to the dataframe's appropriate attribute.
+    index = getattr(df, attrname)
+    if not isinstance(index, pd.MultiIndex):
+        return
+    reconstructed = pd.MultiIndex.from_tuples(index.to_numpy())
+    setattr(df, attrname, reconstructed)
+
+
+def _label_represents_unnamed_column(label):
+    if isinstance(label, str) and UNNAMED_COLUMN_NAME_PATTERN.search(label):
+        return True
+    # unnamed columns will have an int64 label if header=False was used.
+    elif isinstance(label, np.int64):
+        return True
+    elif isinstance(label, tuple):
+        return all([_label_represents_unnamed_column(item) for item in label])
+    else:
+        return False
+
+def _find_labels_of_empty_unnamed_columns(df):
+    return [ 
+        label for label 
+        in df.columns.to_numpy() 
+        if _label_represents_unnamed_column(label) and df[label].isna().all() 
+    ]
 
 def _determine_level_count(index):
     if hasattr(index, "levshape"):
