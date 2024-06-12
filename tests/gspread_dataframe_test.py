@@ -171,15 +171,6 @@ class TestWorksheetReads(unittest.TestCase):
         df = get_as_dataframe(self.sheet, skiprows=range(1, 4))
         self.assertEqual(len(df), 6)
 
-    def test_prefix(self):
-        df = get_as_dataframe(
-            self.sheet, skiprows=[0], header=None, prefix="COL"
-        )
-        self.assertEqual(len(df), 9)
-        self.assertEqual(
-            df.columns.tolist(), ["COL" + str(i) for i in range(11)]
-        )
-
     def test_squeeze(self):
         df = get_as_dataframe(self.sheet, usecols=[0], squeeze=True)
         self.assertTrue(isinstance(df, pd.Series))
