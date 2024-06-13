@@ -10,10 +10,6 @@ gspread-dataframe
 .. image:: https://img.shields.io/pypi/dm/gspread-dataframe.svg
     :target: https://pypi.org/project/gspread-dataframe
 
-.. image:: https://readthedocs.org/projects/gspread-dataframe/badge/?version=latest
-    :target: https://gspread-dataframe.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
-
 This package allows easy data flow between a worksheet in a Google spreadsheet
 and a Pandas DataFrame. Any worksheet you can obtain using the ``gspread`` package
 can be retrieved as a DataFrame with ``get_as_dataframe``; DataFrame objects can
@@ -47,7 +43,7 @@ only options supported by that engine are acceptable:
 
 New in version 4.0.0: ``drop_empty_rows`` and ``drop_empty_columns`` parameters, both ``True``
 by default, are now accepted by ``get_as_dataframe``. If you created a Google sheet with the default
-number of columns and rows (20 columns, 1000 rows), but have meaningful values for the DataFrame
+number of columns and rows (26 columns, 1000 rows), but have meaningful values for the DataFrame
 only in the top left corner of the worksheet, these parameters will cause any empty rows
 or columns to be discarded automatically and absent from the returned DataFrame.
 
