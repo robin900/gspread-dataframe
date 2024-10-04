@@ -282,6 +282,7 @@ def set_with_dataframe(
     resize=False,
     allow_formulas=True,
     string_escaping="default",
+    value_input_option="USER_ENTERED",
 ):
     """
     Sets the values of a given DataFrame, anchoring its upper-left corner
@@ -321,6 +322,11 @@ def set_with_dataframe(
             The escaping done when allow_formulas=False (escaping string values
             beginning with `=`) is unaffected by this parameter's value.
             Default value is `'default'`.
+    :param value_input_option: determines how input data should be interpreted by
+            the Sheets API. See `ValueInputOption` in the Sheets API. Not compatible
+            with allow_formulas=True. 
+            Allowed values: 'RAW', 'USER_ENTERED'.
+            Default is 'USER_ENTERED'. 
     """
     # x_pos, y_pos refers to the position of data rows only,
     # excluding any header rows in the google sheet.
@@ -440,6 +446,6 @@ def set_with_dataframe(
     logger.debug("%d cell updates to send", len(cells_to_update))
 
     resp = worksheet.update_cells(
-        cells_to_update, value_input_option="USER_ENTERED"
+        cells_to_update, value_input_option=value_input_option
     )
     logger.debug("Cell update response: %s", resp)
