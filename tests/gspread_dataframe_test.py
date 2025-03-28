@@ -218,7 +218,7 @@ class TestWorksheetReads(unittest.TestCase):
         df = get_as_dataframe(
             self.sheet,
             parse_dates=[4],
-            date_parser=lambda x: datetime.strptime(x, "%Y-%m-%d") if x is not np.nan else None
+            date_format="%Y-%m-%d"
         )
         self.assertEqual(df["Date Column"][0], datetime(2017, 3, 4))
 
@@ -288,6 +288,11 @@ class TestWorksheetWrites(unittest.TestCase):
         self.sheet.update_cells.assert_called_once_with(
             CELL_LIST_STRINGIFIED, value_input_option="USER_ENTERED"
         )
+
+    def test_write_empty_df_no_updates(self):
+        df = pd.DataFrame.from_records([])
+        set_with_dataframe(self.sheet, df)
+        self.sheet.update_cells.assert_not_called()
 
     def test_include_index_false(self):
         df = get_as_dataframe(self.sheet, na_filter=False)

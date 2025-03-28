@@ -17,7 +17,6 @@ from pandas.io.parsers import TextParser
 import logging
 import re
 from numbers import Real
-from six import string_types, ensure_text
 
 try:
     from collections.abc import defaultdict
@@ -70,10 +69,8 @@ def _cellrepr(value, allow_formulas, string_escaping):
         return ""
     if isinstance(value, Real):
         return value
-    if not isinstance(value, string_types):
+    if not isinstance(value, str):
         value = str(value)
-
-    value = ensure_text(value, encoding='utf-8')
 
     if (not allow_formulas) and value.startswith("="):
         return "'%s" % value
