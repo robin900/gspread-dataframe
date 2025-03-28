@@ -4,8 +4,8 @@ gspread-dataframe
 .. image:: https://badge.fury.io/py/gspread-dataframe.svg
     :target: https://badge.fury.io/py/gspread-dataframe
 
-.. image:: https://app.travis-ci.com/robin900/gspread-dataframe.svg?branch=master
-    :target: https://travis-ci.com/robin900/gspread-dataframe
+.. image:: https://github.com/robin900/gspread-dataframe/actions/workflows/python-package.yml/badge.svg?branch=master
+    :target: https://github.com/robin900/gspread-dataframe/actions/workflows/python-package.yml
 
 .. image:: https://img.shields.io/pypi/dm/gspread-dataframe.svg
     :target: https://pypi.org/project/gspread-dataframe
@@ -72,7 +72,8 @@ Installation
 Requirements
 ~~~~~~~~~~~~
 
-* Python 2.7, 3+
+* Python 3 only, for releases 4.0.0 and later
+* Python 2.7 and 3 for releases prior to 4.0.0
 * gspread (>=3.0.0; to use older versions of gspread, use gspread-dataframe releases of 2.1.1 or earlier)
 * Pandas >= 0.24.0
 

@@ -10,3 +10,4 @@ recursive-include tests *.example
 recursive-include tests *.json
 recursive-include tests *.py
 exclude tests/creds.json
+exclude tests/tests.config
