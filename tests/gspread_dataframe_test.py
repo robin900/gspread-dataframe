@@ -172,9 +172,10 @@ class TestWorksheetReads(unittest.TestCase):
         self.assertEqual(len(df), 6)
 
     def test_squeeze(self):
-        df = get_as_dataframe(self.sheet, usecols=[0], squeeze=True)
-        self.assertTrue(isinstance(df, pd.Series))
-        self.assertEqual(len(df), 9)
+        if pd.__version__ < '2.0.0':
+            df = get_as_dataframe(self.sheet, usecols=[0], squeeze=True)
+            self.assertTrue(isinstance(df, pd.Series))
+            self.assertEqual(len(df), 9)
 
     def test_converters_datetime(self):
         df = get_as_dataframe(
