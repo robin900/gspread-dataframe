@@ -90,5 +90,4 @@ ENV/
 
 /tests/tests.config
 /tests/creds.json
-/travis.secrets.tar.gz
 /.venv
