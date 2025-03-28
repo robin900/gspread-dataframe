@@ -2,6 +2,34 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+- Bump to v4.0.0b2. [Robin Thomas]
+- Convert to pyproject file, end python 2.7 support for upcoming
+  releases, move to GitHub actions (#65) [Robin Thomas]
+
+  * remove six usage; improve coverage
+
+  * test made pd-version-aware; remove setup.py; make testenvs vary pd version use
+
+  * removed reqs file
+
+  * relax coverage fail threshold
+
+  * remove travis secrets from gitignore
+
+  * 4.0.0-beta version for now
+
+  * correct build badge and python version support in README
+
+  * renamed gh workflow
+
+  * 4.0.0b1 not -beta
+- Create python-package.yml. [Robin Thomas]
+- Correct typo in README, remove unneeded docs badge. [Robin Thomas]
+- Reworded and rst-formatted new paragraph in readme. [Robin Thomas]
+
+
 v4.0.0 (2024-06-12)
 -------------------
 - Bump to v4.0.0. [Robin Thomas]
