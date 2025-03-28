@@ -3,7 +3,12 @@
 
 name: Build and Test
 
-on: push
+on: 
+  push:
+    tags-ignore:
+      - '**'
+    branches:
+      - '**'
 
 jobs:
   build:
